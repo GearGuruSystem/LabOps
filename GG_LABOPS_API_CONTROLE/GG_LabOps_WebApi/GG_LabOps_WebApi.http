@@ -1,0 +1,6 @@
+@GG_LabOps_WebApi_HostAddress = http://localhost:5116
+
+GET {{GG_LabOps_WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
