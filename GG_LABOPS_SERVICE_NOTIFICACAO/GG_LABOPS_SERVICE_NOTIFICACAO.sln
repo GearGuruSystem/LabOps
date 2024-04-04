@@ -3,9 +3,53 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. EmailService", "1. EmailService", "{26F40B7C-198E-4ABF-B419-791C3E815547}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application", "2. Application", "{4B1DFDFA-9FD2-4FAA-A73E-87AAD2DC2FBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{CA32239D-D4F4-461A-8BAC-96B3F54BF4A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{50CD46C8-001D-4A25-9ADE-AF372E59935C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GG_LabOps_Notificacao_Domain", "GG_LabOps_Notificacao_Domain\GG_LabOps_Notificacao_Domain.csproj", "{412EE4EB-09B8-4C8B-A633-65393A6DFBD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GG_LabOps_Notificacao_Infrastructure", "GG_LabOps_Notificacao_Infrastructure\GG_LabOps_Notificacao_Infrastructure.csproj", "{8ADD392E-714B-47EA-8B25-CDB2F378227F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GG_LabOps_Notificacao_Application", "GG_LabOps_Notificacao_Application\GG_LabOps_Notificacao_Application.csproj", "{D491C5B0-1278-4EA0-98E2-A88D870E7D57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GG_LabOps_Notificacao_EmailService", "GG_LabOps_Notificacao_EmailService\GG_LabOps_Notificacao_EmailService.csproj", "{2D01BE32-F473-4CBF-BAC3-31438A2D7681}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{412EE4EB-09B8-4C8B-A633-65393A6DFBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{412EE4EB-09B8-4C8B-A633-65393A6DFBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{412EE4EB-09B8-4C8B-A633-65393A6DFBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{412EE4EB-09B8-4C8B-A633-65393A6DFBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ADD392E-714B-47EA-8B25-CDB2F378227F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADD392E-714B-47EA-8B25-CDB2F378227F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADD392E-714B-47EA-8B25-CDB2F378227F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADD392E-714B-47EA-8B25-CDB2F378227F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D491C5B0-1278-4EA0-98E2-A88D870E7D57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D491C5B0-1278-4EA0-98E2-A88D870E7D57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D491C5B0-1278-4EA0-98E2-A88D870E7D57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D491C5B0-1278-4EA0-98E2-A88D870E7D57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D01BE32-F473-4CBF-BAC3-31438A2D7681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D01BE32-F473-4CBF-BAC3-31438A2D7681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D01BE32-F473-4CBF-BAC3-31438A2D7681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D01BE32-F473-4CBF-BAC3-31438A2D7681}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{412EE4EB-09B8-4C8B-A633-65393A6DFBD4} = {CA32239D-D4F4-461A-8BAC-96B3F54BF4A2}
+		{8ADD392E-714B-47EA-8B25-CDB2F378227F} = {50CD46C8-001D-4A25-9ADE-AF372E59935C}
+		{D491C5B0-1278-4EA0-98E2-A88D870E7D57} = {4B1DFDFA-9FD2-4FAA-A73E-87AAD2DC2FBE}
+		{2D01BE32-F473-4CBF-BAC3-31438A2D7681} = {26F40B7C-198E-4ABF-B419-791C3E815547}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {298A8156-27B2-46D6-BBDB-676E8B65F9B0}
