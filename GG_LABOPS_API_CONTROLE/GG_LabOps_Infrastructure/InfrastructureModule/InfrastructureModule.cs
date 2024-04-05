@@ -1,16 +1,20 @@
 ﻿using GG_LabOps_Domain.Interfaces;
-using GG_LabOps_Infrastructure.Messages;
-using GG_LabOps_Infrastructure.Repositories;
+using GG_LabOps_Infrastructure.DataContext;
+using GG_LabOps_Infrastructure.Persistence.DataAcess;
+using GG_LabOps_Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Infrastructure.InfrastructureModule
 {
     public static class InfrastructureModule
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSqlDataServer(configuration);
             services.AddRepositoryServices();
-            services.AddMessageNotification();
+            services.AddSqlDataService();
             return services;
         }
 
@@ -20,9 +24,16 @@ namespace GG_LabOps_Infrastructure.InfrastructureModule
             return services;
         }
 
-        private static IServiceCollection AddMessageNotification(this IServiceCollection services)
+        private static IServiceCollection AddSqlDataService(this IServiceCollection services)
         {
-            services.AddScoped<IMessageNotificationService, RabbitMqService>();
+            services.AddSingleton<ISqlDataAcess, SqlDataAcess>();
+            return services;
+        }
+
+        private static IServiceCollection AddSqlDataServer(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApiDataContext>(opts => opts.UseSqlServer(
+                configuration.GetConnectionString("SqlDataLocal")));
             return services;
         }
     }

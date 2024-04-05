@@ -1,7 +1,7 @@
 ﻿using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
 
-namespace GG_LabOps_Infrastructure.Repositories
+namespace GG_LabOps_Infrastructure.Persistence.Repositories
 {
     internal class LaboratoryRepository : ILaboratoryRepository
     {
@@ -39,7 +39,7 @@ namespace GG_LabOps_Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
-        
+
         public bool DeleteById(int id)
         {
             throw new NotImplementedException();
