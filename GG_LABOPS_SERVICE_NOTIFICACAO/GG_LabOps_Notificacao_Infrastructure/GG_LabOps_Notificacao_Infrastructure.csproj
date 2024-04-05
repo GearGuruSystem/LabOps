@@ -6,4 +6,8 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GG_LabOps_Notificacao_Application\GG_LabOps_Notificacao_Application.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -15,4 +15,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GG_LabOps_Notificacao_Infrastructure\GG_LabOps_Notificacao_Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
