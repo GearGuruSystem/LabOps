@@ -2,8 +2,15 @@
 {
     public class NotificationUpdatedEvent
     {
-        public string TrakingCode { get; set; }
-        public string ContactEmail { get; set; }
-        public string Description { get; set; }
+        public string TrakingCode { get; private set; }
+        public string ContactEmail { get; private set; }
+        public string Description { get; private set; }
+
+        public NotificationUpdatedEvent(string trakingCode, string contactEmail, string description)
+        {
+            TrakingCode = trakingCode;
+            ContactEmail = contactEmail;
+            Description = description;
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace GG_LabOps_Infrastructure.Messages
 
         public RabbitMqService()
         {
-            
         }
 
         public void Publish(object data, string routingKey)
