@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace GG_LabOps_Infrastructure.ConfigurationData
+namespace GG_LabOps_Infrastructure.ConfigurationDB
 {
     internal class LaboratoryConfig : IEntityTypeConfiguration<Laboratory>
     {

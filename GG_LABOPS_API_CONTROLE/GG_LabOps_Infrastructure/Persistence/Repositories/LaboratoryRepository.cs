@@ -5,39 +5,52 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 {
     internal class LaboratoryRepository : ILaboratoryRepository
     {
+        private readonly ISqlDataAcess sqlData;
+
+        public LaboratoryRepository(ISqlDataAcess sqlData)
+        {
+            this.sqlData = sqlData;
+        }
+
         public Task<IEnumerable<Laboratory>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return sqlData.LoadData<Laboratory, dynamic>("", new { });
         }
 
-        public Task<Laboratory> GetByIdAsync(int id)
+        public async Task<Laboratory> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { id });
+            return data.FirstOrDefault();
         }
 
-        public Task<Laboratory> GetByHostnameAsync(string hostname)
+        public async Task<Laboratory> GetByHostnameAsync(string hostname)
         {
-            throw new NotImplementedException();
+            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { hostname });
+            return data.FirstOrDefault();
         }
 
-        public Task<Laboratory> GetByInvetoryAsync(string inventory)
+        public async Task<Laboratory> GetByInvetoryAsync(string inventory)
         {
-            throw new NotImplementedException();
+            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { inventory });
+            return data.FirstOrDefault();
         }
 
         public Task<Laboratory> CreateAsync(Laboratory entity)
         {
-            throw new NotImplementedException();
+            sqlData.SaveData("", new { entity });
+            return Task.FromResult(entity);
         }
 
         public Task<Laboratory> UpdateAsync(int id, Laboratory entity)
         {
-            throw new NotImplementedException();
+            sqlData.SaveData("", new { id, entity });
+            return Task.FromResult(entity);
         }
 
         public bool DisableById(int id)
         {
-            throw new NotImplementedException();
+            sqlData.SaveData("", new { id });
+            return true;
         }
 
         public bool DeleteById(int id)

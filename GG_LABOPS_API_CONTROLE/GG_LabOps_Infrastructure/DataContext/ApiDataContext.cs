@@ -1,5 +1,5 @@
 ﻿using GG_LabOps_Domain.Entities;
-using GG_LabOps_Infrastructure.ConfigurationData;
+using GG_LabOps_Infrastructure.ConfigurationDB;
 using Microsoft.EntityFrameworkCore;
 
 namespace GG_LabOps_Infrastructure.DataContext

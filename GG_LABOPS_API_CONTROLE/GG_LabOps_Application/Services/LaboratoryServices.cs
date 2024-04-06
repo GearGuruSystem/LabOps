@@ -3,7 +3,7 @@ using GG_LabOps_Domain.Interfaces;
 
 namespace GG_LabOps_Application.Services
 {
-    public class LaboratoryServices : ILaboratoryServices
+    internal class LaboratoryServices : ILaboratoryServices
     {
         private readonly ILaboratoryRepository repository;
 
