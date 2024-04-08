@@ -1,4 +1,5 @@
 ﻿using GG_LabOps_Domain.Entities;
+using GG_LabOps_Domain.Exceptions;
 using GG_LabOps_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace GG_LabOps_WebApi.Controllers
             this.services = services;
         }
 
-        // METODO NÃO ESTA COMPLETO.
+        // METODO NÃO ESTA COMPLETO. FALTA CORRIGIR EXCEPTION
         [HttpGet("BuscaTodosCadastro")]
         public async Task<IActionResult> BuscarTudoCadastradoNoLaboratorio()
         {
@@ -28,35 +29,50 @@ namespace GG_LabOps_WebApi.Controllers
                 }
                 return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            catch (Exception ex)
+            catch (ConsultaNoBancoException ex)
             {
-                throw;
+                return BadRequest(ex.Message);
             }
-            // CRIA EXCEPTION CASO DE ALGUM ERRO NA BUSCA DO BANCO
         }
 
-        // METODO NÃO ESTA COMPLETO.
+        // METODO NÃO ESTA COMPLETO. FALTA CORRIGIR EXCEPTION
         [HttpGet("BuscaPeloHostname")]
         public async Task<IActionResult> BuscarEquipamentoPeloHostname(string hostname)
         {
-            var data = await services.GetByHostnameAsync(hostname);
-            if (data != null)
+            try
             {
-                return Ok(data);
+                var data = await services.GetByHostnameAsync(hostname);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            return NotFound();
+            catch (ConsultaNoBancoException ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
-        // METODO NÃO ESTA COMPLETO.
+        // METODO NÃO ESTA COMPLETO. FALTA CORRIGIR EXCEPTION
         [HttpGet("BuscaPeloInventario")]
         public async Task<IActionResult> BuscarEquipamentoPeloInventario(string inventory)
         {
-            var data = await services.GetByInvetoryAsync(inventory);
-            if(data != null)
+            try
             {
-                return Ok(data);
+                var data = await services.GetByInvetoryAsync(inventory);
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            return NotFound();
+            catch (ConsultaNoBancoException ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
         }
 
         // METODO NÃO ESTA COMPLETO.
@@ -88,7 +104,7 @@ namespace GG_LabOps_WebApi.Controllers
         public IActionResult DesativaEquipamentoDoLaboratorio(int id)
         {
             var data = services.DisableById(id);
-            if(data == true)
+            if (data == true)
             {
                 return Ok();
             }
