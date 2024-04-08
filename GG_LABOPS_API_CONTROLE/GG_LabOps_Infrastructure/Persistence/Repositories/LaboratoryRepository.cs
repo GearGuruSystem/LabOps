@@ -14,7 +14,7 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 
         public Task<IEnumerable<Laboratory>> GetAllAsync()
         {
-            return sqlData.LoadData<Laboratory, dynamic>("", new { });
+            return sqlData.LoadData<Laboratory, dynamic>("[dbo].[LabOps_GetAllLaboratory]", new { });
         }
 
         public async Task<Laboratory> GetByIdAsync(int id)
@@ -23,10 +23,10 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             return data.FirstOrDefault();
         }
 
-        public async Task<Laboratory> GetByHostnameAsync(string hostname)
+        public async Task<IEnumerable<Laboratory>> GetByHostnameAsync(string hostname)
         {
             var data = await sqlData.LoadData<Laboratory, dynamic>("", new { hostname });
-            return data.FirstOrDefault();
+            return data;
         }
 
         public async Task<Laboratory> GetByInvetoryAsync(string inventory)

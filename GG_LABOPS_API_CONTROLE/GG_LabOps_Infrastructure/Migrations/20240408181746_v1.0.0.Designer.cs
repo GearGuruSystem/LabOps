@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GG_LabOps_Infrastructure.Migrations
 {
     [DbContext(typeof(ApiDataContext))]
-    [Migration("20240406134654_v1.0")]
-    partial class v10
+    [Migration("20240408181746_v1.0.0")]
+    partial class v100
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace GG_LabOps_Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("LaboratoryId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
@@ -53,10 +56,7 @@ namespace GG_LabOps_Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("BrandEquipamentId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("BrandEquipamentId1")
+                    b.Property<long>("BrandEquipamentId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateRegister")
@@ -99,7 +99,7 @@ namespace GG_LabOps_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandEquipamentId1");
+                    b.HasIndex("BrandEquipamentId");
 
                     b.ToTable("TB_Laboratory", (string)null);
                 });
@@ -108,7 +108,7 @@ namespace GG_LabOps_Infrastructure.Migrations
                 {
                     b.HasOne("GG_LabOps_Domain.Entities.BrandEquipament", "BrandEquipament")
                         .WithMany("Laboratory")
-                        .HasForeignKey("BrandEquipamentId1")
+                        .HasForeignKey("BrandEquipamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

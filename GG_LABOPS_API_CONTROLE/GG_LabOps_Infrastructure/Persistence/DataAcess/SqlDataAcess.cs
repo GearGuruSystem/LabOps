@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace GG_LabOps_Infrastructure.Persistence.DataAcess
 {
-    public class SqlDataAcess : ISqlDataAcess
+    internal class SqlDataAcess : ISqlDataAcess
     {
         private readonly IConfiguration configuration;
 

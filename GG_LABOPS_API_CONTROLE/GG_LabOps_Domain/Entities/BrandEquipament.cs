@@ -3,6 +3,7 @@
     public sealed class BrandEquipament : BaseEntity
     {
         public IEnumerable<Laboratory> Laboratory { get; set; }
+        public long LaboratoryId { get; set; }
         public string Name { get; set; }
     }
 }

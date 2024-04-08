@@ -10,6 +10,10 @@ namespace GG_LabOps_Infrastructure.ConfigurationDB
         {
             builder.ToTable("TB_Laboratory");
             builder.HasKey(x => x.Id);
+
+            builder.HasOne(x => x.BrandEquipament)
+                .WithMany(y => y.Laboratory)
+                .HasForeignKey(z => z.BrandEquipamentId);
         }
     }
 }

@@ -14,14 +14,21 @@ namespace GG_LabOps_Application.Services
 
         public async Task<IEnumerable<Laboratory>> GetAllAsync()
         {
-            return await repository.GetAllAsync();
+            var data = await repository.GetAllAsync();
+            var equipCount = data.Count();
+            Console.WriteLine($"foram encontrado {equipCount} equipamentos");
+            if (equipCount > 0)
+            {
+                return data;
+            }
+            return null!;
         }
         public async Task<Laboratory> GetByIdAsync(int id)
         {
             return await repository.GetByIdAsync(id);
         }
 
-        public Task<Laboratory> GetByHostnameAsync(string hostname)
+        public Task<IEnumerable<Laboratory>> GetByHostnameAsync(string hostname)
         {
             return repository.GetByHostnameAsync(hostname);
         }

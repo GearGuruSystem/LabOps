@@ -30,6 +30,9 @@ namespace GG_LabOps_Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("LaboratoryId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
@@ -50,10 +53,7 @@ namespace GG_LabOps_Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("BrandEquipamentId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("BrandEquipamentId1")
+                    b.Property<long>("BrandEquipamentId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("DateRegister")
@@ -96,7 +96,7 @@ namespace GG_LabOps_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandEquipamentId1");
+                    b.HasIndex("BrandEquipamentId");
 
                     b.ToTable("TB_Laboratory", (string)null);
                 });
@@ -105,7 +105,7 @@ namespace GG_LabOps_Infrastructure.Migrations
                 {
                     b.HasOne("GG_LabOps_Domain.Entities.BrandEquipament", "BrandEquipament")
                         .WithMany("Laboratory")
-                        .HasForeignKey("BrandEquipamentId1")
+                        .HasForeignKey("BrandEquipamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

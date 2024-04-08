@@ -16,57 +16,83 @@ namespace GG_LabOps_WebApi.Controllers
         }
 
         // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO
         [HttpGet("BuscaTodosCadastro")]
         public async Task<IActionResult> BuscarTudoCadastradoNoLaboratorio()
         {
-            await services.GetAllAsync();
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            try
+            {
+                var data = await services.GetAllAsync();
+                if (data != null)
+                {
+                    return Ok(data);
+                }
+                return NotFound("Não foi encontrado nenhum equipamento.");
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            // CRIA EXCEPTION CASO DE ALGUM ERRO NA BUSCA DO BANCO
         }
 
         // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO
         [HttpGet("BuscaPeloHostname")]
         public async Task<IActionResult> BuscarEquipamentoPeloHostname(string hostname)
         {
-            await services.GetByHostnameAsync(hostname);
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var data = await services.GetByHostnameAsync(hostname);
+            if (data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
         }
 
         // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO
         [HttpGet("BuscaPeloInventario")]
         public async Task<IActionResult> BuscarEquipamentoPeloInventario(string inventory)
         {
-            await services.GetByInvetoryAsync(inventory);
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var data = await services.GetByInvetoryAsync(inventory);
+            if(data != null)
+            {
+                return Ok(data);
+            }
+            return NotFound();
         }
 
         // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO.
         [HttpPost("Cadastro")]
         public async Task<IActionResult> CadastraEquipamentoNoLaboratorio(Laboratory laboratory)
         {
-            await services.CreateAsync(laboratory);
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var data = await services.CreateAsync(laboratory);
+            if (data != null)
+            {
+                return Ok();
+            }
+            return StatusCode(StatusCodes.Status304NotModified);
         }
 
-        // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO.
+        // NÃO ESTA COMPLETO.
         [HttpPut("Atualiza/{id:int}")]
         public async Task<IActionResult> AtualizaEquipamentoDoLaboratorio(int id, Laboratory laboratory)
         {
-            await services.UpdateAsync(id, laboratory);
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var data = await services.UpdateAsync(id, laboratory);
+            if (data != null)
+            {
+                return Ok();
+            }
+            return StatusCode(StatusCodes.Status304NotModified);
         }
 
         // METODO NÃO ESTA COMPLETO.
-        // NÃO IMPLEMENTADO.
         [HttpPut("Desabilita/{id:int}")]
         public IActionResult DesativaEquipamentoDoLaboratorio(int id)
         {
-            services.DisableById(id);
-            return StatusCode(StatusCodes.Status501NotImplemented);
+            var data = services.DisableById(id);
+            if(data == true)
+            {
+                return Ok();
+            }
+            return StatusCode(StatusCodes.Status304NotModified);
         }
     }
 }

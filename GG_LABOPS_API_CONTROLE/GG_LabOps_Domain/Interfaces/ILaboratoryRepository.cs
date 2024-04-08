@@ -6,7 +6,7 @@ namespace GG_LabOps_Domain.Interfaces
     public interface ILaboratoryRepository : IGenericRepository<Laboratory>
     {
         public Task<Laboratory> GetByInvetoryAsync(string inventory);
-        public Task<Laboratory> GetByHostnameAsync(string hostname);
+        public Task<IEnumerable<Laboratory>> GetByHostnameAsync(string hostname);
         public bool DisableById(int id);
     }
 }

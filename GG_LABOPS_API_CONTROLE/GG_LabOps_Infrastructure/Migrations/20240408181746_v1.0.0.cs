@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GG_LabOps_Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class v10 : Migration
+    public partial class v100 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,7 @@ namespace GG_LabOps_Infrastructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    LaboratoryId = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -33,8 +34,7 @@ namespace GG_LabOps_Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Inventory = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hostname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BrandEquipamentId1 = table.Column<long>(type: "bigint", nullable: false),
-                    BrandEquipamentId = table.Column<int>(type: "int", nullable: false),
+                    BrandEquipamentId = table.Column<long>(type: "bigint", nullable: false),
                     SerieNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EquipamentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EquipamentModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -49,17 +49,17 @@ namespace GG_LabOps_Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_TB_Laboratory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TB_Laboratory_TB_Brand_Equipament_BrandEquipamentId1",
-                        column: x => x.BrandEquipamentId1,
+                        name: "FK_TB_Laboratory_TB_Brand_Equipament_BrandEquipamentId",
+                        column: x => x.BrandEquipamentId,
                         principalTable: "TB_Brand_Equipament",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_Laboratory_BrandEquipamentId1",
+                name: "IX_TB_Laboratory_BrandEquipamentId",
                 table: "TB_Laboratory",
-                column: "BrandEquipamentId1");
+                column: "BrandEquipamentId");
         }
 
         /// <inheritdoc />

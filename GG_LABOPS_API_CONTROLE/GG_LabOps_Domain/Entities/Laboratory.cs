@@ -5,7 +5,7 @@
         public string? Inventory { get; set; }
         public string? Hostname { get; set; }
         public BrandEquipament BrandEquipament { get; set; }
-        public int BrandEquipamentId { get; set; }
+        public long BrandEquipamentId { get; set; }
         public string SerieNumber { get; set; }
         public string EquipamentType { get; set; }
         public string EquipamentModel { get; set; }
