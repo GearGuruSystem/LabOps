@@ -1,20 +1,28 @@
 ﻿using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
+using GG_LabOps_Infrastructure.DataContext;
+using System.Data;
+using Dapper;
+using GG_LabOps_Infrastructure.Queries;
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Infrastructure.Persistence.Repositories
 {
     internal class LaboratoryRepository : ILaboratoryRepository
     {
         private readonly ISqlDataAcess sqlData;
+        private readonly IDbConnection connection;
 
-        public LaboratoryRepository(ISqlDataAcess sqlData)
+        public LaboratoryRepository(ISqlDataAcess sqlData, SqlFactory sqlFactory)
         {
             this.sqlData = sqlData;
+            connection = sqlFactory.CreateConnection();
         }
 
         public Task<IEnumerable<Laboratory>> GetAllAsync()
         {
-            return sqlData.LoadData<Laboratory, dynamic>("[dbo].[LabOps_GetAllLaboratory]", new { });
+            var query = LaboratoryQueries.GetAllLaboratory();
+            return connection.QueryAsync<Laboratory>(query.Query, query.Parameters);
         }
 
         public async Task<Laboratory> GetByIdAsync(int id)

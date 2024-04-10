@@ -1,6 +1,7 @@
 ﻿using GG_LabOps_Domain.Entities;
 using GG_LabOps_Infrastructure.ConfigurationDB;
 using Microsoft.EntityFrameworkCore;
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Infrastructure.DataContext
 {

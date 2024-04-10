@@ -3,12 +3,15 @@ using GG_LabOps_Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+#pragma warning disable IDE0063 // Use simple 'using' statement
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Infrastructure.Persistence.DataAcess
 {
     internal class SqlDataAcess : ISqlDataAcess
     {
         private readonly IConfiguration configuration;
+
 
         public SqlDataAcess(IConfiguration configuration)
         {
@@ -22,6 +25,7 @@ namespace GG_LabOps_Infrastructure.Persistence.DataAcess
             {
                 return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
             }
+
         }
 
         //METODO QUE FAZ EXECUÇÃO NO BANCO
