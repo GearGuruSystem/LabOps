@@ -27,6 +27,7 @@ namespace GG_LabOps_Infrastructure.InfrastructureModule
         private static IServiceCollection AddSqlDataService(this IServiceCollection services)
         {
             services.AddSingleton<ISqlDataAcess, SqlDataAcess>();
+            services.AddSingleton<ISqlFactory, SqlFactory>();
             return services;
         }
 

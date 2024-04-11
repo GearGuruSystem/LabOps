@@ -1,46 +1,47 @@
-﻿using GG_LabOps_Domain.Entities;
+﻿using Dapper;
+using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
-using GG_LabOps_Infrastructure.DataContext;
-using System.Data;
-using Dapper;
 using GG_LabOps_Infrastructure.Queries;
-#pragma warning disable IDE0290 // Use primary constructor
+using System.Data;
+
 
 namespace GG_LabOps_Infrastructure.Persistence.Repositories
 {
+#pragma warning disable IDE0290 // Use primary constructor
     internal class LaboratoryRepository : ILaboratoryRepository
     {
         private readonly ISqlDataAcess sqlData;
         private readonly IDbConnection connection;
 
-        public LaboratoryRepository(ISqlDataAcess sqlData, SqlFactory sqlFactory)
+        public LaboratoryRepository(ISqlDataAcess sqlData, ISqlFactory sqlFactory)
         {
             this.sqlData = sqlData;
             connection = sqlFactory.CreateConnection();
         }
 
-        public Task<IEnumerable<Laboratory>> GetAllAsync()
+        public async Task<IEnumerable<Laboratory>> GetAllAsync()
         {
-            var query = LaboratoryQueries.GetAllLaboratory();
-            return connection.QueryAsync<Laboratory>(query.Query, query.Parameters);
+            QueryModel query = LaboratoryQueries.GetAllLaboratory();
+            return await connection.QueryAsync<Laboratory>(query.Query, query.Parameters);
         }
 
         public async Task<Laboratory> GetByIdAsync(int id)
         {
-            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { id });
-            return data.FirstOrDefault();
+            QueryModel query = LaboratoryQueries.GetLaboratoryById(id);
+            return await connection.QueryFirstAsync<Laboratory>(query.Query, query.Parameters);
         }
 
         public async Task<IEnumerable<Laboratory>> GetByHostnameAsync(string hostname)
         {
-            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { hostname });
-            return data;
+            QueryModel query = LaboratoryQueries.GetLaboratoryByHost(hostname);
+            return await connection.QueryAsync<Laboratory>(query.Query, query.Parameters);
         }
 
         public async Task<Laboratory> GetByInvetoryAsync(string inventory)
         {
-            var data = await sqlData.LoadData<Laboratory, dynamic>("", new { inventory });
-            return data.FirstOrDefault();
+            QueryModel query = LaboratoryQueries.GetLaboratoryByInv(inventory);
+            return await connection.QueryFirstAsync(query.Query, query.Parameters);
+            
         }
 
         public Task<Laboratory> CreateAsync(Laboratory entity)
@@ -49,10 +50,10 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             return Task.FromResult(entity);
         }
 
-        public Task<Laboratory> UpdateAsync(int id, Laboratory entity)
+        public async Task<Laboratory> UpdateAsync(int id, Laboratory entity)
         {
-            sqlData.SaveData("", new { id, entity });
-            return Task.FromResult(entity);
+            await sqlData.SaveData("", new { id, entity });
+            return await Task.FromResult(entity);
         }
 
         public bool DisableById(int id)

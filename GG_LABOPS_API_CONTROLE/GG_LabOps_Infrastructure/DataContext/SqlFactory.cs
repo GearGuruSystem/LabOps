@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GG_LabOps_Domain.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Infrastructure.DataContext
 {
-    public class SqlFactory
+    public class SqlFactory : ISqlFactory
     {
         public readonly IConfiguration configuration;
 
