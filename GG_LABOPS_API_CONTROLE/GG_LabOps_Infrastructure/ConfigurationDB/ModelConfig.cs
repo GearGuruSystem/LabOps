@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GG_LabOps_Infrastructure.ConfigurationDB
 {
-    internal class LaboratoryConfig : IEntityTypeConfiguration<Laboratory>
+    internal class ModelConfig : IEntityTypeConfiguration<ModelEquipament>
     {
-        public void Configure(EntityTypeBuilder<Laboratory> builder)
+        public void Configure(EntityTypeBuilder<ModelEquipament> builder)
         {
-            builder.ToTable("TB_Laboratorio");
+            builder.ToTable("TB_ModeloEquipamento");
             builder.HasKey(x => x.Id);
         }
     }

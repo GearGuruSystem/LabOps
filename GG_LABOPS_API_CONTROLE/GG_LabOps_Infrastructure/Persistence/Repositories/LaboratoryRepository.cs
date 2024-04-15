@@ -41,7 +41,6 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
         {
             QueryModel query = LaboratoryQueries.GetLaboratoryByInv(inventory);
             return await connection.QueryFirstAsync(query.Query, query.Parameters);
-            
         }
 
         public Task<Laboratory> CreateAsync(Laboratory entity)

@@ -1,8 +1,8 @@
 ﻿namespace GG_LabOps_Domain.Entities
 {
-    public sealed class BrandEquipament : BaseEntity
+    public sealed class TypeEquipament : BaseEntity
     {
         public Equipament Equipament { get; set; }
-        public string BrandName { get; set; }
+        public string TypeName { get; set; }
     }
 }
