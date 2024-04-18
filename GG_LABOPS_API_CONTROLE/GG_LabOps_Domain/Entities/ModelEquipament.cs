@@ -1,8 +1,12 @@
-﻿namespace GG_LabOps_Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GG_LabOps_Domain.Entities
 {
     public sealed class ModelEquipament : BaseEntity
     {
-        public Equipament Equipament { get; set; }
-        public string ModelNome { get; set; }
+        [Column("id_modelo")]
+        public long Id { get; set; }
+        [Column("nomeModelo")]
+        public string ModelName { get; set; }
     }
 }

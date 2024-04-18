@@ -1,18 +1,14 @@
 ﻿using GG_LabOps_Domain.Interfaces;
-using GG_LabOps_Infrastructure.DataContext;
-using GG_LabOps_Infrastructure.Persistence.DataAcess;
+using GG_LabOps_Infrastructure.DataAcess;
 using GG_LabOps_Infrastructure.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Infrastructure.InfrastructureModule
 {
     public static class InfrastructureModule
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddSqlDataServer(configuration);
             services.AddRepositoryServices();
             services.AddSqlDataService();
             return services;
@@ -21,6 +17,7 @@ namespace GG_LabOps_Infrastructure.InfrastructureModule
         private static IServiceCollection AddRepositoryServices(this IServiceCollection services)
         {
             services.AddScoped<ILaboratoryRepository, LaboratoryRepository>();
+            services.AddScoped<IEquipamentRepository, EquipamentRepository>();
             return services;
         }
 
@@ -28,13 +25,6 @@ namespace GG_LabOps_Infrastructure.InfrastructureModule
         {
             services.AddSingleton<ISqlDataAcess, SqlDataAcess>();
             services.AddSingleton<ISqlFactory, SqlFactory>();
-            return services;
-        }
-
-        private static IServiceCollection AddSqlDataServer(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<ApiDataContext>(opts => opts.UseSqlServer(
-                configuration.GetConnectionString("SqlDataLocal")));
             return services;
         }
     }

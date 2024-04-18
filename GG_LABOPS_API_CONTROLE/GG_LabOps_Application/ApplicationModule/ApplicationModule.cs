@@ -15,6 +15,7 @@ namespace GG_LabOps_Application.ApplicationModule
         private static IServiceCollection AddApplicationService(this IServiceCollection services)
         {
             services.AddScoped<ILaboratoryServices, LaboratoryServices>();
+            services.AddScoped<IEquipamentService, EquipamentServices>();
             return services;
         }
     }

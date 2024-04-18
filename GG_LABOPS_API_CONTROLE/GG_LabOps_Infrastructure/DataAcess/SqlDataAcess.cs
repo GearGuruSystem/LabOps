@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 #pragma warning disable IDE0063 // Use simple 'using' statement
 #pragma warning disable IDE0290 // Use primary constructor
 
-namespace GG_LabOps_Infrastructure.Persistence.DataAcess
+namespace GG_LabOps_Infrastructure.DataAcess
 {
     internal class SqlDataAcess : ISqlDataAcess
     {

@@ -7,6 +7,7 @@ namespace GG_LabOps_Application.Services
     {
         private readonly ILaboratoryRepository repository;
 
+#pragma warning disable IDE0290 // Use primary constructor
         public LaboratoryServices(ILaboratoryRepository repository)
         {
             this.repository = repository;

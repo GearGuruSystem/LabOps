@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 #pragma warning disable IDE0290 // Use primary constructor
 
-namespace GG_LabOps_Infrastructure.DataContext
+namespace GG_LabOps_Infrastructure.DataAcess
 {
     public class SqlFactory : ISqlFactory
     {
@@ -17,7 +17,7 @@ namespace GG_LabOps_Infrastructure.DataContext
 
         public IDbConnection CreateConnection()
         {
-            var connectionString = configuration.GetSection("ConnectionString").Value;
+            var connectionString = configuration.GetConnectionString("SqlDataLocal");
             return new SqlConnection(connectionString);
         }
     }

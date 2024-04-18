@@ -2,6 +2,7 @@
 {
     internal static class ContextMap
     {
-        public static string LaboratoryTable() => "[DB_LabOpsDev].[dbo].[TB_Laboratory]";
+        public static string LaboratoryTable() => "[dbo].[TB_Laboratorio]";
+        public static string EquipamentTable() => "[dbo].[TB_Equipamentos]";
     }
 }
