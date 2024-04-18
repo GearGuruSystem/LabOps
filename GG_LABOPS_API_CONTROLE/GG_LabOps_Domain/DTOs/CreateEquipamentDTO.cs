@@ -1,4 +1,4 @@
-﻿namespace GG_LabOps_Application.DTOs
+﻿namespace GG_LabOps_Domain.DTOs
 {
     public class CreateEquipamentDTO
     {

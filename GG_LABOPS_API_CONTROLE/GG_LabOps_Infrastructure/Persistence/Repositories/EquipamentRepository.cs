@@ -20,18 +20,19 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Equipament>> GetAllAsync()
         {
-            QueryModel query = EquipamentQueries.GetAllEquipament();
-            return await connection.QueryAsync<Equipament>(query.Query, query.Parameters);
+            return await sqlData.LoadData<Equipament, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
         }
 
-        public Task<Equipament> GetByIdAsync(int id)
+        public async Task<Equipament> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            QueryModel query = EquipamentQueries.GetAllEquipament();
+            IEnumerable<Equipament> response = await connection.QueryAsync<Equipament>(query.Query, query.Parameters);
+            return response.FirstOrDefault();
         }
 
         public async Task<Equipament> CreateAsync(Equipament entity)
         {
-            await sqlData.SaveData("dbo.LABOPS_CADASTRA_MAQUINATESTE", new { entity });
+            await sqlData.SaveData("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new { entity });
             return entity;
         }
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GG_LabOps_WebApi.Controllers
 {
     [ApiController]
-    [Route("api/v1/{controller}")]
+    [Route("api/v1/[controller]")]
     public class EquipamentController : ControllerBase
     {
         private readonly IEquipamentService equipamentService;
@@ -16,6 +16,13 @@ namespace GG_LabOps_WebApi.Controllers
             this.equipamentService = equipamentService;
         }
 
+        [HttpGet("BuscaEquipamentos")]
+        public async Task<IActionResult> BuscaTodosEquipamentos()
+        {
+            return Ok(await equipamentService.GetEquipamentsAsync());
+        }
+
+        [HttpPost("CadastraEquipamento")]
         public async Task<IActionResult> CadastraEquipamento(Equipament equipament)
         {
             await equipamentService.RegisterEquipament(equipament);
