@@ -12,24 +12,23 @@ namespace GG_LabOps_Infrastructure.DataAcess
     {
         private readonly IConfiguration configuration;
 
-
         public SqlDataAcess(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
         //METODO QUE FAZ A LEITURA NO BANCO
-        public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionName = "SqlDataLocal")
+        public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionName = "SqlDataLocal")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
-                return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                var response = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                return response;
             }
-
         }
 
         //METODO QUE FAZ EXECUÇÃO NO BANCO
-        public async Task SaveData<T>(string storedProcedure, T parameters, string connectionName = "SqlDataLocal")
+        public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionName = "SqlDataLocal")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
@@ -38,3 +37,4 @@ namespace GG_LabOps_Infrastructure.DataAcess
         }
     }
 }
+ 

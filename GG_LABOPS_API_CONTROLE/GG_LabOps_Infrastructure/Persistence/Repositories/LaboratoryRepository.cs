@@ -45,19 +45,19 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 
         public Task<Laboratory> CreateAsync(Laboratory entity)
         {
-            sqlData.SaveData("", new { entity });
+            sqlData.SaveDataAsync("", new { entity });
             return Task.FromResult(entity);
         }
 
         public async Task<Laboratory> UpdateAsync(int id, Laboratory entity)
         {
-            await sqlData.SaveData("", new { id, entity });
+            await sqlData.SaveDataAsync("", new { id, entity });
             return await Task.FromResult(entity);
         }
 
         public bool DisableById(int id)
         {
-            sqlData.SaveData("", new { id });
+            sqlData.SaveDataAsync("", new { id });
             return true;
         }
 

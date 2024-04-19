@@ -1,6 +1,9 @@
 ﻿using GG_LabOps_Domain.Interfaces;
 using GG_LabOps_Infrastructure.DataAcess;
+using GG_LabOps_Infrastructure.DataContext;
 using GG_LabOps_Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Infrastructure.InfrastructureModule
@@ -27,5 +30,12 @@ namespace GG_LabOps_Infrastructure.InfrastructureModule
             services.AddSingleton<ISqlFactory, SqlFactory>();
             return services;
         }
+
+        //private static IServiceCollection AddSqlDataServer(this IServiceCollection services, IConfiguration configuration)
+        //{
+        //    services.AddDbContext<AppDataContext>(opts => opts.UseSqlServer(
+        //        configuration.GetConnectionString("SqlDataLocal")));
+        //    return services;
+        //}
     }
 }

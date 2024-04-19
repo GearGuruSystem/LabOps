@@ -2,7 +2,7 @@
 
 namespace GG_LabOps_Domain.Entities
 {
-    public sealed class ModelEquipament : BaseEntity
+    public class ModelEquipament : BaseEntity
     {
         [Column("id_modelo")]
         public long Id { get; set; }

@@ -20,7 +20,7 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 
         public async Task<IEnumerable<Equipament>> GetAllAsync()
         {
-            return await sqlData.LoadData<Equipament, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
+            return await sqlData.LoadDataAsync<Equipament, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
         }
 
         public async Task<Equipament> GetByIdAsync(int id)
@@ -32,13 +32,13 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 
         public async Task<Equipament> CreateAsync(Equipament entity)
         {
-            await sqlData.SaveData("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new { entity });
+            await sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new { entity });
             return entity;
         }
 
         public async Task<Equipament> UpdateAsync(int id, Equipament entity)
         {
-            await sqlData.SaveData("", new { id, entity });
+            await sqlData.SaveDataAsync("", new { id, entity });
             return entity;
         }
 
