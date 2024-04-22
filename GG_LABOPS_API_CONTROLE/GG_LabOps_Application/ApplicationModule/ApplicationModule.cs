@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using Dapper;
-using GG_LabOps_Application.Mapping;
+using GG_LabOps_Application.Interfaces;
 using GG_LabOps_Application.Profiles;
 using GG_LabOps_Application.Services;
-using GG_LabOps_Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Application.ApplicationModule
@@ -14,7 +12,6 @@ namespace GG_LabOps_Application.ApplicationModule
         {
             services.AddApplicationService();
             services.MapperService();
-            AddDapperMappingCustom();
             return services;
         }
 
@@ -25,19 +22,12 @@ namespace GG_LabOps_Application.ApplicationModule
             return services;
         }
 
-        private static void AddDapperMappingCustom()
-        {
-            SqlMapper.AddTypeHandler(new EquipamentMap());
-
-        }
-
         private static IServiceCollection MapperService(this IServiceCollection services)
         {
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new EquipamentProfile());
             });
-
             var mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             return services;

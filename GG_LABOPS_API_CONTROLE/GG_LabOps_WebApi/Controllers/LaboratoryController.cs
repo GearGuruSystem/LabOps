@@ -1,6 +1,6 @@
-﻿using GG_LabOps_Domain.Entities;
+﻿using GG_LabOps_Application.Interfaces;
+using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Exceptions;
-using GG_LabOps_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 #pragma warning disable IDE0290 // Use primary constructor
 

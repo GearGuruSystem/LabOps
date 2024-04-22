@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using GG_LabOps_Domain.DTOs;
 using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
+using GG_LabOps_Infrastructure.DataAcess;
 using GG_LabOps_Infrastructure.Queries;
 using System.Data;
 
@@ -18,31 +20,42 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             connection = factory.CreateConnection();
         }
 
-        public async Task<IEnumerable<Equipament>> GetAllAsync()
+        public async Task<IEnumerable<ViewEquipamentDTO>> GetAllAsync()
         {
-            return await sqlData.LoadDataAsync<Equipament, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
+            return await sqlData.LoadDataAsync<ViewEquipamentDTO, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
         }
 
-        public async Task<Equipament> GetByIdAsync(int id)
+        public async Task<ViewEquipamentDTO> GetByIdAsync(int id)
         {
-            QueryModel query = EquipamentQueries.GetAllEquipament();
-            IEnumerable<Equipament> response = await connection.QueryAsync<Equipament>(query.Query, query.Parameters);
+            QueryModel query = EquipamentQueries.GetEquipamentById(id);
+            IEnumerable<ViewEquipamentDTO> response = await connection.QueryAsync<ViewEquipamentDTO>(query.Query, query.Parameters);
             return response.FirstOrDefault();
         }
 
-        public async Task<Equipament> CreateAsync(Equipament entity)
+        public async void CreateAsync(CreateEquipamentDTO equipament)
         {
-            await sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new { entity });
-            return entity;
+            await sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new 
+            { 
+                inventario = equipament.Inventario.Trim().ToUpper(),
+                hostname = equipament.Hostname.Trim().ToUpper(),
+                numeroSerie = equipament.NumeroSerie.Trim().ToUpper(),
+                idMarca = equipament.MarcaId,
+                idModelo = equipament.ModeloId,
+                idTipo = equipament.TipoId,
+                ativa = equipament.Ativa
+            });
         }
 
-        public async Task<Equipament> UpdateAsync(int id, Equipament entity)
+        public async Task<UpdateEquipamentDTO> UpdateAsync(int id, UpdateEquipamentDTO equipament)
         {
-            await sqlData.SaveDataAsync("", new { id, entity });
-            return entity;
+            await sqlData.SaveDataAsync("[dbo].[LABOPS_ATUALIZA_MAQUINA]", new 
+            { 
+                equipament
+            });
+            return equipament;
         }
 
-        public bool DeleteById(int id)
+        public bool DisableById(int id)
         {
             throw new NotImplementedException();
         }

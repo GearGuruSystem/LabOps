@@ -3,6 +3,6 @@
     internal static class ContextMap
     {
         public static string LaboratoryTable() => "[dbo].[TB_Laboratorio]";
-        public static string EquipamentTable() => "[dbo].[TB_Equipamentos]";
+        public static string EquipamentTable() => "[dbo].[TB_Equipamento]";
     }
 }

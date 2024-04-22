@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GG_LabOps_Application.Interfaces;
 using GG_LabOps_Domain.DTOs;
 using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
@@ -20,15 +21,24 @@ namespace GG_LabOps_Application.Services
         public async Task<IEnumerable<ViewEquipamentDTO>> GetEquipamentsAsync()
         {
             var response = await repository.GetAllAsync();
-            await Console.Out.WriteLineAsync("FEZ A CONSULTA");
-            return mapper.Map<IEnumerable<ViewEquipamentDTO>>(response);
-            
+            return response;
         }
 
-        public async Task<Equipament> RegisterEquipament(Equipament equipament)
+        public async Task<ViewEquipamentDTO> GetEquipamentsAsync(int id)
         {
-            var response = await repository.CreateAsync(equipament);
-            await Console.Out.WriteLineAsync("CADASTROU PORRA");
+            var response = await repository.GetByIdAsync(id);
+            return response;
+        }
+
+        public Task RegisterEquipament(CreateEquipamentDTO equipamentDTO)
+        {
+            repository.CreateAsync(equipamentDTO);
+            return Task.CompletedTask;
+        }
+
+        public async Task<UpdateEquipamentDTO> UpdateEquipament(int id, UpdateEquipamentDTO equipament)
+        {
+            var response = await repository.UpdateAsync(id, equipament);
             return response;
         }
     }

@@ -10,6 +10,7 @@ namespace GG_LabOps_Application.Profiles
         {
             CreateMap<Equipament, ViewEquipamentDTO>().ReverseMap();
             CreateMap<Equipament, CreateEquipamentDTO>().ReverseMap();
+            CreateMap<Equipament, UpdateEquipamentDTO>().ReverseMap();  
         }
     }
 }

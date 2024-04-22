@@ -1,4 +1,5 @@
-﻿using GG_LabOps_Domain.Entities;
+﻿using GG_LabOps_Application.Interfaces;
+using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
 
 namespace GG_LabOps_Application.Services

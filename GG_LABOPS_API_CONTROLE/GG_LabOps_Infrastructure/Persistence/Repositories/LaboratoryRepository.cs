@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
+using GG_LabOps_Infrastructure.DataAcess;
 using GG_LabOps_Infrastructure.Queries;
 using System.Data;
 

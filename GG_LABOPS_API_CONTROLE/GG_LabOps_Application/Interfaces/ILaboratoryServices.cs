@@ -1,6 +1,6 @@
 ﻿using GG_LabOps_Domain.Entities;
 
-namespace GG_LabOps_Domain.Interfaces
+namespace GG_LabOps_Application.Interfaces
 {
     public interface ILaboratoryServices
     {

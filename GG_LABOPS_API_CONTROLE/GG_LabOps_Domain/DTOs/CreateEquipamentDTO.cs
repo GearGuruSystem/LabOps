@@ -2,16 +2,12 @@
 {
     public class CreateEquipamentDTO
     {
-        public long Id { get; set; }
-        public long LaboratoryId { get; set; }
-        public string? Inventory { get; set; }
+        public string? Inventario { get; set; }
         public string? Hostname { get; set; }
-        public string SerialNumber { get; set; }
-        public bool IsActive { get; set; }
-        public long BrandId { get; set; }
-        public long TypeId { get; set; }
-        public long ModelId { get; set; }
-        public DateTime DateRegister { get; set; }
-        public DateTime LastUpdate { get; set; }
+        public string NumeroSerie { get; set; }
+        public bool Ativa { get; set; }
+        public int MarcaId { get; set; }
+        public int TipoId { get; set; }
+        public int ModeloId { get; set; }
     }
 }
