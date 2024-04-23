@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using GG_LabOps_Domain.DTOs;
-using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
 using GG_LabOps_Infrastructure.DataAcess;
 using GG_LabOps_Infrastructure.Queries;
@@ -10,54 +9,68 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
 {
     public class EquipamentRepository : IEquipamentRepository
     {
-        private readonly ISqlDataAcess sqlData;
-        private readonly IDbConnection connection;
+        private readonly ISqlDataAcess _sqlData;
+        private readonly IDbConnection _connection;
 
 #pragma warning disable IDE0290 // Use primary constructor
         public EquipamentRepository(ISqlDataAcess sqlData, ISqlFactory factory)
         {
-            this.sqlData = sqlData;
-            connection = factory.CreateConnection();
+            _sqlData = sqlData;
+            _connection = factory.CreateConnection();
         }
 
         public async Task<IEnumerable<ViewEquipamentDTO>> GetAllAsync()
         {
-            return await sqlData.LoadDataAsync<ViewEquipamentDTO, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
+            return await _sqlData.LoadDataAsync<ViewEquipamentDTO, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
         }
 
         public async Task<ViewEquipamentDTO> GetByIdAsync(int id)
         {
             QueryModel query = EquipamentQueries.GetEquipamentById(id);
-            IEnumerable<ViewEquipamentDTO> response = await connection.QueryAsync<ViewEquipamentDTO>(query.Query, query.Parameters);
+            var response = await _connection.QueryAsync<ViewEquipamentDTO>(query.Query, query.Parameters);
             return response.FirstOrDefault();
         }
 
-        public async void CreateAsync(CreateEquipamentDTO equipament)
+        public async Task<CreateEquipamentDTO> CreateAsync(CreateEquipamentDTO equipament)
         {
-            await sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new 
-            { 
-                inventario = equipament.Inventario.Trim().ToUpper(),
-                hostname = equipament.Hostname.Trim().ToUpper(),
-                numeroSerie = equipament.NumeroSerie.Trim().ToUpper(),
-                idMarca = equipament.MarcaId,
-                idModelo = equipament.ModeloId,
-                idTipo = equipament.TipoId,
-                ativa = equipament.Ativa
-            });
-        }
-
-        public async Task<UpdateEquipamentDTO> UpdateAsync(int id, UpdateEquipamentDTO equipament)
-        {
-            await sqlData.SaveDataAsync("[dbo].[LABOPS_ATUALIZA_MAQUINA]", new 
-            { 
-                equipament
+            await _sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new
+            {
+                @Inventario = equipament.Inventario.Trim().ToUpper(),
+                @Hostname = equipament.Hostname.Trim().ToUpper(),
+                @NumeroSerie = equipament.NumeroSerie.Trim().ToUpper(),
+                @IdMarca = equipament.MarcaId,
+                @IdModelo = equipament.ModeloId,
+                @IdTipo = equipament.TipoId,
+                equipament.Ativa
             });
             return equipament;
         }
 
-        public bool DisableById(int id)
+        public async Task<UpdateEquipamentDTO> UpdateAsync(int id, UpdateEquipamentDTO equipament)
         {
-            throw new NotImplementedException();
+            await _sqlData.SaveDataAsync("[dbo].[LABOPS_ATUALIZA_MAQUINA]", new
+            {
+                @Id = id,
+                @Inventario = equipament.Inventory.Trim().ToUpper(),
+                @Hostname = equipament.Hostname.Trim().ToUpper(),
+                @NumeroSerie = equipament.SerialNumber.Trim().ToUpper(),
+                @MarcaId = equipament.BrandId,
+                @TipoId = equipament.TypeId,
+                @ModeloId = equipament.ModelId,
+                @Ativo = equipament.IsActive
+            });
+            return equipament;
+        }
+
+        public async Task<bool> DisableById(int id)
+        {
+            var data = await GetByIdAsync(id);
+            await _sqlData.SaveDataAsync("", new
+            {
+                @Id = id,
+                @Ativo = data.IsActive,
+            });
+            return true;
         }
     }
 }

@@ -10,12 +10,12 @@ namespace GG_LabOps_WebApi.Controllers
     [Route("api/v1/[controller]")]
     public class EquipamentController : ControllerBase
     {
-        private readonly IEquipamentService equipamentService;
+        private readonly IEquipamentService _equipamentService;
 
 #pragma warning disable IDE0290 // Use primary constructor
         public EquipamentController(IEquipamentService equipamentService)
         {
-            this.equipamentService = equipamentService;
+            this._equipamentService = equipamentService;
         }
 
         [HttpGet("BuscaEquipamentos")]
@@ -23,7 +23,7 @@ namespace GG_LabOps_WebApi.Controllers
         {
             try
             {
-                var data = await equipamentService.GetEquipamentsAsync();
+                var data = await _equipamentService.GetEquipamentsAsync();
                 if (data != null)
                 {
                     return Ok(data);
@@ -41,7 +41,7 @@ namespace GG_LabOps_WebApi.Controllers
         {
             try
             {
-                var data = await equipamentService.GetEquipamentsAsync(id);
+                var data = await _equipamentService.GetEquipamentsAsync(id);
                 if (data != null)
                 {
                     return Ok(data);
@@ -57,15 +57,43 @@ namespace GG_LabOps_WebApi.Controllers
         [HttpPost("CadastraEquipamento")]
         public async Task<IActionResult> CadastraEquipamento(CreateEquipamentDTO equipamentDTO)
         {
-            await equipamentService.RegisterEquipament(equipamentDTO);
-            return Created();
+            try
+            {
+                await _equipamentService.RegisterEquipament(equipamentDTO);
+                return Created("api/v1/Equipament", equipamentDTO);
+            }
+            catch (ErroGenericoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("AtualizaEquipamento")]
         public async Task<IActionResult> AtualizaEquipamento(int id, UpdateEquipamentDTO equipament)
         {
-            var data = await equipamentService.UpdateEquipament(id, equipament);
-            return Ok(data);
+            try
+            {
+                var data = await _equipamentService.UpdateEquipament(id, equipament);
+                return Ok(data);
+            }
+            catch (ErroGenericoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> DesabilitaEquipamento(int id)
+        {
+            try
+            {
+                await _equipamentService.DisableEquipament(id);
+                return Ok();
+            }
+            catch (ErroGenericoException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

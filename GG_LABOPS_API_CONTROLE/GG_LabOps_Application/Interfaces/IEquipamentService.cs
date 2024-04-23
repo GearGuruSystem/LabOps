@@ -5,9 +5,10 @@ namespace GG_LabOps_Application.Interfaces
 {
     public interface IEquipamentService
     {
+        Task<DisableEquipamentDTO> DisableEquipament(int id);
         Task<IEnumerable<ViewEquipamentDTO>> GetEquipamentsAsync();
         Task<ViewEquipamentDTO> GetEquipamentsAsync(int id);
-        Task RegisterEquipament(CreateEquipamentDTO equipamentDTO);
+        Task<CreateEquipamentDTO> RegisterEquipament(CreateEquipamentDTO equipamentDTO);
         Task<UpdateEquipamentDTO> UpdateEquipament(int id, UpdateEquipamentDTO equipament);
     }
 }
