@@ -5,24 +5,24 @@ namespace GG_LabOps_Domain.DTOs
     public class UpdateEquipamentDTO
     {
         [StringLength(15)]
-        public string? Inventory { get; set; }
+        public string? Inventario { get; set; }
 
         [StringLength(15)]
         public string? Hostname { get; set; }
 
         [StringLength(15)]
-        public string SerialNumber { get; set; }
+        public string NumeroSerie { get; set; }
 
         [Required(ErrorMessage = "Informe uma marca para o equipamento.")]
-        public int BrandId { get; set; }
+        public int MarcaId { get; set; }
 
         [Required(ErrorMessage = "Informe qual tipo é o equipamento.")]
-        public int TypeId { get; set; }
+        public int TipoId { get; set; }
 
         [Required(ErrorMessage = "Informe qual modelo é o equipamento.")]
-        public int ModelId { get; set; }
+        public int ModeloId { get; set; }
 
         [Required(ErrorMessage = "Informe se o equipamento está ativo.")]
-        public bool IsActive { get; set; }
+        public bool Ativa { get; set; }
     }
 }

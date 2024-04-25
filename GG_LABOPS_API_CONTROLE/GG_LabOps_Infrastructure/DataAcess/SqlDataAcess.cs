@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using GG_LabOps_Domain.Interfaces;
+using GG_LabOps_Domain.Exceptions;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -28,13 +28,17 @@ namespace GG_LabOps_Infrastructure.DataAcess
         }
 
         //METODO QUE FAZ EXECUÇÃO NO BANCO
-        public async Task SaveDataAsync<T>(string storedProcedure, T parameters, string connectionName = "SqlDataLocal")
+        public async Task<Task> SaveDataAsync<T>(string storedProcedure, T parameters, string connectionName = "SqlDataLocal")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
-                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                if (result.GetHashCode() == 0)
+                {
+                    throw new BancoDeDadosExceptions("Ocorreu um erro ao executar procedure.");
+                }
+                return Task.CompletedTask;
             }
         }
     }
 }
- 

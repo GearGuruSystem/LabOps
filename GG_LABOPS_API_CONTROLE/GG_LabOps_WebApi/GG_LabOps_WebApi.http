@@ -4,3 +4,12 @@ GET {{GG_LabOps_WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{GG_LabOps_WebApi_HostAddress}}/api/v1/equipament/BuscaEquipamentos
+Accept: application/json
+
+###
+
+GET {{GG_LabOps_WebApi_HostAddress}}//BuscaEquipamentoPeloId/12
+
+Accept: application/json

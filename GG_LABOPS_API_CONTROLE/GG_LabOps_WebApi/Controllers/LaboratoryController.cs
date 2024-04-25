@@ -30,7 +30,7 @@ namespace GG_LabOps_WebApi.Controllers
                 }
                 return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            catch (ConsultaNoBancoException ex)
+            catch (BancoDeDadosExceptions ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -49,7 +49,7 @@ namespace GG_LabOps_WebApi.Controllers
                 }
                 return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            catch (ConsultaNoBancoException ex)
+            catch (BancoDeDadosExceptions ex)
             {
 
                 return BadRequest(ex.Message);
@@ -69,7 +69,7 @@ namespace GG_LabOps_WebApi.Controllers
                 }
                 return NotFound("Não foi encontrado nenhum equipamento.");
             }
-            catch (ConsultaNoBancoException ex)
+            catch (BancoDeDadosExceptions ex)
             {
 
                 return BadRequest(ex.Message);

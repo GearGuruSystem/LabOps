@@ -3,14 +3,14 @@
     public class ViewEquipamentDTO
     {
         public long Id { get; set; }
-        public string? Inventory { get; set; }
+        public string? Inventario { get; set; }
         public string? Hostname { get; set; }
-        public string SerialNumber { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime DateRegister { get; set; }
-        public string BrandName { get; set; }
-        public string TypeName { get; set; }
-        public string ModelName { get; set; }
-        public DateTime LastUpdate { get; set; }
+        public string NumeroSerie { get; set; }
+        public bool Ativa { get; set; }
+        public DateTime DataRegistro { get; set; }
+        public string MarcaNome { get; set; }
+        public string ModeloNome { get; set; }
+        public string TipoNome { get; set; }
+        public DateTime UltimaAtualizacao { get; set; }
     }
 }

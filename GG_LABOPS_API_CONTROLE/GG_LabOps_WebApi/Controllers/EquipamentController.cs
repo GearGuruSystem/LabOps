@@ -1,6 +1,5 @@
 ﻿using GG_LabOps_Application.Interfaces;
 using GG_LabOps_Domain.DTOs;
-using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,31 +23,35 @@ namespace GG_LabOps_WebApi.Controllers
             try
             {
                 var data = await _equipamentService.GetEquipamentsAsync();
-                if (data != null)
-                {
-                    return Ok(data);
-                }
-                return NotFound();
+                return Ok(data);
             }
-            catch (ConsultaNoBancoException ex)
+            catch (BancoDeDadosExceptions ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
+            }
+            catch (ErroGenericoException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
-        [HttpGet("BuscaEquipamentoPeloId")]
+        [HttpGet("BuscaEquipamentoPeloId/{id:int}")]
         public async Task<IActionResult> BuscaEquipamentosPeloId(int id)
         {
             try
             {
                 var data = await _equipamentService.GetEquipamentsAsync(id);
-                if (data != null)
-                {
-                    return Ok(data);
-                }
-                return NotFound();
+                return Ok(data);
             }
-            catch (ConsultaNoBancoException ex)
+            catch (BancoDeDadosExceptions ex)
+            {
+                return NotFound(ex.ErroMsg);
+            }
+            catch (ErroGenericoException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -68,7 +71,7 @@ namespace GG_LabOps_WebApi.Controllers
             }
         }
 
-        [HttpPut("AtualizaEquipamento")]
+        [HttpPut("AtualizaEquipamento/{id:int}")]
         public async Task<IActionResult> AtualizaEquipamento(int id, UpdateEquipamentDTO equipament)
         {
             try
@@ -82,7 +85,7 @@ namespace GG_LabOps_WebApi.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("DesabilitaEquipamento/{id:int}")]
         public async Task<IActionResult> DesabilitaEquipamento(int id)
         {
             try
