@@ -1,4 +1,5 @@
 ﻿using GG_LabOps_Domain.DTOs;
+using GG_LabOps_Domain.Entities;
 
 namespace GG_LabOps_Domain.Interfaces
 {
@@ -6,8 +7,8 @@ namespace GG_LabOps_Domain.Interfaces
     {
         Task<IEnumerable<ViewEquipamentDTO>> GetAllAsync();
         Task<ViewEquipamentDTO> GetByIdAsync(int id);
-        Task<CreateEquipamentDTO> CreateAsync(CreateEquipamentDTO equipament);
-        Task<UpdateEquipamentDTO> UpdateAsync(int id, UpdateEquipamentDTO entity);
+        Task<Equipament> CreateAsync(Equipament equipament);
+        Task<Equipament> UpdateAsync(int id, Equipament entity);
         Task<bool> DisableById(int id);
     }
 }

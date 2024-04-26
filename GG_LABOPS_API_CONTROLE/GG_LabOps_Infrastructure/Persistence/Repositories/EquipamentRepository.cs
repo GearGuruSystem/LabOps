@@ -1,4 +1,5 @@
 ﻿using GG_LabOps_Domain.DTOs;
+using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Exceptions;
 using GG_LabOps_Domain.Interfaces;
 using GG_LabOps_Infrastructure.DataAcess;
@@ -39,9 +40,8 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task<CreateEquipamentDTO> CreateAsync(CreateEquipamentDTO equipament)
+        public async Task<Equipament> CreateAsync(Equipament equipament)
         {
-
             var result = await _sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new
             {
                 @Inventario = equipament.Inventario.Trim().ToUpper(),
@@ -56,10 +56,10 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             {
                 return equipament;
             }
-            throw new BancoDeDadosExceptions();
+            throw new BancoDeDadosExceptions($"Falha ao inserir o {equipament.Hostname} no banco!");
         }
 
-        public async Task<UpdateEquipamentDTO> UpdateAsync(int id, UpdateEquipamentDTO equipament)
+        public async Task<Equipament> UpdateAsync(int id, Equipament equipament)
         {
             var result = await _sqlData.SaveDataAsync("[dbo].[LABOPS_ATUALIZA_MAQUINA]", new
             {
@@ -76,7 +76,7 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
             {
                 return equipament;
             }
-            throw new BancoDeDadosExceptions();
+            throw new BancoDeDadosExceptions($"Falha ao atualizar o {equipament.Hostname} no banco!");
         }
 
         public async Task<bool> DisableById(int id)

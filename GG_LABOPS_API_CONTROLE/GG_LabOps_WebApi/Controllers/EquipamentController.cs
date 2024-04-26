@@ -14,7 +14,7 @@ namespace GG_LabOps_WebApi.Controllers
 #pragma warning disable IDE0290 // Use primary constructor
         public EquipamentController(IEquipamentService equipamentService)
         {
-            this._equipamentService = equipamentService;
+            _equipamentService = equipamentService;
         }
 
         [HttpGet("BuscaEquipamentos")]

@@ -8,7 +8,7 @@ namespace GG_LabOps_Application.Interfaces
         Task<DisableEquipamentDTO> DisableEquipament(int id);
         Task<IEnumerable<ViewEquipamentDTO>> GetEquipamentsAsync();
         Task<ViewEquipamentDTO> GetEquipamentsAsync(int id);
-        Task<CreateEquipamentDTO> RegisterEquipament(CreateEquipamentDTO equipamentDTO);
-        Task<UpdateEquipamentDTO> UpdateEquipament(int id, UpdateEquipamentDTO equipament);
+        Task<ViewEquipamentDTO> RegisterEquipament(CreateEquipamentDTO equipamentDTO);
+        Task<ViewEquipamentDTO> UpdateEquipament(int id, UpdateEquipamentDTO equipament);
     }
 }
