@@ -7,7 +7,7 @@ namespace GG_LabOps_FakeData.EquipamentData
     {
         public EquipamentViewFaker()
         {
-            RuleFor(p => p.Id, x => new Faker().Random.Number(1, 999999));
+            RuleFor(p => p.Id, x => new Faker().Random.Number(1, 999));
             RuleFor(p => p.Inventario, x => x.Random.AlphaNumeric(14));
             RuleFor(p => p.Hostname, x => x.Random.AlphaNumeric(14));
             RuleFor(p => p.NumeroSerie, x => x.Random.AlphaNumeric(15));

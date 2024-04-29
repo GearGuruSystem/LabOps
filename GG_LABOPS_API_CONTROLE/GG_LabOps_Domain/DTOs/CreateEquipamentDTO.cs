@@ -2,7 +2,7 @@
 
 namespace GG_LabOps_Domain.DTOs
 {
-    public class CreateEquipamentDTO
+    public class CreateEquipamentDTO : ICloneable
     {
         [StringLength(15)]
         public string? Inventario { get; set; }
@@ -24,5 +24,15 @@ namespace GG_LabOps_Domain.DTOs
 
         [Required(ErrorMessage ="Informe qual modelo é o equipamento.")]
         public int ModeloId { get; set; }
+
+        public object Clone()
+        {
+            return (CreateEquipamentDTO)MemberwiseClone(); 
+        }
+
+        public CreateEquipamentDTO CloneTyped()
+        {
+            return (CreateEquipamentDTO)Clone();
+        }
     }
 }

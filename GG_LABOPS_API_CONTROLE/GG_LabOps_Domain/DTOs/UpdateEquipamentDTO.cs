@@ -2,7 +2,7 @@
 
 namespace GG_LabOps_Domain.DTOs
 {
-    public class UpdateEquipamentDTO
+    public class UpdateEquipamentDTO : ICloneable
     {
         [StringLength(15)]
         public string? Inventario { get; set; }
@@ -24,5 +24,15 @@ namespace GG_LabOps_Domain.DTOs
 
         [Required(ErrorMessage = "Informe se o equipamento está ativo.")]
         public bool Ativa { get; set; }
+
+        public object Clone()
+        {
+            return (UpdateEquipamentDTO)MemberwiseClone();
+        }
+
+        public UpdateEquipamentDTO CloneTyped()
+        {
+            return (UpdateEquipamentDTO)Clone();
+        }
     }
 }

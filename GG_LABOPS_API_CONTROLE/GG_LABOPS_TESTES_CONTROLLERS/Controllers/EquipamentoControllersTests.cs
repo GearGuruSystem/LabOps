@@ -14,6 +14,7 @@ namespace GG_LABOPS_TESTs.Controllers
         private readonly EquipamentController _controller;
         private readonly ViewEquipamentDTO _viewEquipament;
         private readonly List<ViewEquipamentDTO> _viewEquipamentData;
+        private readonly CreateEquipamentDTO _createEquipament;
 
         public EquipamentoControllersTests()
         {
@@ -22,6 +23,7 @@ namespace GG_LABOPS_TESTs.Controllers
 
             _viewEquipament = new EquipamentViewFaker().Generate();
             _viewEquipamentData = new EquipamentViewFaker().Generate(50);
+            _createEquipament = new CreateEquipamentFaker().Generate();
         }
 
         [Fact]
@@ -93,6 +95,31 @@ namespace GG_LABOPS_TESTs.Controllers
             var result = (ObjectResult)await _controller.BuscaEquipamentosPeloId(idRandom);
 
             await _service.Received().GetEquipamentsAsync(idRandom);
+            result.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+        }
+
+        [Fact]
+        public async Task CadastraEquipamento_OK()
+        {
+            var createEquipamentDTO = _createEquipament.CloneTyped();
+            var viewEquipamentDTO = _viewEquipament.CloneTyped();
+            _service.RegisterEquipament(Arg.Any<CreateEquipamentDTO>()).Returns(viewEquipamentDTO);
+
+            var result = (ObjectResult)await _controller.CadastraEquipamento(createEquipamentDTO);
+
+            await _service.Received().RegisterEquipament(createEquipamentDTO);
+            result.StatusCode.Should().Be(StatusCodes.Status201Created);
+        }
+
+        [Fact]
+        public async Task CadastraEquipamento_BadRequest()
+        {
+            var createEquipamentDTO = _createEquipament.CloneTyped();
+            _service.RegisterEquipament(createEquipamentDTO).Should().Throws<ErroGenericoException>();
+
+            var result = (ObjectResult)await _controller.CadastraEquipamento(createEquipamentDTO);
+
+            await _service.Received().RegisterEquipament(createEquipamentDTO);
             result.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
         }
     }
