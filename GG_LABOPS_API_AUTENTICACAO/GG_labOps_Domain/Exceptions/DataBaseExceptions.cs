@@ -1,15 +1,14 @@
 ﻿namespace GG_labOps_Domain.Exceptions
 {
-    public class ErroGenericoExceptions : Exception
+    public class DataBaseExceptions : Exception
     {
         public string Information { get; private set; }
 
-        public ErroGenericoExceptions() : base("Ocorreu um problema")
+        public DataBaseExceptions() : base("Ocorreu um problema")
         {
-
         }
 
-        public ErroGenericoExceptions(string Information)
+        public DataBaseExceptions(string Information)
         {
             this.Information = Information;
         }

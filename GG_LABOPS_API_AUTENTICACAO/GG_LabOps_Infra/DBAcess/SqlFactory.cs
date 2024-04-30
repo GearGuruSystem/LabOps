@@ -23,7 +23,12 @@ namespace GG_LabOps_Infra.DBAcess
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
-                return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                if (result.Any())
+                {
+                    return result;
+                }
+                throw new DataBaseExceptions("Não foi encontrado nenhuma informação.");
             }
         }
 
@@ -35,7 +40,7 @@ namespace GG_LabOps_Infra.DBAcess
                 var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
                 if (result.GetHashCode() == 0)
                 {
-                    throw new BancoDeDadosExceptions();
+                    throw new DataBaseExceptions();
                 }
                 return Task.CompletedTask;
             }

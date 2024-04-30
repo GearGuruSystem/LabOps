@@ -1,15 +1,14 @@
 ﻿namespace GG_labOps_Domain.Exceptions
 {
-    public class BancoDeDadosExceptions : Exception
+    public class GenericsErrorExceptions : Exception
     {
         public string Information { get; private set; }
 
-        public BancoDeDadosExceptions() : base("Ocorreu um problema")
+        public GenericsErrorExceptions() : base("Ocorreu um problema")
         {
-
         }
 
-        public BancoDeDadosExceptions(string Information)
+        public GenericsErrorExceptions(string Information)
         {
             this.Information = Information;
         }

@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\GG_LabOps_Infra\GG_LabOps_Infra.csproj" />
+    <ProjectReference Include="..\GG_LabOps_Services\GG_LabOps_Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using GG_labOps_Domain.Entities;
 using GG_labOps_Domain.Exceptions;
 using GG_LabOps_Services.Interfaces;
+using GG_LabOps_Services.Security;
 
 #pragma warning disable IDE0290 // Use primary constructor
 namespace GG_LabOps_Infra.Persistence.Repository
@@ -17,20 +18,26 @@ namespace GG_LabOps_Infra.Persistence.Repository
         public async Task<User> SearchUser(User user)
         {
             VerifyParameters(user);
-            var uData = await _sqlFactory.LoadData<User, dynamic>("", new 
+            var userData = await _sqlFactory.LoadData<User, dynamic>("", new
             {
-                
+
             });
-            if (uData.Any())
+            return userData.FirstOrDefault();
+        }
+
+        public async Task<User> SearchUser(string userKey)
+        {
+            VerifyParameters(userKey);
+            var userData = await _sqlFactory.LoadData<User, dynamic>("", new
             {
-                return uData.FirstOrDefault();
-            }
-            throw new BancoDeDadosExceptions("Encontrado nenhum valor.");
+
+            });
+            return userData.FirstOrDefault();
         }
 
         public async Task<User> AddUser(User user)
         {
-            var result = await _sqlFactory.SaveData("", new
+            await _sqlFactory.SaveData("", new
             {
                 user.Nome,
                 user.ChaveUsuario,
@@ -38,23 +45,34 @@ namespace GG_LabOps_Infra.Persistence.Repository
                 user.Senha,
                 user.ConfirmaSenha
             });
-            if (result.IsCompleted)
-            {
-                return user;
-            }
-            throw new BancoDeDadosExceptions($@"Falha ao inserir usuário {user.Nome} no banco de dados!");
+            return user;
         }
 
-        public Task<User> UpdateUser(int id, User user)
+        public async Task<User> UpdateUser(int id, User user)
         {
-            throw new NotImplementedException();
+            await SearchUser(user);
+            GeneratesHashPasswordUser.ConverteSenhaEmHash(user);
+            await _sqlFactory.SaveData("", new
+            {
+
+            });
+            return user;
+        }
+
+        private static bool VerifyParameters(string userKey)
+        {
+            if (userKey == null)
+            {
+                throw new GenericsErrorExceptions("Reveja o parametro enviado");
+            }
+            return true;
         }
 
         private static bool VerifyParameters(User user)
         {
-            if (user.ChaveUsuario != null)
+            if (user.ChaveUsuario == null)
             {
-                throw new ErroGenericoExceptions("Reveja o parametro enviado");
+                throw new GenericsErrorExceptions("Reveja o parametro enviado");
             }
             return true;
         }

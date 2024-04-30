@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GG_LabOps_Services.Security
 {
-    public static class GeraHashSenhaUser
+    public static class GeneratesHashPasswordUser
     {
-        private static readonly IUserServices _service;
+        private static readonly IUserService _service;
 
         public static void ConverteSenhaEmHash(User user)
         {
