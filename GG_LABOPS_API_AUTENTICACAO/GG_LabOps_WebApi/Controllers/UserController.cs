@@ -15,11 +15,30 @@ namespace GG_LabOps_WebApi.Controllers
             _services = Services;
         }
 
+        [HttpPost("CadastraUsuario")]
+        public async Task<IActionResult> CadastrarUsuario([FromBody] User user)
+        {
+            try
+            {
+                return Ok(await _services.AddUserAsync(user));
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("BuscaUsuarioPorChave")]
         public async Task<IActionResult> BuscaUsuarioPelaChave(string chaveUsuario)
         {
-            var result = await _services.GetUser(chaveUsuario);
-            return Ok(result);
+            try
+            {
+                return Ok(await _services.GetUser(chaveUsuario));
+            }
+            catch (Exception)
+            {
+                return NotFound("Houve um problema");
+            }
         }
 
         [HttpGet("Login")]
