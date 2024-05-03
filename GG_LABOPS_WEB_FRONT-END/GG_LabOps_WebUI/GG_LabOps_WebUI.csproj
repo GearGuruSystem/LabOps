@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>annotations</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GG_LabOps_Application\GG_LabOps_Application.csproj" />
+    <ProjectReference Include="..\GG_LabOps_Infra\GG_LabOps_Infra.csproj" />
+  </ItemGroup>
+
+</Project>
