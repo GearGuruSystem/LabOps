@@ -1,9 +1,10 @@
 ﻿using GG_labOps_Domain.Entities;
 using GG_labOps_Domain.Exceptions;
-using GG_LabOps_Services.Interfaces;
+using GG_labOps_Domain.Interfaces;
 using GG_LabOps_Services.Security;
 
 #pragma warning disable IDE0290 // Use primary constructor
+
 namespace GG_LabOps_Infra.Persistence.Repository
 {
     public class UserRepository : IUserRepository
@@ -20,7 +21,6 @@ namespace GG_LabOps_Infra.Persistence.Repository
             VerifyParameters(user);
             var userData = await _sqlFactory.LoadData<User, dynamic>("", new
             {
-
             });
             return userData.FirstOrDefault();
         }
@@ -30,7 +30,6 @@ namespace GG_LabOps_Infra.Persistence.Repository
             VerifyParameters(userKey);
             var userData = await _sqlFactory.LoadData<User, dynamic>("", new
             {
-
             });
             return userData.FirstOrDefault();
         }
@@ -54,7 +53,6 @@ namespace GG_LabOps_Infra.Persistence.Repository
             GeneratesHashPasswordUser.ConverteSenhaEmHash(user);
             await _sqlFactory.SaveData("", new
             {
-
             });
             return user;
         }

@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using GG_labOps_Domain.Exceptions;
-using GG_LabOps_Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;

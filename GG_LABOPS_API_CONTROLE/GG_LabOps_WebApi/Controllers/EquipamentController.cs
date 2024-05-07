@@ -12,6 +12,7 @@ namespace GG_LabOps_WebApi.Controllers
         private readonly IEquipamentService _equipamentService;
 
 #pragma warning disable IDE0290 // Use primary constructor
+
         public EquipamentController(IEquipamentService equipamentService)
         {
             _equipamentService = equipamentService;
@@ -58,17 +59,21 @@ namespace GG_LabOps_WebApi.Controllers
         }
 
         [HttpPost("CadastraEquipamento")]
-        public async Task<IActionResult> CadastraEquipamento(CreateEquipamentDTO equipamentDTO)
+        public async Task<IActionResult> CadastraEquipamento([FromBody] CreateEquipamentDTO equipamentDTO)
         {
-            try
+            if (ModelState.IsValid)
             {
-                await _equipamentService.RegisterEquipament(equipamentDTO);
-                return Created("api/v1/Equipament", equipamentDTO);
+                try
+                {
+                    await _equipamentService.RegisterEquipament(equipamentDTO);
+                    return Created("api/v1/Equipament", equipamentDTO);
+                }
+                catch (ErroGenericoException ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-            catch (ErroGenericoException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest();
         }
 
         [HttpPut("AtualizaEquipamento/{id:int}")]

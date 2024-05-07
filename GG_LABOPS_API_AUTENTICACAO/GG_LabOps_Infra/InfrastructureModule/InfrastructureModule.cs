@@ -1,6 +1,5 @@
 ﻿using GG_LabOps_Infra.DBAcess;
 using GG_LabOps_Infra.Persistence.Repository;
-using GG_LabOps_Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Infra.InfrastructureModule

@@ -1,9 +1,11 @@
 ﻿using GG_labOps_Domain.DTOs;
 using GG_labOps_Domain.Entities;
-using GG_LabOps_Services.Interfaces;
+using GG_labOps_Domain.Exceptions;
+using GG_labOps_Domain.Interfaces;
 using GG_LabOps_Services.Security;
 
 #pragma warning disable IDE0290 // Use primary constructor
+
 namespace GG_LabOps_Services.Services
 {
     public class UserService : IUserService
@@ -26,8 +28,9 @@ namespace GG_LabOps_Services.Services
             return await QueryUser(user);
         }
 
-        public async Task<User> AddUserAsync(User user)
+        public async Task<User> AddUserAsync(RegisterUserDTO userDTO)
         {
+            var user = ConvertToUser(userDTO);
             await QueryUser(user);
             GeneratesHashPasswordUser.ConverteSenhaEmHash(user);
             return await _repository.AddUser(user);
@@ -53,7 +56,7 @@ namespace GG_LabOps_Services.Services
             {
                 return userConsulted;
             }
-            throw new Exception();
+            throw new DataBaseExceptions();
         }
 
         private async Task<User> QueryUser(User user)
@@ -78,18 +81,32 @@ namespace GG_LabOps_Services.Services
 
         private User SetToken(User user)
         {
-            var userDTO = ConvertToDto(user);
+            var userDTO = ConvertToDtoLogged(user);
             userDTO.Token = _jwtService.GenerateToken(user);
             return user;
         }
 
-        private static UserLoggedDTO ConvertToDto(User user)
+        private static UserLoggedDTO ConvertToDtoLogged(User user)
         {
             var dto = new UserLoggedDTO
             {
                 Login = user.ChaveUsuario,
             };
             return dto;
+        }
+
+        private static User ConvertToUser(RegisterUserDTO userDTO)
+        {
+            var user = new User
+            {
+                Nome = userDTO.Nome,
+                ChaveUsuario = userDTO.ChaveUsuario,
+                Email = userDTO.Email,
+                Senha = userDTO.Senha,
+                ConfirmaSenha = userDTO.ConfirmaSenha,
+                DataCadastro = userDTO.DataCadastro
+            };
+            return user;
         }
     }
 }

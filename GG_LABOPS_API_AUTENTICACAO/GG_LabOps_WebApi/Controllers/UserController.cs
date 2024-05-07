@@ -1,13 +1,14 @@
-﻿using GG_labOps_Domain.Entities;
-using GG_LabOps_Services.Interfaces;
+﻿using GG_labOps_Domain.DTOs;
+using GG_labOps_Domain.Entities;
+using GG_labOps_Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GG_LabOps_WebApi.Controllers
 {
 #pragma warning disable IDE0290 // Use primary constructor
+
     public class UserController : ControllerBase
     {
-
         private readonly IUserService _services;
 
         public UserController(IUserService Services)
@@ -16,7 +17,7 @@ namespace GG_LabOps_WebApi.Controllers
         }
 
         [HttpPost("CadastraUsuario")]
-        public async Task<IActionResult> CadastrarUsuario([FromBody] User user)
+        public async Task<IActionResult> CadastrarUsuario([FromBody] RegisterUserDTO user)
         {
             try
             {
@@ -49,7 +50,7 @@ namespace GG_LabOps_WebApi.Controllers
                 return Ok(await _services.ValidUserAndGeneratesToken(user));
             }
             catch (Exception)
-            { 
+            {
                 return Unauthorized();
             }
         }

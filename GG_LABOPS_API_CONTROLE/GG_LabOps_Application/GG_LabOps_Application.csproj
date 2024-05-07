@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="ApplicationModule\" />
-    <Folder Include="Validations\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿using GG_labOps_Domain.Entities;
 
-namespace GG_LabOps_Services.Interfaces
+namespace GG_labOps_Domain.Interfaces
 {
-    internal interface IJWTService
+    public interface IJWTService
     {
         string GenerateToken(User user);
     }

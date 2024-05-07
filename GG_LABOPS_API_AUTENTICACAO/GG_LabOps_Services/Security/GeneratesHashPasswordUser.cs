@@ -1,5 +1,4 @@
 ﻿using GG_labOps_Domain.Entities;
-using GG_LabOps_Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace GG_LabOps_Services.Security
@@ -14,7 +13,7 @@ namespace GG_LabOps_Services.Security
             user.Senha = passwordHasher.HashPassword(user, user.Senha);
         }
 
-        public static bool ValidUpdateHashAsync (User user, string hash)
+        public static bool ValidUpdateHashAsync(User user, string hash)
         {
             var passwordHasher = new PasswordHasher<User>();
             var status = passwordHasher.VerifyHashedPassword(user, hash, user.Senha);
@@ -22,11 +21,14 @@ namespace GG_LabOps_Services.Security
             {
                 case PasswordVerificationResult.Failed:
                     return false;
+
                 case PasswordVerificationResult.Success:
                     return true;
+
                 case PasswordVerificationResult.SuccessRehashNeeded:
                     _service.UpdateUser(user.Id, user);
                     return true;
+
                 default:
                     throw new InvalidOperationException();
             }

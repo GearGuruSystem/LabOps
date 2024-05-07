@@ -4,7 +4,7 @@
     {
         public string Information { get; private set; }
 
-        public DataBaseExceptions() : base("Ocorreu um problema")
+        public DataBaseExceptions() : base("Ocorreu um problema ao consultar o banco de dados")
         {
         }
 
