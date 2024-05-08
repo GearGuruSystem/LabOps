@@ -2,11 +2,11 @@
 
 namespace GG_LabOps_Domain.Entities
 {
-    public class TypeEquipament : BaseEntity
+    public class Situation : BaseEntity
     {
         public int Id { get; set; }
 
-        [StringLength(120)]
+        [StringLength(45)]
         public string Descricao { get; set; }
     }
 }

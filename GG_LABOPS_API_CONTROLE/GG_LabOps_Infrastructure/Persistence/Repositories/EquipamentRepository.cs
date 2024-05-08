@@ -44,39 +44,43 @@ namespace GG_LabOps_Infrastructure.Persistence.Repositories
         {
             var result = await _sqlData.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new
             {
-                @Inventario = equipament.Inventario.Trim().ToUpper(),
-                @Hostname = equipament.Hostname.Trim().ToUpper(),
-                @NumeroSerie = equipament.NumeroSerie.Trim().ToUpper(),
-                @IdMarca = equipament.MarcaId,
-                @IdModelo = equipament.ModeloId,
-                @IdTipo = equipament.TipoId,
-                equipament.Ativa
+                @NomeParam = equipament.Nome.ToUpper(),
+                @IDSituacaoParam = equipament.Situacao.Id,
+                @IDTipoEquipamentoParam = equipament.TipoEquipamento.Id,
+                @IDFabricanteParam = equipament.Fabricante.Id,
+                @IDLaboratorioParam = equipament.Laboratorio.Id,
+                @UsuarioInsercaoParam = equipament.UsuarioInsercao,
+                @InseridoEmParam = equipament.InseridoEm,
+                @UsuarioUltimaAtualizacaoParam = equipament.UsuarioUltimaAtualizacao.Id,
+                @AtualizadoEmParam = equipament.AtualizadoEm
             });
             if (result.IsCompleted)
             {
                 return equipament;
             }
-            throw new BancoDeDadosExceptions($"Falha ao inserir o {equipament.Hostname} no banco!");
+            throw new BancoDeDadosExceptions($"Falha ao inserir o {equipament.Nome} no banco!");
         }
 
         public async Task<Equipament> UpdateAsync(int id, Equipament equipament)
         {
             var result = await _sqlData.SaveDataAsync("[dbo].[LABOPS_ATUALIZA_MAQUINA]", new
             {
-                @Id = id,
-                @Inventario = equipament.Inventario.Trim().ToUpper(),
-                @Hostname = equipament.Hostname.Trim().ToUpper(),
-                @NumeroSerie = equipament.NumeroSerie.Trim().ToUpper(),
-                @IdMarca = equipament.MarcaId,
-                @IdModelo = equipament.ModeloId,
-                @IdTipo = equipament.TipoId,
-                @Ativo = equipament.Ativa
+                @IDEquipamentoParam = id,
+                @NomeParam = equipament.Nome.ToUpper(),
+                @IDSituacaoParam = equipament.Situacao.Id,
+                @IDTipoEquipamentoParam = equipament.TipoEquipamento.Id,
+                @IDFabricanteParam = equipament.Fabricante.Id,
+                @IDLaboratorioParam = equipament.Laboratorio.Id,
+                @UsuarioInsercaoParam = equipament.UsuarioInsercao,
+                @InseridoEmParam = equipament.InseridoEm,
+                @UsuarioUltimaAtualizacaoParam = equipament.UsuarioUltimaAtualizacao.Id,
+                @AtualizadoEmParam = equipament.AtualizadoEm
             });
             if (result.IsCompleted)
             {
                 return equipament;
             }
-            throw new BancoDeDadosExceptions($"Falha ao atualizar o {equipament.Hostname} no banco!");
+            throw new BancoDeDadosExceptions($"Falha ao atualizar o {equipament.Nome} no banco!");
         }
 
         public async Task<bool> DisableById(int id)

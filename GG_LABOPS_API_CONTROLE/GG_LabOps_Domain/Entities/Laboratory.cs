@@ -1,18 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GG_LabOps_Domain.Entities
 {
-    public sealed class Laboratory : BaseEntity
+    public class Laboratory : BaseEntity
     {
-        [Column("id_lab")]
-        public long Id { get; set; }
-        [Column("responsavel")]
-        public string Owner { get; set; }
-        [Column("chaveResponsavel")]
-        public string KeyOwner { get; set; }
-        [Column("id_equip")]
-        public long EquipamentId { get; set; }
-        [Column("observacao")]
-        public string? Observation { get; set; }
+        public int Id { get; set; }
+
+        [StringLength(100)]
+        public string Nome { get; set; }
+
+        public Technical? IdUsuarioResponsavel { get; set; }
+
+        [StringLength(45)]
+        public Technical? ChaveResponsavel { get; set; }
     }
 }

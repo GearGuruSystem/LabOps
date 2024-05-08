@@ -8,12 +8,10 @@ namespace GG_LabOps_WebUI.Controllers
     public class LoginController : Controller
     {
         private readonly IUserServices _services;
-        private readonly ISessionHelper _session;
 
-        public LoginController(IUserServices services, ISessionHelper session)
+        public LoginController(IUserServices services)
         {
             _services = services;
-            _session = session;
         }
 
         [HttpGet]

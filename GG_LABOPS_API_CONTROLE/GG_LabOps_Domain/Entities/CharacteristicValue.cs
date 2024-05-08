@@ -2,7 +2,7 @@
 
 namespace GG_LabOps_Domain.Entities
 {
-    public class TypeEquipament : BaseEntity
+    public class CharacteristicValue
     {
         public int Id { get; set; }
 

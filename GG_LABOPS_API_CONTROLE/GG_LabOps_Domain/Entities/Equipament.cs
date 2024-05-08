@@ -1,27 +1,36 @@
 ﻿using System.ComponentModel.DataAnnotations;
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Domain.Entities
 {
     public class Equipament : BaseEntity
     {
-        [Required(ErrorMessage = "Informe um ID")]
-        public long Id { get; set; }
-        public string? Inventario { get; set; }
-        public string? Hostname { get; set; }
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "Informe um Numero de Serie valido")]
-        public string NumeroSerie { get; set; }
+        [StringLength(120)]
+        public string? Nome { get; set; }
 
-        public bool Ativa { get; set; }
+        public Situation Situacao { get; private set; }
+        public int SituacaoId { get; set; }
 
-        [Required(ErrorMessage = "Informe uma marca para o equipamento.")]
-        public int MarcaId { get; set; }
+        public TypeEquipament TipoEquipamento { get; private set; }
+        public int TipoEquipamentoId { get; set; }
 
-        [Required(ErrorMessage = "Informe qual tipo é o equipamento.")]
-        public int TipoId { get; set; }
+        public Manufacturer Fabricante { get; private set; }
+        public int FabricanteId { get; set; }
 
-        [Required(ErrorMessage = "Informe qual modelo é o equipamento.")]
-        public int ModeloId { get; set; }
-        public DateTime DataRegistro { get; set; }
+        public Laboratory Laboratorio { get; private set; }
+        public int? LaboratorioId { get; set;}
+
+        public Equipament(string? nome, Situation situacao, int situacaoId, TypeEquipament tipoEquipamento,
+            Manufacturer fabricante, Laboratory laboratorio)
+        {
+            Nome = nome;
+            Situacao = situacao;
+            SituacaoId = situacaoId;
+            TipoEquipamento = tipoEquipamento;
+            Fabricante = fabricante;
+            Laboratorio = laboratorio;
+        }
     }
 }

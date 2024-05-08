@@ -10,6 +10,7 @@ namespace GG_LabOps_Infra.InfrastructureModule
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddApiClientsServices(configuration);
+            services.AddSqlDataService();
 
             return services;
         }

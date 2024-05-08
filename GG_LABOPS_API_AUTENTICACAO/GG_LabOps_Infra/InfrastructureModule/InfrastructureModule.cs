@@ -1,4 +1,5 @@
-﻿using GG_LabOps_Infra.DBAcess;
+﻿using GG_labOps_Domain.Interfaces;
+using GG_LabOps_Infra.DBAcess;
 using GG_LabOps_Infra.Persistence.Repository;
 using Microsoft.Extensions.DependencyInjection;
 

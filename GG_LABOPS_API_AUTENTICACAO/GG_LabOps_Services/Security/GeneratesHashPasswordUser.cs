@@ -1,4 +1,5 @@
 ﻿using GG_labOps_Domain.Entities;
+using GG_labOps_Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace GG_LabOps_Services.Security

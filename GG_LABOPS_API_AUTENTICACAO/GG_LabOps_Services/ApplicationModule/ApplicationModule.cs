@@ -1,4 +1,5 @@
-﻿using GG_LabOps_Services.Services;
+﻿using GG_labOps_Domain.Interfaces;
+using GG_LabOps_Services.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GG_LabOps_Services.ApplicationModule
