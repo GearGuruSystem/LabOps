@@ -1,7 +1,8 @@
 ﻿using GG_LabOps_Domain.DTOs;
 using GG_LabOps_Domain.Entities;
 using GG_LabOps_Domain.Interfaces;
-#pragma warning disable IDE0290 // Use primary constructor
+
+#pragma warning disable IDE0290
 
 namespace GG_LabOps_Application.Services
 {
@@ -21,27 +22,7 @@ namespace GG_LabOps_Application.Services
 
         public async Task<UserLoggedDTO> LoginUser(UserLoginDTO userDTO)
         {
-            await _userClient.FindByKeyAsync(userDTO.ChaveUsuario);
-            var uValid = await _userClient.ValidUser(userDTO);
-            if (uValid)
-            {
-                return new UserLoggedDTO
-                {
-                    ChaveUsuario = userDTO.ChaveUsuario,
-                };
-            }
-            throw new Exception();
-        }
-
-        private static UserLoggedDTO ConvertUserInLogged(User user)
-        {
-            var userDTO = new UserLoggedDTO
-            {
-                ChaveUsuario = user.ChaveUsuario,
-                Permissao = user.Permissao,
-                Token = user.Token
-            };
-            return userDTO;
+            return await _userClient.LoginUser(userDTO);
         }
     }
 }

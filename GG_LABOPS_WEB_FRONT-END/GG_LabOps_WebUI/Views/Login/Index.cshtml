@@ -2,6 +2,7 @@
 @model GG_LabOps_WebUI.Models.LoginModel
 
 @{
+    Layout = "_LayoutLoggedOut";
     ViewBag.Title = "Login";
 }
 
@@ -13,7 +14,7 @@
     </div>
 }
 
-<div class="container">
+<div class="container-login">
     <h2>@ViewBag.Title</h2>
     <form asp-controller="Login" asp-action="Login" method="post">
         <div>

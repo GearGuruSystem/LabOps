@@ -5,8 +5,12 @@ namespace GG_LabOps_Domain.Interfaces
 {
     public interface IUserApiClient
     {
+        Task<User> FindAll();
+        Task<User> FindById(int id);
         Task<User> FindByKeyAsync(string userKey);
-        Task<User> LoginUser(UserLoginDTO userDto);
+        Task<UserLoggedDTO> LoginUser(UserLoginDTO user);
+        Task<User> RegisterUser(User user);
+        Task<User> UpdateUser(int id, User user);
         Task<bool> ValidUser(UserLoginDTO userDto);
     }
 }
