@@ -3,6 +3,7 @@ using GG_labOps_Domain.Entities;
 using GG_labOps_Domain.Exceptions;
 using GG_labOps_Domain.Interfaces;
 using GG_LabOps_Services.Security;
+using AutoMapper;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -33,7 +34,7 @@ namespace GG_LabOps_Services.Services
             var user = ConvertToUser(userDTO);
             await QueryUser(user);
             GeneratesHashPasswordUser.ConverteSenhaEmHash(user);
-            return await _repository.AddUser(user);
+            return await _repository.InsertUserAsync(user);
         }
 
         public Task<User> UpdateUser(int id, User user)
@@ -41,17 +42,18 @@ namespace GG_LabOps_Services.Services
             return _repository.UpdateUser(id, user);
         }
 
-        public async Task<User> ValidUserAndGeneratesToken(User user)
+        public async Task<UserLoggedDTO> ValidUserAndGeneratesToken(User user)
         {
             await QueryUser(user);
             VerifyHash(user);
             SetToken(user);
+
             return user;
         }
 
         private async Task<User> QueryUser(string userKey)
         {
-            var userConsulted = await _repository.SearchUser(userKey);
+            var userConsulted = await _repository.SearchUserAsync(userKey);
             if (userConsulted != null)
             {
                 return userConsulted;
@@ -61,7 +63,7 @@ namespace GG_LabOps_Services.Services
 
         private async Task<User> QueryUser(User user)
         {
-            var userConsulted = await _repository.SearchUser(user);
+            var userConsulted = await _repository.SearchUserAsync(user);
             if (userConsulted != null)
             {
                 return userConsulted;
@@ -81,12 +83,12 @@ namespace GG_LabOps_Services.Services
 
         private User SetToken(User user)
         {
-            var userDTO = ConvertToDtoLogged(user);
+            var userDTO = ConvertToLoggedDto(user);
             userDTO.Token = _jwtService.GenerateToken(user);
             return user;
         }
 
-        private static UserLoggedDTO ConvertToDtoLogged(User user)
+        private static UserLoggedDTO ConvertToLoggedDto(User user)
         {
             var dto = new UserLoggedDTO
             {

@@ -2,7 +2,6 @@
 using GG_labOps_Domain.Exceptions;
 using GG_labOps_Domain.Interfaces;
 using GG_LabOps_Services.Security;
-
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Infra.Persistence.Repository
@@ -16,7 +15,7 @@ namespace GG_LabOps_Infra.Persistence.Repository
             _sqlFactory = sqlFactory;
         }
 
-        public async Task<User> SearchUser(User user)
+        public async Task<User> SearchUserAsync(User user)
         {
             VerifyParameters(user);
             var userData = await _sqlFactory.LoadData<User, dynamic>("", new
@@ -25,7 +24,7 @@ namespace GG_LabOps_Infra.Persistence.Repository
             return userData.FirstOrDefault();
         }
 
-        public async Task<User> SearchUser(string userKey)
+        public async Task<User> SearchUserAsync(string userKey)
         {
             VerifyParameters(userKey);
             var userData = await _sqlFactory.LoadData<User, dynamic>("", new
@@ -34,7 +33,7 @@ namespace GG_LabOps_Infra.Persistence.Repository
             return userData.FirstOrDefault();
         }
 
-        public async Task<User> AddUser(User user)
+        public async Task<User> InsertUserAsync(User user)
         {
             await _sqlFactory.SaveData("", new
             {
@@ -49,7 +48,7 @@ namespace GG_LabOps_Infra.Persistence.Repository
 
         public async Task<User> UpdateUser(int id, User user)
         {
-            await SearchUser(user);
+            await SearchUserAsync(user);
             GeneratesHashPasswordUser.ConverteSenhaEmHash(user);
             await _sqlFactory.SaveData("", new
             {

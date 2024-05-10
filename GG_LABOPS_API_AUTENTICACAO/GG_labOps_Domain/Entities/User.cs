@@ -8,7 +8,7 @@
         public string Email { get; set; }
         public string Senha { get; set; }
         public string ConfirmaSenha { get; set; }
-        public int Permissao { get; set; }
+        public ICollection<Permissao> Permissoes { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

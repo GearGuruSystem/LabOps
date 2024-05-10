@@ -1,18 +1,24 @@
-﻿using GG_labOps_Domain.Interfaces;
+﻿using AutoMapper;
+using GG_labOps_Domain.Interfaces;
+using GG_LabOps_Services.Profiles;
 using GG_LabOps_Services.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace GG_LabOps_Services.ApplicationModule
 {
     public static class ApplicationModule
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddApplicationService();
             services.AddHttpServices();
             services.AddSessionService();
             services.AddAutoMapperService();
-
+            services.AddJwtConfiguration(configuration);
             return services;
         }
 
@@ -43,6 +49,39 @@ namespace GG_LabOps_Services.ApplicationModule
 
         private static IServiceCollection AddAutoMapperService(this IServiceCollection services)
         {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new UserProfiles());
+            });
+            var mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+            return services;
+        }
+
+        private static IServiceCollection AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IJWTService, JWTService>();
+            var key = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration.GetSection("JWT:Issuer").Value,
+                    ValidateAudience = true,
+                    ValidAudience = configuration.GetSection("JWT:Audience").Value,
+                    ValidateLifetime = true,
+                };
+            });
             return services;
         }
     }

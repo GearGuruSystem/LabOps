@@ -30,7 +30,7 @@ namespace GG_LabOps_WebApi.Controllers
         }
 
         [HttpGet("BuscaUsuarioPorChave")]
-        public async Task<IActionResult> BuscaUsuarioPelaChave(string chaveUsuario)
+        public async Task<IActionResult> BuscaUsuarioPelaChave([FromBody] string chaveUsuario)
         {
             try
             {
@@ -47,7 +47,8 @@ namespace GG_LabOps_WebApi.Controllers
         {
             try
             {
-                return Ok(await _services.ValidUserAndGeneratesToken(user));
+                var userLogged = await _services.ValidUserAndGeneratesToken(user);
+                return Ok(userLogged);
             }
             catch (Exception)
             {
