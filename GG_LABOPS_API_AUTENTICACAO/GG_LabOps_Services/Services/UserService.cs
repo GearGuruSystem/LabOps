@@ -4,7 +4,6 @@ using GG_labOps_Domain.Exceptions;
 using GG_labOps_Domain.Interfaces;
 using GG_LabOps_Services.Security;
 using AutoMapper;
-
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace GG_LabOps_Services.Services
@@ -13,10 +12,13 @@ namespace GG_LabOps_Services.Services
     {
         private readonly IUserRepository _repository;
         private readonly IJWTService _jwtService;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper, IJWTService jwtService)
         {
             _repository = userRepository;
+            _mapper = mapper;
+            _jwtService = jwtService;
         }
 
         public async Task<User> GetUser(string chaveUsuario)
@@ -47,8 +49,8 @@ namespace GG_LabOps_Services.Services
             await QueryUser(user);
             VerifyHash(user);
             SetToken(user);
-
-            return user;
+            var userLogged = _mapper.Map<UserLoggedDTO>(user);
+            return userLogged;
         }
 
         private async Task<User> QueryUser(string userKey)

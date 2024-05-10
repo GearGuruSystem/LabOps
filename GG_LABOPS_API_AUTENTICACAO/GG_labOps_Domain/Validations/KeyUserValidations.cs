@@ -7,7 +7,7 @@ namespace GG_labOps_Domain.Validations
     {
         private static readonly IUserService _service;
 
-        public static async Task<bool> ValidKeyUserInDataBase(string keyUser)
+        private static async Task<bool> ValidKeyUserInDataBase(string keyUser)
         {
             var userverify = await _service.GetUser(keyUser);
             if (userverify != null)
