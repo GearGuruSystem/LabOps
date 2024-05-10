@@ -26,7 +26,7 @@ namespace GG_LabOps_WebUI.Controllers
         {
             try
             {
-                await _services.SearchUserByKey(loginModel.Login) ;
+                await _services.SearchUserByKey(loginModel.Login);
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController.Index));
             }
             catch (Exception ex)

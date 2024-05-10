@@ -16,10 +16,7 @@ namespace GG_LabOps_Infra.Useful
                 throw new ApplicationException($"Algo deu errado: {response.ReasonPhrase}");
             }
             var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            JsonSerializerSettings jsonSerializerOptions = new JsonSerializerSettings
-            {
-                ContractResolver = new CustomContractResolver()
-            };
+            JsonSerializerSettings jsonSerializerOptions = new JsonSerializerSettings { ContractResolver = new CustomContractResolver() };
             JsonSerializerSettings options = jsonSerializerOptions;
             return JsonConvert.DeserializeObject<T>(dataAsString, options);
         }

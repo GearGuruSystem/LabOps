@@ -1,91 +1,29 @@
-﻿@model GG_LabOps_WebUI.Models.LoginModel
+﻿<link href="~/css/tela-login.css" rel="stylesheet" />
+@model GG_LabOps_WebUI.Models.LoginModel
 
 @{
     ViewBag.Title = "Login";
 }
 
-@if (TempData["MensagemErro"] != null)
+@if (TempData["MsgError"] != null)
 {
     <div class="alert alert-danger" role="alert">
         <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
-        @TempData["MensagemErro"]
+        @TempData["MsgError"]
     </div>
 }
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        max-width: 400px;
-        margin: 100px auto;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        border-top: 6px solid #FF00FF; /* Alterado para um tom menos escuro de magenta */
-    }
-
-    h2 {
-        margin-top: 0;
-        text-align: center;
-        color: black; /* Alterado para um tom menos escuro de magenta */
-    }
-
-    input[type="text"], input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid #FF00FF; /* Alterado para um tom menos escuro de magenta */
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-        background-color: #FF00FF; /* Alterado para um tom menos escuro de magenta */
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100%;
-        transition: background-color 0.3s;
-    }
-
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .signup-link {
-        color: #FF00FF; /* Alterado para um tom menos escuro de magenta */
-        text-decoration: none;
-    }
-
-        .signup-link:hover {
-            text-decoration: underline;
-        }
-</style>
-
 <div class="container">
-    <h2>Login</h2>
-    <form asp-controller="Login" asp-action="Entrar" method="post">
-        <div class="mb-3">
+    <h2>@ViewBag.Title</h2>
+    <form asp-controller="Login" asp-action="Login" method="post">
+        <div>
             <div class="mb-3">
-                <label asp-for="Login" class="control-label">ChaveUsuario:</label>
+                <label asp-for="Login">Chave de Usuario:</label>
                 <input asp-for="Login" type="text" id="username" required>
                 <span asp-validation-for="Login" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Senha" class="control-label">Senha:</label>
+                <label asp-for="Senha">Senha:</label>
                 <input asp-for="Senha" type="password" id="password" required>
                 <span asp-validation-for="Senha" class="text-danger"></span>
             </div>
