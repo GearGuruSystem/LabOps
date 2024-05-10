@@ -1,6 +1,6 @@
 ﻿namespace GG_LabOps_Domain.Entities
 {
-    public class Technical
+    public class User
     {
         public int Id { get; set; }
         public string Nome { get; set; }

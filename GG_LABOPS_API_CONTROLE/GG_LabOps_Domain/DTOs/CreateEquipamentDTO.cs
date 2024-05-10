@@ -1,30 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GG_LabOps_Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace GG_LabOps_Domain.DTOs
 {
     public class CreateEquipamentDTO : ICloneable
     {
-        [StringLength(15)]
-        public string? Inventario { get; set; }
+        [StringLength(120)]
+        public string? Nome { get; set; }
 
-        [StringLength(15)]
-        public string? Hostname { get; set; }
+        public Situation Situacao { get; private set; }
+        public int? SituacaoId { get; set; }
 
-        [Required]
-        [StringLength(15)]
-        public string NumeroSerie { get; set; }
+        public TypeEquipament TipoEquipamento { get; private set; }
+        public int? TipoEquipamentoId { get; set; }
 
-        [Required(ErrorMessage = "Informe se o equipamento está ativo.")]
-        public bool Ativa { get; set; }
+        public Manufacturer Fabricante { get; private set; }
+        public int? FabricanteId { get; set; }
 
-        [Required(ErrorMessage = "Informe uma marca para o equipamento.")]
-        public int MarcaId { get; set; }
-
-        [Required(ErrorMessage = "Informe qual tipo é o equipamento.")]
-        public int TipoId { get; set; }
-
-        [Required(ErrorMessage = "Informe qual modelo é o equipamento.")]
-        public int ModeloId { get; set; }
+        public Laboratory Laboratorio { get; private set; }
+        public int? LaboratorioId { get; set; }
 
         public object Clone()
         {

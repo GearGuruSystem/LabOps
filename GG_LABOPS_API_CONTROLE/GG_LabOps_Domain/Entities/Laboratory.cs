@@ -9,9 +9,9 @@ namespace GG_LabOps_Domain.Entities
         [StringLength(100)]
         public string Nome { get; set; }
 
-        public Technical? IdUsuarioResponsavel { get; set; }
+        public User? IdUsuarioResponsavel { get; set; }
 
         [StringLength(45)]
-        public Technical? ChaveResponsavel { get; set; }
+        public User? ChaveResponsavel { get; set; }
     }
 }
