@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGateway", "ApiGateway\OcelotApiGateway.csproj", "{2702B8FD-3037-4E35-8A1E-B49062E725B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "ApiGateway\OcelotApiGateway.csproj", "{2702B8FD-3037-4E35-8A1E-B49062E725B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5DC43B1A-3170-476F-9288-3AD1BC1FCECF}"
 EndProject
@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service1", "Service1", "{B5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service2", "Service2", "{6E3BF4D8-372B-40CB-ABCB-D5C67C46136D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiService1", "ApiService1\ApiService1.csproj", "{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiService2", "ApiService2\ApiService2.csproj", "{6DB1038A-1E5C-4539-9613-25EEF9118937}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2702B8FD-3037-4E35-8A1E-B49062E725B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2702B8FD-3037-4E35-8A1E-B49062E725B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2702B8FD-3037-4E35-8A1E-B49062E725B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DB1038A-1E5C-4539-9613-25EEF9118937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DB1038A-1E5C-4539-9613-25EEF9118937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DB1038A-1E5C-4539-9613-25EEF9118937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DB1038A-1E5C-4539-9613-25EEF9118937}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +49,8 @@ Global
 		{830C14D3-E66B-426B-BCBF-33ED36C047AC} = {5DC43B1A-3170-476F-9288-3AD1BC1FCECF}
 		{B54BF687-2425-4709-BD54-E740BDBAC5DD} = {830C14D3-E66B-426B-BCBF-33ED36C047AC}
 		{6E3BF4D8-372B-40CB-ABCB-D5C67C46136D} = {830C14D3-E66B-426B-BCBF-33ED36C047AC}
+		{3C0598BB-B3A4-4FB8-AC60-AE96C458F6EB} = {B54BF687-2425-4709-BD54-E740BDBAC5DD}
+		{6DB1038A-1E5C-4539-9613-25EEF9118937} = {6E3BF4D8-372B-40CB-ABCB-D5C67C46136D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AE6292E-9282-43ED-8AC6-A03F5A49DAF1}
