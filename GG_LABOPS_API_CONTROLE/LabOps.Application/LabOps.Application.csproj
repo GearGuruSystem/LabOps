@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LabOps.Application.DTO\LabOps.Application.DTO.csproj" />
+    <ProjectReference Include="..\LabOps.Domain.Core\LabOps.Domain.Core.csproj" />
     <ProjectReference Include="..\LabOps.Infrastructure.CrossCutting.Adapter\LabOps.Infrastructure.CrossCutting.Adapter.csproj" />
-    <ProjectReference Include="..\LabOps_Domain.Core\LabOps.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
