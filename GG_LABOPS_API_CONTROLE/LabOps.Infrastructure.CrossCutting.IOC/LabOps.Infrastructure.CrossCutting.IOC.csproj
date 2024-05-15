@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LabOps.Application\LabOps.Application.csproj" />
+    <ProjectReference Include="..\LabOps.Domain.Services\LabOps.Domain.Services.csproj" />
+    <ProjectReference Include="..\LabOps.Infrastructure.CrossCutting.Adapter\LabOps.Infrastructure.CrossCutting.Adapter.csproj" />
+    <ProjectReference Include="..\LabOps.Infrastructure.Repository\LabOps.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\LabOps_Domain.Core\LabOps.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>
