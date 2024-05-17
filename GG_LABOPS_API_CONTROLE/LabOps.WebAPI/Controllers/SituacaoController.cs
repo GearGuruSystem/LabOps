@@ -30,7 +30,7 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPost("CadastraSituacao")]
-        public IActionResult CadastraSituacao(SituacaoDTO situacaoDTO)
+        public IActionResult CadastraSituacao([FromBody] SituacaoDTO situacaoDTO)
         {
             if (ModelState.IsValid)
             {
