@@ -1,12 +1,13 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
+using Microsoft.IdentityModel.Tokens;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.Infrastructure.Repository.Repository
 {
-    public class RepositoryEquipamento : IRepositoryEquipamento
+    public class RepositoryEquipamento : RepositoryBase<Equipamento>, IRepositoryEquipamento
     {
         private readonly SqlFactory sqlFactory;
 
@@ -14,42 +15,53 @@ namespace LabOps.Infrastructure.Repository.Repository
         {
             this.sqlFactory = sqlFactory;
         }
-        public async Task<IEnumerable<Equipamento>> BuscarTodos()
+
+        public override async Task<IEnumerable<Equipamento>> BuscarTodos()
         {
-            var result = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("[dbo].[LABOPS_CONSULTA_TODAS_MAQUINAS]", new { });
-            if (result.Any())
+            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
+            if (resultadoSql.IsNullOrEmpty())
             {
-                return result;
+                throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
-            throw new Exception("Não foi encontrando nenhum registro no banco.");
+            return resultadoSql;
         }
 
-        public async Task<Equipamento> BuscarPorId(int id)
+        public override async Task<IEnumerable<Equipamento>> BuscarPorParametro(Equipamento obj)
         {
-            var result = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("[dbo].[LABOPS_CONSULTA_MAQUINA_POR_ID]", new
+            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
+            if (resultadoSql.IsNullOrEmpty())
+            {
+                throw new Exception("Não foi encontrando nenhum registro no banco.");
+            }
+            return resultadoSql;
+        }
+
+        public override async Task<Equipamento> BuscarPorId(int id)
+        {
+            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new
             {
                 @idParam = id
             });
-            if (result.Any())
+            if (resultadoSql.Any())
             {
-                return result.FirstOrDefault();
+                return resultadoSql.FirstOrDefault();
             }
             throw new Exception("Não foi encontrando nenhum registro no banco.");
         }
 
-        public async void Registrar(Equipamento obj)
+        public override async void Registrar(Equipamento obj)
         {
-            var result = await sqlFactory.SaveDataAsync("[dbo].[LABOPS_CADASTRA_MAQUINATESTE]", new
+            var resultadoSql = await sqlFactory.SaveDataAsync("", new
             {
 
             });
-            if (!result.IsCompleted)
+            if (!resultadoSql.IsCompleted)
             {
                 throw new Exception($"Falha ao inserir o {obj.Nome} no banco!");
             }
         }
 
-        public async void Atualizar(Equipamento obj)
+        public override async void Atualizar(Equipamento obj)
         {
             var result = await sqlFactory.SaveDataAsync("", new
             {
@@ -61,7 +73,7 @@ namespace LabOps.Infrastructure.Repository.Repository
             }
         }
 
-        public async void Remove(Equipamento obj)
+        public override async void Remove(Equipamento obj)
         {
             var result = await sqlFactory.SaveDataAsync("", new
             {

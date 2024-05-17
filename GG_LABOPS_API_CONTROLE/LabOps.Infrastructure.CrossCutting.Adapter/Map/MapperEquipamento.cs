@@ -10,19 +10,20 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
     public class MapperEquipamento : IMapperEquipamento
     {
         #region properties
-
         readonly List<EquipamentoDTO> EquipamentoDTOs = new List<EquipamentoDTO>();
-
         #endregion
 
-        #region methods
-
+        #region Metodos
         public Equipamento MapperToEntity(EquipamentoDTO equipamentoDTO)
         {
-            Equipamento equipamento = new Equipamento()
-            {
-                
-            };
+            Equipamento equipamento = new Equipamento(
+                equipamentoDTO.Nome,
+                equipamentoDTO.IDSituacao,
+                equipamentoDTO.IDTipoEquipamento,
+                equipamentoDTO.IDFabricante,
+                equipamentoDTO.IDLaboratorio,
+                equipamentoDTO.UsuarioInsercao,
+                equipamentoDTO.AtualizadoEm);
             return equipamento;
         }
 
@@ -31,10 +32,15 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             foreach (var item in equipamentos)
             {
-                EquipamentoDTO equipamentoDTO = new EquipamentoDTO
-                {
-                    
-                };
+                EquipamentoDTO equipamentoDTO = new EquipamentoDTO(
+                    item.Nome,
+                    item.IDSituacao,
+                    item.IDTipoEquipamento,
+                    item.IDFabricante,
+                    item.IDLaboratorio,
+                    item.UsuarioInsercao,
+                    item.AtualizadoEm);
+
                 EquipamentoDTOs.Add(equipamentoDTO);
             }
             return EquipamentoDTOs;
@@ -42,10 +48,14 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 
         public EquipamentoDTO MapperToDTO(Equipamento equipamento)
         {
-            EquipamentoDTO equipamentoDTO = new EquipamentoDTO
-            {
-
-            };
+            EquipamentoDTO equipamentoDTO = new EquipamentoDTO(
+                equipamento.Nome,
+                equipamento.IDSituacao,
+                equipamento.IDTipoEquipamento,
+                equipamento.IDFabricante,
+                equipamento.IDLaboratorio,
+                equipamento.UsuarioInsercao,
+                equipamento.AtualizadoEm);
             return equipamentoDTO;
         }
         #endregion

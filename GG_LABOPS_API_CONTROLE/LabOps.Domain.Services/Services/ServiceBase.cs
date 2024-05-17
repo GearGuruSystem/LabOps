@@ -24,6 +24,11 @@ namespace LabOps.Domain.Services.Services
             return await _repository.BuscarPorId(id);
         }
 
+        public async Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj)
+        {
+            return await _repository.BuscarPorParametro(obj);
+        }
+
         public virtual void Adicionar(TEntity obj)
         {
             _repository.Registrar(obj);

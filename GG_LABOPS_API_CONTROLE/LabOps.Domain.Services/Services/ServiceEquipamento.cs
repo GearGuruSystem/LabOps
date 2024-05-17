@@ -8,12 +8,12 @@ namespace LabOps.Domain.Services.Services
 {
     public class ServiceEquipamento : ServiceBase<Equipamento>, IServiceEquipamento
     {
-        public readonly IRepositoryEquipamento _repositoryEquipamento;
+        public readonly IRepositoryEquipamento repositoryEquipamento;
 
         public ServiceEquipamento(IRepositoryEquipamento repositoryEquipamento)
             : base(repositoryEquipamento)
         {
-            _repositoryEquipamento = repositoryEquipamento;
+            this.repositoryEquipamento = repositoryEquipamento;
         }
     }
 }

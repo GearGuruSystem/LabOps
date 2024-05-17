@@ -53,7 +53,7 @@ namespace LabOps.WebAPI.Controllers
                 try
                 {
                     applicationService.RegistraEquipamento(equipamentDTO);
-                    return Created("api/v1/Equipament", equipamentDTO);
+                    return Created(nameof(BuscaEquipamentosPeloId), equipamentDTO.IDEquipamento);
                 }
                 catch (Exception ex)
                 {
