@@ -2,9 +2,9 @@
 {
     public class TipoEquipamentoDTO
     {
-        public int IDTipoEquipamento { get; private set; }
-        public string Descricao { get; private set; }
-        public int UsuarioAtualizacao { get; private set; }
-        public DateTime? AtualizadoEm { get; private set; }
+        public int IDTipoEquipamento { get; set; }
+        public string Descricao { get; set; }
+        public int UsuarioAtualizacao { get; set; }
+        public DateTime? AtualizadoEm { get; set; }
     }
 }
