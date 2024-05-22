@@ -1,11 +1,8 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.Domain.Services.Services
 {

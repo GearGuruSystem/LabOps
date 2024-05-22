@@ -2,6 +2,8 @@
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
+#pragma warning disable IDE0090 // Use 'new(...)'
+
 namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 {
     public class MapperTipoEquipamento : IMapperTipoEquipamento

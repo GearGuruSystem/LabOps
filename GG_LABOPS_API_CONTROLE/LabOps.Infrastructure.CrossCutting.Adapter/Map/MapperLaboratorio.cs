@@ -2,11 +2,14 @@
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
+#pragma warning disable IDE0090 // Use 'new(...)'
+#pragma warning disable IDE0028 // Simplify collection initialization
+
 namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 {
     public class MapperLaboratorio : IMapperLaboratorio
     {
-        private readonly List<LaboratorioDTO> laboratorioDTOs;
+        private readonly List<LaboratorioDTO> laboratorioDTOs = new List<LaboratorioDTO>();
 
         public IEnumerable<LaboratorioDTO> MapperListaLaboratorios(IEnumerable<Laboratorio> laboratorio)
         {

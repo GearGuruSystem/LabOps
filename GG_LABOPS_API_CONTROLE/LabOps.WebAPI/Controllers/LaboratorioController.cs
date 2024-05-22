@@ -1,6 +1,8 @@
 ﻿using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
+#pragma warning disable IDE0290 // Use primary constructor
+
 namespace LabOps.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
