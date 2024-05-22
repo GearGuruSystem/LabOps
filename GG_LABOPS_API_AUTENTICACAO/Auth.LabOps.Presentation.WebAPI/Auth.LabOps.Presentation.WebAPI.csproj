@@ -8,14 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LabOps.Application.DTO\LabOps.Application.DTO.csproj" />
-    <ProjectReference Include="..\LabOps.Infrastructure.CrossCutting.IOC\LabOps.Infrastructure.CrossCutting.IOC.csproj" />
+    <ProjectReference Include="..\Auth.LabOps.Infrastructure.CrossCutting.IOC\Auth.LabOps.Infrastructure.CrossCutting.IOC.csproj" />
+    <ProjectReference Include="..\LabOps.Application\Auth.LabOps.Application.csproj" />
   </ItemGroup>
 
 </Project>

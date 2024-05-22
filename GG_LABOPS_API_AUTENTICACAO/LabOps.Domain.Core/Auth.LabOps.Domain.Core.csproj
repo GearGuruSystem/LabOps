@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LabOps.Application.DTOs\Auth.LabOps.Application.DTOs.csproj" />
+    <ProjectReference Include="..\LabOps.Domain\Auth.LabOps.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

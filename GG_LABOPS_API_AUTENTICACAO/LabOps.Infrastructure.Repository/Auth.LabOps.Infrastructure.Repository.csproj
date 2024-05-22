@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Auth.LabOps.Infrastructure.Data\Auth.LabOps.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\LabOps.Domain.Core\Auth.LabOps.Domain.Core.csproj" />
+  </ItemGroup>
+
+</Project>

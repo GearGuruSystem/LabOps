@@ -1,0 +1,6 @@
+@Auth.LabOps.Presentation.WebAPI_HostAddress = http://localhost:5180
+
+GET {{Auth.LabOps.Presentation.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
