@@ -54,7 +54,7 @@ Este projeto é licenciado sob a [Licença Creative Commons Attribution-NonComme
 
 ## Agradecimentos
 
-Agradecimentos especiais a todos que ajudaram no desenvolvimento do projeto, tanto dentro quanto fora da empresa, especialmente ao professor Ricardo pela orientação e apoio.
+Agradecimentos especiais a todos que ajudaram no desenvolvimento do projeto, tanto dentro quanto fora da empresa.
 
 ## Documentação
 
