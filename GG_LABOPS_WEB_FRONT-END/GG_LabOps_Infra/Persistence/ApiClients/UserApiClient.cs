@@ -16,32 +16,32 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
             _client = client;
         }
 
-        public async Task<User> FindAll()
+        public async Task<Usuario> FindAll()
         {
             var response = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.ReadContentAs<User>();
+                return await response.ReadContentAs<Usuario>();
             }
             throw new Exception();
         }
 
-        public async Task<User> FindById(int id)
+        public async Task<Usuario> FindById(int id)
         {
             var response = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}/{id}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.ReadContentAs<User>();
+                return await response.ReadContentAs<Usuario>();
             }
             throw new Exception();
         }
 
-        public async Task<User> FindByKeyAsync(string userKey)
+        public async Task<Usuario> FindByKeyAsync(string userKey)
         {
             var response = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}/{userKey}");
             if (response.IsSuccessStatusCode)
             {
-                return await response.ReadContentAs<User>();
+                return await response.ReadContentAs<Usuario>();
             }
             throw new Exception();
         }
@@ -56,22 +56,22 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
             throw new Exception();
         }
 
-        public async Task<User> RegisterUser(User user)
+        public async Task<Usuario> RegisterUser(Usuario user)
         {
             var response = await _client.PostAsJson($"{EndpointsApiClient.UserEndpoint()}/", user);
             if (response.IsSuccessStatusCode)
             {
-                return await response.ReadContentAs<User>();
+                return await response.ReadContentAs<Usuario>();
             }
             throw new Exception();
         }
 
-        public async Task<User> UpdateUser(int id, User user)
+        public async Task<Usuario> UpdateUser(int id, Usuario user)
         {
             var response = await _client.PutAsJson($"{EndpointsApiClient.UserEndpoint()}/Update/{id}", user);
             if (response.IsSuccessStatusCode)
             {
-                return await response.ReadContentAs<User>();
+                return await response.ReadContentAs<Usuario>();
             }
             throw new Exception();
         }

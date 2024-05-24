@@ -15,7 +15,7 @@ namespace GG_LabOps_Application.Services
             _userClient = userClient;
         }
 
-        public async Task<User> SearchUserByKey(string userKey)
+        public async Task<Usuario> SearchUserByKey(string userKey)
         {
             return await _userClient.FindByKeyAsync(userKey);
         }

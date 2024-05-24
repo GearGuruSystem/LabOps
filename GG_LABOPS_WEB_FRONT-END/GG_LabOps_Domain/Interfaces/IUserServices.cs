@@ -5,7 +5,7 @@ namespace GG_LabOps_Domain.Interfaces
 {
     public interface IUserServices
     {
-        Task<User> SearchUserByKey(string userKey);
+        Task<Usuario> SearchUserByKey(string userKey);
         Task<UserLoggedDTO> LoginUser(UserLoginDTO userDTO);
     }
 }

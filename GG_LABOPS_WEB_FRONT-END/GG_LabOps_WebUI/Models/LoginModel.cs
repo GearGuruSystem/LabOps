@@ -9,5 +9,10 @@ namespace GG_LabOps_WebUI.Models
 
         [Required(ErrorMessage = "Digite a senha")]
         public string Senha { get; set; }
+
+        public string? Nome {  get; set; }
+
+        [EmailAddress]
+        public string? Email { get; set; }
     }
 }

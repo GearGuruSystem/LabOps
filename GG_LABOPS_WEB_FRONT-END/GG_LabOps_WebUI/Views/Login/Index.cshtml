@@ -1,5 +1,4 @@
-﻿<link href="~/css/tela-login.css" rel="stylesheet" />
-@model GG_LabOps_WebUI.Models.LoginModel
+﻿@model LoginModel
 
 @{
     Layout = "_LayoutLoggedOut";
@@ -14,21 +13,35 @@
     </div>
 }
 
-<div class="container-login">
-    <h2>@ViewBag.Title</h2>
-    <form asp-controller="Login" asp-action="Login" method="post">
-        <div>
-            <div class="mb-3">
-                <label asp-for="Login">Chave de Usuario:</label>
-                <input asp-for="Login" type="text" id="username" required>
-                <span asp-validation-for="Login" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="Senha">Senha:</label>
-                <input asp-for="Senha" type="password" id="password" required>
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-            <input type="submit" value="Login" class="btn btn-primary">
-        </div>
-    </form>
+<div class="card">
+    <section class="form-section" id="sign-in">
+        <h1 class="title">Entrar</h1>
+        <form asp-action="Login" asp-controller="Login" method="post">
+            <span class="subtitle">ou use a sua conta</span>
+            <input asp-for="Login" type="text" placeholder="Email">
+            <input asp-for="Senha" type="password" placeholder="Senha">
+            <button type="submit" class="form-btn"> Entrar </button>
+        </form>
+    </section>
+    <section class="form-section" id="sign-up">
+        <h1 class="title">Solicitar acesso</h1>
+        <form asp-action="Cadastro" asp-controller="Login" method="post">
+            <span class="subtitle">Preencha os dados necessarios</span>
+            <input asp-for="Nome" type="text" placeholder="Nome">
+            <input asp-for="Email" type="email" placeholder="Email">
+            <input asp-for="Senha" type="password" placeholder="Senha">
+            <button class="form-btn"> Solicitar o acesso </button>
+        </form>
+    </section>
+    <section class="call" id="sign-in-call">
+        <h1 class="title">Bem-vindo de volta!</h1>
+        <span class="subtitle">Se mantenha conectado fazendo login <br> com as suas informações!</span>
+        <button class="call-btn" id="sign-in-call-btn">já sou cadastrado</button>
+    </section>
+    <section class="call hide" id="sign-up-call">
+        <h1 class="title">Primeiro acesso?</h1>
+        <span class="subtitle">Solicite seu acesso <br> ao administrador</span>
+        <button class="call-btn" id="sign-up-call-btn">Fazer meu cadastro</button>
+    </section>
+    <div id="cover"></div>
 </div>

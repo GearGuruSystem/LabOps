@@ -3,7 +3,7 @@
 namespace GG_LabOps_WebUI.Controllers
 {
     [Route("Equipament")]
-    public class EquipamentController : Controller
+    public class EquipamentoController : Controller
     {
         [Route("Index")]
         public IActionResult Index()
