@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Auth.LabOps.Infrastructure.Repository.Repository
 {
-    public class RepositoryBase<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> where TEntity : class
     {
-
+        public abstract Task<IEnumerable<TEntity>> BuscarTodos();
+        public abstract Task<TEntity> Buscar();
+        public abstract void Registrar(TEntity entity);
     }
 }

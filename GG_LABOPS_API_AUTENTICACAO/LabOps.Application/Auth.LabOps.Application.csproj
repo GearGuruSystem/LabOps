@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LabOps.Domain.Services\Auth.LabOps.Domain.Services.csproj" />
+    <ProjectReference Include="..\LabOps.Infrastructure.CrossCutting.Adapter\Auth.LabOps.Infrastructure.CrossCutting.Adapter.csproj" />
   </ItemGroup>
 
 </Project>

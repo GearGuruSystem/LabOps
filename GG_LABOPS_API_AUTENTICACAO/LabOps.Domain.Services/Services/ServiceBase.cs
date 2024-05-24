@@ -12,5 +12,20 @@ namespace Auth.LabOps.Domain.Services.Services
         {
             this.repository = repository;
         }
+
+        public virtual async Task<IEnumerable<TEntity>> BuscarTodos()
+        {
+            return await repository.BuscarTodos();
+        }
+
+        public virtual async Task<TEntity> Buscar()
+        {
+            return await repository.Buscar();
+        }
+
+        public virtual void Registrar(TEntity entity)
+        {
+            repository.Registrar(entity);
+        }
     }
 }

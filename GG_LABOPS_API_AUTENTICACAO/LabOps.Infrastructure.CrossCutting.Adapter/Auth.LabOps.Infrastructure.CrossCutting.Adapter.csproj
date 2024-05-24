@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LabOps.Application.DTOs\Auth.LabOps.Application.DTOs.csproj" />
+    <ProjectReference Include="..\LabOps.Domain.Core\Auth.LabOps.Domain.Core.csproj" />
+    <ProjectReference Include="..\LabOps.Domain\Auth.LabOps.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
