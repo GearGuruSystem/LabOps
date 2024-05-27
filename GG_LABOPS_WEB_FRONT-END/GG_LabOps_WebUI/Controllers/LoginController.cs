@@ -44,6 +44,18 @@ namespace GG_LabOps_WebUI.Controllers
             return View(nameof(Index));
         }
 
+        [HttpPost]
+        public IActionResult EsqueciSenha()
+        {
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult SolicitarAcesso(LoginModel loginModel)
+        {
+            return NotFound();
+        }
+
         [HttpGet]
         public IActionResult Sair()
         {

@@ -13,35 +13,71 @@
     </div>
 }
 
-<div class="card">
-    <section class="form-section" id="sign-in">
-        <h1 class="title">Entrar</h1>
-        <form asp-action="Login" asp-controller="Login" method="post">
-            <span class="subtitle">ou use a sua conta</span>
-            <input asp-for="Login" type="text" placeholder="Email">
-            <input asp-for="Senha" type="password" placeholder="Senha">
-            <button type="submit" class="form-btn"> Entrar </button>
-        </form>
-    </section>
-    <section class="form-section" id="sign-up">
-        <h1 class="title">Solicitar acesso</h1>
-        <form asp-action="Cadastro" asp-controller="Login" method="post">
-            <span class="subtitle">Preencha os dados necessarios</span>
-            <input asp-for="Nome" type="text" placeholder="Nome">
-            <input asp-for="Email" type="email" placeholder="Email">
-            <input asp-for="Senha" type="password" placeholder="Senha">
-            <button class="form-btn"> Solicitar o acesso </button>
-        </form>
-    </section>
-    <section class="call" id="sign-in-call">
-        <h1 class="title">Bem-vindo de volta!</h1>
-        <span class="subtitle">Se mantenha conectado fazendo login <br> com as suas informações!</span>
-        <button class="call-btn" id="sign-in-call-btn">já sou cadastrado</button>
-    </section>
-    <section class="call hide" id="sign-up-call">
-        <h1 class="title">Primeiro acesso?</h1>
-        <span class="subtitle">Solicite seu acesso <br> ao administrador</span>
-        <button class="call-btn" id="sign-up-call-btn">Fazer meu cadastro</button>
-    </section>
-    <div id="cover"></div>
-</div>
+<form asp-controller="Login" method="post">
+    <div class="section">
+        <div class="container">
+            <div class="row full-height justify-content-center">
+                <div class="col-12 text-center align-self-center py-5">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <h6 class="mb-0 pb-3">
+                            <span>Login</span>
+                            <span>Solicitação</span>
+                        </h6>
+                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                        <label for="reg-log"></label>
+    
+                        <div class="card-3d-wrap mx-auto">
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Logar</h4>
+                                            <div class="form-group">
+                                                <input asp-for="Login" type="text" name="logemail" class="form-style" placeholder="Seu Usuário" autocomplete="off">
+                                                <i class="input-icon uil uil-user-circle"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input asp-for="Senha" type="password" name="logpass" class="form-style" placeholder="Sua Senha" autocomplete="off">
+                                                <i class="input-icon uil uil-key-skeleton-alt"></i>
+                                            </div>
+                                            <button asp-action="Login" class="btn mt-4">Faça Login</button>
+                                            <p class="mb-0 mt-4 text-center">
+                                                <button asp-action="EsqueciSenha" class="link">Esqueceu sua senha?</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="card-back">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Solicitar Acesso</h4>
+                                            <div class="form-group">
+                                                <input asp-for="Nome" type="text" name="logname" class="form-style" placeholder="Seu Nome" autocomplete="off">
+                                                <i class="input-icon uil uil-user"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input asp-for="Login" type="text" name="loguser" class="form-style" placeholder="Informe sua chave americas" autocomplete="off">
+                                                <i class="input-icon uil uil-user-circle"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input asp-for="Email" type="email" name="logemail" class="form-style" placeholder="Seu E-mail" autocomplete="off">
+                                                <i class="input-icon uil uil-envelope"></i>
+                                            </div>
+                                            <div class="form-group mt-2">
+                                                <input asp-for="Senha" type="password" name="logpass" class="form-style" placeholder="Crie uma Senha" autocomplete="off">
+                                                <i class="input-icon uil uil-key-skeleton-alt"></i>
+                                            </div>
+                                            <button asp-action="SolicitarAcesso" class="btn mt-4">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
