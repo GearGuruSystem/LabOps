@@ -1,29 +1,54 @@
 ﻿using Auth.LabOps.Domain.Core.Interfaces;
 using Auth.LabOps.Domain.Entities;
 using Auth.LabOps.Infrastructure.Data.DataAcess;
+using Auth.LabOps.Infrastructure.Repository.Queries;
+using Dapper;
+using System.Data;
+
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace Auth.LabOps.Infrastructure.Repository.Repository
 {
     public class RepositoryUsuario : RepositoryBase<Usuario>, IRepositoryUsuario
     {
-        private readonly ISqlFactory sqlFactory;
+        private readonly ISqlData sqlData;
+        private readonly IDbConnection connection;
 
-        public RepositoryUsuario(ISqlFactory sqlFactory)
+        public RepositoryUsuario(ISqlData sqlData, SqlFactory sqlFactory)
         {
-            this.sqlFactory = sqlFactory;
+            this.sqlData = sqlData;
+            connection = sqlFactory.CreateConnection();
         }
 
-        public override Task<IEnumerable<Usuario>> BuscarTodos()
+        public async override Task<IEnumerable<Usuario>> BuscarTodos()
         {
-            throw new NotImplementedException();
+            var resultadoSql = await sqlData.LoadDataAsync<Usuario, dynamic>("[dbo].[LoSp_BuscaTodosUsuarios]", new { });
+            return resultadoSql.ToList();
         }
 
-        public override Task<Usuario> Buscar()
+        public override async Task<Usuario> Buscar(int id)
         {
-            
+            var resultadoSql = await sqlData.LoadDataAsync<Usuario, dynamic>("", new { @Id = id });
+            return resultadoSql.FirstOrDefault();
         }
 
-        public override void Registrar(Usuario entity)
+        public async Task<Usuario> Buscar(string chave)
+        {
+            var query = UsuarioQueries.BuscarUsuarioPelaChave(chave);
+            var resultadoSql = await connection.QueryAsync<Usuario>(query.CodigoSql, query.Parametros);
+            return resultadoSql.FirstOrDefault();
+        }
+
+        public override async void Registrar(Usuario entity)
+        {
+            await sqlData.SaveDataAsync("[dbo].[LoSp_InserirUsuario]", new 
+            { 
+                @Login = entity.Login.ToUpper(),
+                @Senha = entity.Senha 
+            });
+        }
+
+        public Task<Usuario> Atualizar(Usuario entity)
         {
             throw new NotImplementedException();
         }

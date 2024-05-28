@@ -1,4 +1,5 @@
-﻿using Auth.LabOps.Application.Interfaces;
+﻿using Auth.LabOps.Application.DTOs.DTOs.Usuario;
+using Auth.LabOps.Application.Interfaces;
 using Auth.LabOps.Domain.Core.Services;
 using Auth.LabOps.Domain.Entities;
 using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
@@ -18,19 +19,34 @@ namespace Auth.LabOps.Application.Services
             this.mapperUsuario = mapperUsuario;
         }
 
-        public async Task<IEnumerable<Usuario>> BuscarTodos()
+        public async Task<IEnumerable<UsuarioDTO>> BuscarTodos()
         {
-            return await service.BuscarTodos();
+            var usuarios = await service.BuscarTodos();
+            return mapperUsuario.MapperListaUsuarios(usuarios);
         }
 
-        public async Task<Usuario> Buscar()
+        public async Task<Usuario> Buscar(int id)
         {
-            return await service.Buscar();
+            return await service.Buscar(id);
         }
 
-        public void Criar(Usuario usuario)
+        public async Task<UsuarioDTO> Buscar(string chave)
         {
+            var usuario = await service.Buscar(chave);
+            return mapperUsuario.MapperToDTO(usuario);
+        }
+
+        public void Criar(CriarUsuarioDTO criarUsuarioDTO)
+        {
+            var usuario = mapperUsuario.MapperToEntity(criarUsuarioDTO);
             service.Registrar(usuario);
+        }
+
+        public async Task<UsuarioLogadoDTO> ValidaUsuarioGeraToken(UsuarioLoginDTO UsuarioLoginDTO)
+        {
+            var usuario = mapperUsuario.MapperToEntity(UsuarioLoginDTO);
+            await service.ValidaUsuarioGeraToken(usuario);
+            return mapperUsuario.MapperToLogadoDTO(usuario);
         }
     }
 }

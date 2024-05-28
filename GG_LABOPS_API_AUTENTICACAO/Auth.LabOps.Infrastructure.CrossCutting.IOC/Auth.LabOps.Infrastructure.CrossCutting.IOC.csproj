@@ -10,4 +10,9 @@
     <PackageReference Include="Autofac" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LabOps.Application\Auth.LabOps.Application.csproj" />
+    <ProjectReference Include="..\LabOps.Infrastructure.Repository\Auth.LabOps.Infrastructure.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

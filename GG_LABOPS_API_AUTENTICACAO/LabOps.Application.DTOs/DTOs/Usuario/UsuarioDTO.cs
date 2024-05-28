@@ -1,6 +1,6 @@
-﻿namespace Auth.LabOps.Domain.Entities
+﻿namespace Auth.LabOps.Application.DTOs.DTOs.Usuario
 {
-    public class Usuario
+    public class UsuarioDTO
     {
         public int IDUsuario { get; set; }
         public string Login { get; set; }
@@ -8,7 +8,5 @@
         public DateTime InseridoEm { get; set; }
         public DateTime AtualizadoEm { get; set; }
         public string Token { get; set; }
-
-        public ICollection<UsuarioXGrupoUsuario> UsuarioXGrupoUsuarios { get; set; }
     }
 }
