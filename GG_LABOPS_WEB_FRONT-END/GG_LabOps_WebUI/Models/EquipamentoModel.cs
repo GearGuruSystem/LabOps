@@ -7,13 +7,13 @@ namespace GG_LabOps_WebUI.Models
         public int IDEquipamento { get; set; }
 
         [StringLength(120)]
-        public string Nome { get; private set; }
+        public string Nome { get;  set; }
 
-        public int IDSituacao { get; private set; }
-        public int IDTipoEquipamento { get; private set; }
-        public int IDFabricante { get; private set; }
-        public int? IDLaboratorio { get; private set; }
-        public int UsuarioInsercao { get; private set; }
-        public DateTime? AtualizadoEm { get; private set; }
+        public int IDSituacao { get; set; }
+        public int IDTipoEquipamento { get; set; }
+        public int IDFabricante { get; set; }
+        public int? IDLaboratorio { get; set; }
+        public int UsuarioInsercao { get; set; }
+        public DateTime? AtualizadoEm { get; set; }
     }
 }

@@ -17,7 +17,8 @@ namespace GG_LabOps_Infra.InfrastructureModule
 
         private static IServiceCollection AddApiClientsServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHttpClient<IUserApiClient, UserApiClient>(x => x.BaseAddress = new Uri(configuration["ServiceUrls:UserAPI"]));
+            services.AddHttpClient<IUsuarioApiClient, UsuarioApiClient>(x => x.BaseAddress = new Uri(configuration["ServiceUrls:UserAPI"]));
+            services.AddHttpClient<IEquipamentoApiClient, EquipamentoApiClient>(x => x.BaseAddress = new Uri(configuration["ServiceUrls:ControleAPI"]));
 
             return services;
         }

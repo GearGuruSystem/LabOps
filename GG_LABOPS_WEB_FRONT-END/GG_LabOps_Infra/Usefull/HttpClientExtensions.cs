@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
+
 #pragma warning disable IDE0090 // Use 'new(...)'
 
 namespace GG_LabOps_Infra.Useful
@@ -13,7 +14,7 @@ namespace GG_LabOps_Infra.Useful
         {
             if (!response.IsSuccessStatusCode)
             {
-                throw new ApplicationException($"Algo deu errado: {response.ReasonPhrase}");
+                throw new ApplicationException(response.ReasonPhrase);
             }
             var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             JsonSerializerSettings jsonSerializerOptions = new JsonSerializerSettings { ContractResolver = new CustomContractResolver() };

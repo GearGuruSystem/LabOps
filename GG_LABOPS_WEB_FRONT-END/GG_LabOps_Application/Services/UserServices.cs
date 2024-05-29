@@ -8,9 +8,9 @@ namespace GG_LabOps_Application.Services
 {
     public class UserServices : IUserServices
     {
-        private readonly IUserApiClient _userClient;
+        private readonly IUsuarioApiClient _userClient;
 
-        public UserServices(IUserApiClient userClient)
+        public UserServices(IUsuarioApiClient userClient)
         {
             _userClient = userClient;
         }

@@ -4,48 +4,82 @@
     ViewBag.Title = "Equipamentos";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewData["Title"]</h2>
 <br />
-<form asp-action="CadastroEquipamento" asp-controller="Equipamento" method="get">
-    <button class="btn btn-primary">Criar</button>
-</form>
-
-<br />
+<div>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
+        <div>
+            <input type="text" class="form-control" name="hostname" placeholder="Digite o Hostname" />
+        </div>
+    </p>
+        
+</div>
 <table class="table table-hover">
-    <thead class="table-dark">
+    <thead class="table-primary">
         <tr>
-            @* <th>
-                @Html.DisplayNameFor(model => model.Inventario)
+            <th>
+                Nome
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hostname)
+                Situação
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumeroSerie)
+                Tipo do Equipamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ativa)
-            </th> *@
+                Fabricante
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                INVENTARIO 1 <br />
-            <td>
-                HOSTNAME 1 <br />
-            </td>
-            <td>
-                NUMERO DE SERIE 1 <br />
-            </td>
-            <td>
-                ATIVA  <br />
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="" class="btn btn-primary">Editar</a>
-                <a asp-action="Details" asp-route-id="" class="btn btn-primary">Detalhes</a>
-                <a asp-action="Delete" asp-route-id="" class="btn btn-primary">Deletar</a>
-            </td>
-        </tr>
+        @foreach (var equipamento in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(e => equipamento.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => equipamento.IDSituacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => equipamento.IDTipoEquipamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(e => equipamento.IDFabricante)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-info btn-sm" asp-route-id="@equipamento.IDEquipamento">Editar</a>
+                    <a asp-action="Delete" class="btn btn-danger btn-sm" asp-route-id="@equipamento.IDEquipamento">Deletar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Função para filtrar os resultados com base no valor do campo de busca
+        function filtrarResultados() {
+            var inputValor = document.querySelector('input[name="hostname"]').value.toLowerCase();
+            var linhasTabela = document.querySelectorAll('.table tbody tr');
+
+            linhasTabela.forEach(function (linha) {
+                var colunaHostname = linha.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                if (colunaHostname.includes(inputValor)) {
+                    linha.style.display = 'table-row';
+                } else {
+                    linha.style.display = 'none';
+                }
+            });
+        }
+
+        // Adicione um ouvinte de evento ao campo de busca
+        var inputCampo = document.querySelector('input[name="hostname"]');
+        inputCampo.addEventListener('input', filtrarResultados);
+    </script>
+}
