@@ -18,12 +18,12 @@ namespace LabOps.Infrastructure.Data.DataAcess
         }
 
         //METODO QUE FAZ A LEITURA NO BANCO
-        public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionName = "SqlDataLocal")
+        public async Task<List<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionName = "SqlDataLocal")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
                 var response = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                return response;
+                return response.ToList();
             }
         }
 

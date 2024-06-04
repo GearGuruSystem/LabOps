@@ -1,4 +1,5 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Requests;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
@@ -11,17 +12,23 @@ namespace LabOps.Application.Service
     {
         private readonly IServiceEquipamento _serviceEquipamento;
         private readonly IMapperEquipamento _mapperEquipamento;
+        private readonly PagedRequest pagedRequest;
+        private readonly Request request;
+        
 
-        public ApplicationServiceEquipamento(IServiceEquipamento ServiceCliente, IMapperEquipamento MapperEquipamento)
+        public ApplicationServiceEquipamento(IServiceEquipamento ServiceCliente, IMapperEquipamento MapperEquipamento, 
+            PagedRequest pagedRequest, Request request)
         {
             _serviceEquipamento = ServiceCliente;
             _mapperEquipamento = MapperEquipamento;
+            this.pagedRequest = pagedRequest;
+            this.request = request;
         }
 
         public async Task<IEnumerable<EquipamentoDTO>> BuscaTodosEquipamentos()
         {
-            var objEquipamento = await _serviceEquipamento.BuscarTodos();
-            return _mapperEquipamento.MapperListaEquipamentos(objEquipamento);
+            var objEquipamento = await _serviceEquipamento.BuscarTodos(pagedRequest.PageNumber, pagedRequest.PageSize);
+            return _mapperEquipamento.MapperListaPaginaEquipamento(objEquipamento);
         }
 
         public async Task<EquipamentoDTO> BuscaEquipamentoPeloId(int id)

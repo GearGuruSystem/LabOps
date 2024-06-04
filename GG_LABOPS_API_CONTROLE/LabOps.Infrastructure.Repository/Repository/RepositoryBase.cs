@@ -1,10 +1,12 @@
-﻿using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Application.DTO.Responses;
+using LabOps.Domain.Core.Interfaces;
+using LabOps.Domain.Entities;
 
 namespace LabOps.Infrastructure.Repository.Repository
 {
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        public abstract Task<IEnumerable<TEntity>> BuscarTodos();
+        public abstract Task<PagedResponse<List<TEntity>>> BuscarTodos(int pageNumber, int pageSize);
 
         public abstract Task<TEntity> BuscarPorId(int id);
 

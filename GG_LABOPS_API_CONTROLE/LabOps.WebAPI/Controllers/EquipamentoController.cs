@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Equipamentos;
 using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,5 @@
-﻿using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Application.DTO.Responses;
+using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
 
@@ -15,7 +16,7 @@ namespace LabOps.Infrastructure.Repository.Repository
             this.sqlFactory = sqlFactory;
         }
 
-        public Task<IEnumerable<TipoEquipamento>> BuscarTodos()
+        public Task<PagedResponse<List<TipoEquipamento>>> BuscarTodos(int pageNumber, int pageSize)
         {
             throw new NotImplementedException();
         }

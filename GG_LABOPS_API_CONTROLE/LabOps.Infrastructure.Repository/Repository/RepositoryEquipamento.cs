@@ -1,4 +1,5 @@
-﻿using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Application.DTO.Responses;
+using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
 using Microsoft.IdentityModel.Tokens;
@@ -16,15 +17,23 @@ namespace LabOps.Infrastructure.Repository.Repository
             this.sqlFactory = sqlFactory;
         }
 
-        public override async Task<IEnumerable<Equipamento>> BuscarTodos()
+        public override async Task<PagedResponse<List<Equipamento>>> BuscarTodos(int pageNumber, int pageSize)
         {
-            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
-            if (resultadoSql.IsNullOrEmpty())
+            var resultSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new
+            {
+                @PageNumberParam = pageNumber,
+                @PageSizeParam = pageSize
+            });
+            if (resultSql.IsNullOrEmpty())
             {
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
-            return resultadoSql;
+            var count = resultSql.Count;
+            return new PagedResponse<List<Equipamento>>(resultSql, count, pageNumber, pageSize);
         }
+            //resultSql.OrderBy(x => x.AtualizadoEm)
+            //    .Skip((pageNumber -1) * pageSize)
+            //    .Take(pageSize);
 
         public override async Task<IEnumerable<Equipamento>> BuscarPorParametro(Equipamento obj)
         {
@@ -42,7 +51,7 @@ namespace LabOps.Infrastructure.Repository.Repository
             {
                 @idParam = id
             });
-            if (resultadoSql.Any())
+            if (resultadoSql.Count != 0)
             {
                 return resultadoSql.FirstOrDefault();
             }

@@ -1,6 +1,8 @@
-﻿namespace LabOps.Application.DTO.DTO
+﻿using LabOps.Application.DTO.Requests;
+
+namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class EquipamentoDTO : ICloneable
+    public class EquipamentoDTO : Request, ICloneable
     {
         public int IDEquipamento { get; private set; }
         public string Nome { get; private set; }
@@ -18,7 +20,7 @@
         #endregion
 
         #region Construtor Completo
-        public EquipamentoDTO(string nome, int iDSituacao, int iDTipoEquipamento, int iDFabricante, int? iDLaboratorio, 
+        public EquipamentoDTO(string nome, int iDSituacao, int iDTipoEquipamento, int iDFabricante, int? iDLaboratorio,
             int usuarioInsercao, DateTime? atualizadoEm)
         {
             Nome = nome;

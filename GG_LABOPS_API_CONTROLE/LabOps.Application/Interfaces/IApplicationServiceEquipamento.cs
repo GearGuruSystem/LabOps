@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Equipamentos;
 
 namespace LabOps.Application.Interfaces
 {

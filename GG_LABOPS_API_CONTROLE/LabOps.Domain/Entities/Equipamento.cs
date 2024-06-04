@@ -43,21 +43,5 @@ namespace LabOps.Domain.Entities
             AtualizadoEm = atualizadoEm;
         }
         #endregion
-
-        public Equipamento(string Nome)
-        {
-            if (Nome != "")
-            {
-                this.Nome = Nome;
-            }
-        }
-
-        public void AlteraNome(string NovoNome)
-        {
-            if (Nome != "")
-            {
-                Nome = NovoNome;
-            }
-        }
     }
 }
