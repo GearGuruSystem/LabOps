@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Microsoft.Extensions.DependencyInjection;
+using System.Runtime.CompilerServices;
 
 namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
 {

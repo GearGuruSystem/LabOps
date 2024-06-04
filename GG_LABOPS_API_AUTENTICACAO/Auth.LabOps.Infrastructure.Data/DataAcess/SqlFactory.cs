@@ -1,6 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 
 #pragma warning disable IDE0290 // Use primary constructor
 

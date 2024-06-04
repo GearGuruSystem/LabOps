@@ -25,9 +25,9 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
 
             #region IOC Services 
             builder.RegisterType<ServiceUsuario>().As<IServiceUsuario>();
-                #region Security Jwt
-                builder.RegisterType<ServiceToken>().As<IServiceToken>();
-                #endregion
+            #region Security Jwt
+            builder.RegisterType<ServiceToken>().As<IServiceToken>();
+            #endregion
             #endregion
 
             #region Repository SQL
