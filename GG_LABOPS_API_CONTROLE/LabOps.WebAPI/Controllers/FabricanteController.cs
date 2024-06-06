@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Fabricantes;
 using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,17 +17,25 @@ namespace LabOps.WebAPI.Controllers
             this.applicationService = applicationService;
         }
 
+        /// <summary>
+        /// Faz uma varedura do mais recente cadastrado para o mais antigo.
+        /// </summary>
+        /// <param name="numeroPagina"></param>
+        /// <param name="tamanhoPagina"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("BuscarTodosFabricantes")]
-        public async Task<IActionResult> BuscarTodosFabricantes()
+        public async Task<IActionResult> BuscarTodosFabricantes([FromQuery] int numeroPagina, [FromQuery] int tamanhoPagina)
         {
             try
             {
-                var data = await applicationService.BuscaTodosFabricantes();
+                var data = await applicationService.BuscaTodosFabricantes(numeroPagina, tamanhoPagina);
                 return Ok(data);
             }
             catch (Exception)
             {
-                return BadRequest();                
+                return BadRequest();
             }
         }
 

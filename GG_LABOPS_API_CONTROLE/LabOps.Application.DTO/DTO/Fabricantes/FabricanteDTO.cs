@@ -1,4 +1,4 @@
-﻿namespace LabOps.Application.DTO.DTO
+﻿namespace LabOps.Application.DTO.DTO.Fabricantes
 {
     public class FabricanteDTO : ICloneable
     {

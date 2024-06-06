@@ -17,12 +17,20 @@ namespace LabOps.WebAPI.Controllers
             this.applicationService = applicationService;
         }
 
+        /// <summary>
+        /// Faz uma varedura do mais recente cadastrado para o mais antigo.
+        /// </summary>
+        /// <param name="numeroPagina"></param>
+        /// <param name="tamanhoPagina"></param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("BuscarEquipamentos")]
-        public async Task<IActionResult> BuscaTodosEquipamentos()
+        public async Task<IActionResult> BuscaTodosEquipamentos([FromQuery] int numeroPagina, [FromQuery] int tamanhoPagina)
         {
             try
             {
-                var data = await applicationService.BuscaTodosEquipamentos();
+                var data = await applicationService.BuscaTodosEquipamentos(numeroPagina, tamanhoPagina);
                 return Ok(data);
             }
             catch (Exception)

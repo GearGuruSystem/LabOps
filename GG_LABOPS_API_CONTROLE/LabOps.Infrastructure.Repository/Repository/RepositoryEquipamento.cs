@@ -1,7 +1,7 @@
-﻿using LabOps.Application.DTO.Responses;
-using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
+using LabOps.Infrastructure.Data.DataContext;
 using Microsoft.IdentityModel.Tokens;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -12,28 +12,26 @@ namespace LabOps.Infrastructure.Repository.Repository
     {
         private readonly SqlFactory sqlFactory;
 
-        public RepositoryEquipamento(SqlFactory sqlFactory)
+        public RepositoryEquipamento(SqlFactory sqlFactory, AppDbContext context)
+            : base(context)
         {
             this.sqlFactory = sqlFactory;
         }
 
-        public override async Task<PagedResponse<List<Equipamento>>> BuscarTodos(int pageNumber, int pageSize)
+        public override async Task<IEnumerable<Equipamento>> BuscarTodos()
         {
-            var resultSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new
-            {
-                @PageNumberParam = pageNumber,
-                @PageSizeParam = pageSize
-            });
+            var resultSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
             if (resultSql.IsNullOrEmpty())
             {
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
-            var count = resultSql.Count;
-            return new PagedResponse<List<Equipamento>>(resultSql, count, pageNumber, pageSize);
+            return resultSql;
         }
-            //resultSql.OrderBy(x => x.AtualizadoEm)
-            //    .Skip((pageNumber -1) * pageSize)
-            //    .Take(pageSize);
+
+        public override Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            return base.BuscarTodosPorPagina(pageNumber, pageSize);
+        }
 
         public override async Task<IEnumerable<Equipamento>> BuscarPorParametro(Equipamento obj)
         {

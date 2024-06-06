@@ -1,10 +1,9 @@
-﻿using LabOps.Application.DTO.Responses;
-
-namespace LabOps.Domain.Core.Services
+﻿namespace LabOps.Domain.Core.Services
 {
     public interface IServiceBase<TEntity> where TEntity : class
     {
-        Task<PagedResponse<List<TEntity>>> BuscarTodos(int pageNumber, int pageSize);
+        Task<ICollection<TEntity>> BuscarTodosPorPagina(int pageNumber, int pageSize);
+        Task<IEnumerable<TEntity>> BuscarTodosSemRestricao();
         Task<TEntity> BuscarPorId(int id);
         Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj);
         void Adicionar(TEntity obj);

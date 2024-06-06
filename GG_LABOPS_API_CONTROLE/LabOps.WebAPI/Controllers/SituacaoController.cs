@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,11 +16,11 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpGet("BuscarTodosComSituacaoAtiva")]
-        public async Task<IActionResult> BuscaTodosComSituacaoAtiva()
+        public async Task<IActionResult> BuscaTodosComSituacaoAtiva(int pageNumber, int pageSize)
         {
             try
             {
-                var dados = await applicationService.BuscaTodasSituacaoAtiva();
+                var dados = await applicationService.BuscaTodasSituacaoAtiva(pageNumber, pageSize);
                 return Ok(dados);
             }
             catch (Exception)

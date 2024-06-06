@@ -1,12 +1,24 @@
-﻿using LabOps.Application.DTO.Responses;
-using LabOps.Domain.Core.Interfaces;
-using LabOps.Domain.Entities;
+﻿using LabOps.Domain.Core.Interfaces;
+using LabOps.Infrastructure.Data.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabOps.Infrastructure.Repository.Repository
 {
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        public abstract Task<PagedResponse<List<TEntity>>> BuscarTodos(int pageNumber, int pageSize);
+        private readonly AppDbContext context;
+
+        protected RepositoryBase(AppDbContext context)
+        {
+            this.context = context;
+        }
+
+        public abstract Task<IEnumerable<TEntity>> BuscarTodos();
+
+        public virtual async Task<ICollection<TEntity>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            return await context.Set<TEntity>().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        }
 
         public abstract Task<TEntity> BuscarPorId(int id);
 

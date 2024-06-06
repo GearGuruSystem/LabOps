@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Laboratorio;
 using LabOps.Domain.Entities;
 
 namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces

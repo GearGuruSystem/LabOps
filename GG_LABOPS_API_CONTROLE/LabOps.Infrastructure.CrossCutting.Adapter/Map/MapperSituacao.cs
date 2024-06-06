@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
@@ -11,22 +11,21 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
     {
         private readonly List<SituacaoDTO> SituacoesDTOs = new List<SituacaoDTO>();
 
-        public IEnumerable<SituacaoDTO> MapperListaFabricantes(IEnumerable<Situacao> situacoes)
+        public IEnumerable<SituacaoDTO> MapperListaSituacao(IEnumerable<Situacao> situacoes)
         {
             foreach (var item in situacoes)
             {
-                SituacaoDTO situacaoDTO = new SituacaoDTO 
+                SituacaoDTO situacaoDTO = new SituacaoDTO
                 {
                     IDSituacao = item.IDSituacao,
                     Descricao = item.Descricao,
                     UsuarioAtualizacao = item.UsuarioAtualizacao,
-                    AtualizadoEm = item.AtualizadoEm 
+                    AtualizadoEm = item.AtualizadoEm
                 };
                 SituacoesDTOs.Add(situacaoDTO);
             }
             return SituacoesDTOs;
         }
-
         public SituacaoDTO MapperToDTO(Situacao situacao)
         {
             SituacaoDTO situacaoDTO = new SituacaoDTO

@@ -16,11 +16,11 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpGet("BuscarTodosTiposDeEquipamentos")]
-        public IActionResult BuscarTodosTiposDeEquipamentos()
+        public IActionResult BuscarTodosTiposDeEquipamentos(int pageNumber, int pageSize)
         {
             try
             {
-                var dados = applicationService.BuscarTodosTiposDeEquipamentos();
+                var dados = applicationService.BuscarTodosTiposDeEquipamentos(pageNumber, pageSize);
                 return Ok(dados);
             }
             catch (Exception)

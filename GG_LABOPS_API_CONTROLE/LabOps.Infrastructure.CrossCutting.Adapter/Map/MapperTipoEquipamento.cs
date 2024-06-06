@@ -8,7 +8,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 {
     public class MapperTipoEquipamento : IMapperTipoEquipamento
     {
-        private readonly List<TipoEquipamentoDTO> tipoEquipamentos;
+        private readonly List<TipoEquipamentoDTO> tipoEquipamentos = null!;
 
         public IEnumerable<TipoEquipamentoDTO> MapperListaTipoEquipamentos(IEnumerable<TipoEquipamento> tipoEquipamento)
         {

@@ -1,8 +1,6 @@
-﻿using LabOps.Application.DTO.Requests;
-
-namespace LabOps.Application.DTO.DTO.Equipamentos
+﻿namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class BuscarTodosEquipamentos : PagedRequest
+    public class BuscarTodosEquipamentos
     {
     }
 }

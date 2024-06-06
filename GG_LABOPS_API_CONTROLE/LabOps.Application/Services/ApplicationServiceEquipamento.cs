@@ -1,5 +1,4 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
-using LabOps.Application.DTO.Requests;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
@@ -10,49 +9,49 @@ namespace LabOps.Application.Service
 {
     public class ApplicationServiceEquipamento : IApplicationServiceEquipamento
     {
-        private readonly IServiceEquipamento _serviceEquipamento;
-        private readonly IMapperEquipamento _mapperEquipamento;
-        private readonly PagedRequest pagedRequest;
-        private readonly Request request;
-        
+        private readonly IServiceEquipamento serviceEquipamento;
+        private readonly IMapperEquipamento mapperEquipamento;
 
-        public ApplicationServiceEquipamento(IServiceEquipamento ServiceCliente, IMapperEquipamento MapperEquipamento, 
-            PagedRequest pagedRequest, Request request)
+        public ApplicationServiceEquipamento(IServiceEquipamento serviceEquipamento, IMapperEquipamento mapperEquipamento)
         {
-            _serviceEquipamento = ServiceCliente;
-            _mapperEquipamento = MapperEquipamento;
-            this.pagedRequest = pagedRequest;
-            this.request = request;
+            this.serviceEquipamento = serviceEquipamento;
+            this.mapperEquipamento = mapperEquipamento;
         }
 
-        public async Task<IEnumerable<EquipamentoDTO>> BuscaTodosEquipamentos()
+        public async Task<IEnumerable<EquipamentoDTO>> BuscaTodosEquipamentos(int pageNumber, int pageSize)
         {
-            var objEquipamento = await _serviceEquipamento.BuscarTodos(pagedRequest.PageNumber, pagedRequest.PageSize);
-            return _mapperEquipamento.MapperListaPaginaEquipamento(objEquipamento);
+            var objEquipamento = await serviceEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
+            return mapperEquipamento.MapperListaEquipamentos(objEquipamento);
+        }
+
+        public async Task<IEnumerable<EquipamentoDTO>> BuscaTodosPorPagina(int pageNumber, int pageSize)
+        {
+            var objEquipamento = await serviceEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
+            return mapperEquipamento.MapperListaEquipamentos(objEquipamento);
         }
 
         public async Task<EquipamentoDTO> BuscaEquipamentoPeloId(int id)
         {
-            var objEquipamento = await _serviceEquipamento.BuscarPorId(id);
-            return _mapperEquipamento.MapperToDTO(objEquipamento);
+            var objEquipamento = await serviceEquipamento.BuscarPorId(id);
+            return mapperEquipamento.MapperToDTO(objEquipamento);
         }
 
         public void RegistraEquipamento(EquipamentoDTO obj)
         {
-            var objEquipamento = _mapperEquipamento.MapperToEntity(obj);
-            _serviceEquipamento.Adicionar(objEquipamento);
+            var objEquipamento = mapperEquipamento.MapperToEntity(obj);
+            serviceEquipamento.Adicionar(objEquipamento);
         }
 
         public void AtualizaEquipamento(EquipamentoDTO obj)
         {
-            var objEquipamento = _mapperEquipamento.MapperToEntity(obj);
-            _serviceEquipamento.Atualiza(objEquipamento);
+            var objEquipamento = mapperEquipamento.MapperToEntity(obj);
+            serviceEquipamento.Atualiza(objEquipamento);
         }
 
         public void RemoveEquipamento(EquipamentoDTO obj)
         {
-            var objEquipamento = _mapperEquipamento.MapperToEntity(obj);
-            _serviceEquipamento.Remove(objEquipamento);
+            var objEquipamento = mapperEquipamento.MapperToEntity(obj);
+            serviceEquipamento.Remove(objEquipamento);
         }
     }
 }

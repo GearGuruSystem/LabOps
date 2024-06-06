@@ -1,10 +1,9 @@
-﻿using LabOps.Application.DTO.Responses;
-
-namespace LabOps.Domain.Core.Interfaces
+﻿namespace LabOps.Domain.Core.Interfaces
 {
     public interface IRepositoryBase<TEntity> where TEntity : class
     {
-        Task<PagedResponse<List<TEntity>>> BuscarTodos(int pageNumber, int pageSize);
+        Task<IEnumerable<TEntity>> BuscarTodos();
+        Task<ICollection<TEntity>> BuscarTodosPorPagina(int pageNumber, int pageSize);
         Task<TEntity> BuscarPorId(int id);
         Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj);
         void Registrar(TEntity obj);

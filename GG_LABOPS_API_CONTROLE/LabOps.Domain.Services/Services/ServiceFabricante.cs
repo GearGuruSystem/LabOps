@@ -15,30 +15,5 @@ namespace LabOps.Domain.Services.Services
         {
             this.repositoryFabricante = repositoryFabricante;
         }
-
-        public override Task<IEnumerable<Fabricante>> BuscarTodos()
-        {
-            return base.BuscarTodos();
-        }
-
-        public override Task<Fabricante> BuscarPorId(int id)
-        {
-            return base.BuscarPorId(id);
-        }
-
-        public override void Adicionar(Fabricante obj)
-        {
-            base.Adicionar(obj);
-        }
-
-        public override void Atualiza(Fabricante obj)
-        {
-            base.Atualiza(obj);
-        }
-
-        public override void Remove(Fabricante obj)
-        {
-            base.Remove(obj);
-        }
     }
 }

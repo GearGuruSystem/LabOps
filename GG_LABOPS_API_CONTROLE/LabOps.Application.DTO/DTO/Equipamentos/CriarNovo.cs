@@ -1,9 +1,8 @@
-﻿using LabOps.Application.DTO.Requests;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class CriarNovo : Request, ICloneable
+    public class CriarNovo : ICloneable
     {
         public int IDEquipamento { get; private set; }
 

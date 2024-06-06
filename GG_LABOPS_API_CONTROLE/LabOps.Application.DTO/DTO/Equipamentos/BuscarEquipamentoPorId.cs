@@ -1,8 +1,6 @@
-﻿using LabOps.Application.DTO.Requests;
-
-namespace LabOps.Application.DTO.DTO.Equipamentos
+﻿namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class BuscarEquipamentoPorId : Request
+    public class BuscarEquipamentoPorId
     {
         public int Id { get; set; }
     }

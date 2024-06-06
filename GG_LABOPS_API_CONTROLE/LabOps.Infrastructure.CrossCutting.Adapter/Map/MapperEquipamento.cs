@@ -1,5 +1,4 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
-using LabOps.Application.DTO.Responses;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
@@ -41,24 +40,6 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
                     item.IDLaboratorio,
                     item.UsuarioInsercao,
                     item.AtualizadoEm);
-
-                EquipamentoDTOs.Add(equipamentoDTO);
-            }
-            return EquipamentoDTOs;
-        }
-
-        public IEnumerable<EquipamentoDTO> MapperListaPaginaEquipamento(PagedResponse<List<Equipamento>> equipamentoPagina)
-        {
-            foreach (var item in equipamentoPagina.Data)
-            {
-                EquipamentoDTO equipamentoDTO = new EquipamentoDTO(
-                     item.Nome,
-                     item.IDSituacao,
-                     item.IDTipoEquipamento,
-                     item.IDFabricante,
-                     item.IDLaboratorio,
-                     item.UsuarioInsercao,
-                     item.AtualizadoEm);
 
                 EquipamentoDTOs.Add(equipamentoDTO);
             }

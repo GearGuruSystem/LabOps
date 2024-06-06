@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Fabricantes;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
@@ -18,9 +18,9 @@ namespace LabOps.Application.Service
             this.mapperFabricante = mapperFabricante;
         }
 
-        public async Task<IEnumerable<FabricanteDTO>> BuscaTodosFabricantes()
+        public async Task<IEnumerable<FabricanteDTO>> BuscaTodosFabricantes(int pageNumber, int pageSize)
         {
-            var objFabricante = await serviceFabricante.BuscarTodos();
+            var objFabricante = await serviceFabricante.BuscarTodosSemRestricao();
             return mapperFabricante.MapperListaFabricantes(objFabricante);
         }
 

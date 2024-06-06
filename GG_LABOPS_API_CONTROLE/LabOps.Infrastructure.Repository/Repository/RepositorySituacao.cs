@@ -1,6 +1,7 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
+using LabOps.Infrastructure.Data.DataContext;
 using Microsoft.IdentityModel.Tokens;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -11,7 +12,8 @@ namespace LabOps.Infrastructure.Repository.Repository
     {
         private readonly SqlFactory sqlFactory;
 
-        public RepositorySituacao(SqlFactory sqlFactory)
+        public RepositorySituacao(SqlFactory sqlFactory, AppDbContext context)
+    : base(context)
         {
             this.sqlFactory = sqlFactory;
         }
@@ -24,6 +26,11 @@ namespace LabOps.Infrastructure.Repository.Repository
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
             return resultadoSql;
+        }
+
+        public override Task<ICollection<Situacao>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            return base.BuscarTodosPorPagina(pageNumber, pageSize);
         }
 
         public override async Task<Situacao> BuscarPorId(int id)

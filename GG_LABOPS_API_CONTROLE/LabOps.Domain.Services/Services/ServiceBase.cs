@@ -1,5 +1,4 @@
-﻿using LabOps.Application.DTO.Responses;
-using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Core.Services;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -15,9 +14,14 @@ namespace LabOps.Domain.Services.Services
             _repository = Repository;
         }
 
-        public virtual async Task<PagedResponse<List<TEntity>>> BuscarTodos(int pageNumber, int pageSize)
+        public virtual async Task<IEnumerable<TEntity>> BuscarTodosSemRestricao()
         {
-            return await _repository.BuscarTodos(pageNumber, pageSize);
+            return await _repository.BuscarTodos();
+        }
+
+        public virtual async Task<ICollection<TEntity>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            return await _repository.BuscarTodosPorPagina(pageNumber, pageSize);
         }
 
         public virtual async Task<TEntity> BuscarPorId(int id)

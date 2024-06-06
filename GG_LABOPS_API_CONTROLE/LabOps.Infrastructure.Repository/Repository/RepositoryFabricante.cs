@@ -1,6 +1,7 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.Data.DataAcess;
+using LabOps.Infrastructure.Data.DataContext;
 using Microsoft.IdentityModel.Tokens;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -11,19 +12,25 @@ namespace LabOps.Infrastructure.Repository.Repository
     {
         private readonly SqlFactory sqlFactory;
 
-        public RepositoryFabricante(SqlFactory sqlFactory)
+        public RepositoryFabricante(SqlFactory sqlFactory, AppDbContext context)
+            : base(context)
         {
             this.sqlFactory = sqlFactory;
         }
 
         public override async Task<IEnumerable<Fabricante>> BuscarTodos()
         {
-            var result = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("", new { });
-            if (result.IsNullOrEmpty())
+            var resultSql = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("", new { });
+            if (resultSql.IsNullOrEmpty())
             {
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
-            return result;
+            return resultSql;
+        }
+
+        public override Task<ICollection<Fabricante>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            return base.BuscarTodosPorPagina(pageNumber, pageSize);
         }
 
         public override async Task<IEnumerable<Fabricante>> BuscarPorParametro(Fabricante obj)

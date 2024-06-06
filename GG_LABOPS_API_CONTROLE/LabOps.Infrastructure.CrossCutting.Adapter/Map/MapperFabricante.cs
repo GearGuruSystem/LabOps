@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Fabricantes;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 

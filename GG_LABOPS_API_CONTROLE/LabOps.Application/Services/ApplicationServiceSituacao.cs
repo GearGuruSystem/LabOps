@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
@@ -19,16 +19,16 @@ namespace LabOps.Application.Service
             this.mapperSituacao = mapperSituacao;
         }
 
-        public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
+        public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva(int pageNumber, int pageSize)
         {
-            var objSituacao = await serviceSituacao.BuscarTodos();
-            return mapperSituacao.MapperListaFabricantes(objSituacao);
+            var objSituacao = await serviceSituacao.BuscarTodosPorPagina(pageNumber, pageSize);
+            return mapperSituacao.MapperListaSituacao(objSituacao);
         }
 
         public async Task<IEnumerable<SituacaoDTO>> BuscarSituacaoPorParametro(Situacao situacaoDTO)
         {
             var objSituacao = await serviceSituacao.BuscarPorParametro(situacaoDTO);
-            return mapperSituacao.MapperListaFabricantes(objSituacao);
+            return mapperSituacao.MapperListaSituacao(objSituacao);
         }
 
         public void CadastraSituacao(SituacaoDTO situacaoDTO)

@@ -1,4 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
+﻿using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Domain.Entities;
 
 namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
@@ -6,7 +6,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
     public interface IMapperSituacao
     {
         #region Mappers
-        IEnumerable<SituacaoDTO> MapperListaFabricantes(IEnumerable<Situacao> situacoes);
+        IEnumerable<SituacaoDTO> MapperListaSituacao(IEnumerable<Situacao> situacoes);
         Situacao MapperToEntity(SituacaoDTO situacaoDTO);
         SituacaoDTO MapperToDTO(Situacao situacao);
         #endregion

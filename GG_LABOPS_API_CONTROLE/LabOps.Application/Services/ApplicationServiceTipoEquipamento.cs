@@ -18,9 +18,9 @@ namespace LabOps.Application.Service
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<TipoEquipamentoDTO>> BuscarTodosTiposDeEquipamentos()
+        public async Task<IEnumerable<TipoEquipamentoDTO>> BuscarTodosTiposDeEquipamentos(int pageNumber, int pageSize)
         {
-            var tipoEquipamentos = await serviceTipoEquipamento.BuscarTodos();
+            var tipoEquipamentos = await serviceTipoEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
             return mapper.MapperListaTipoEquipamentos(tipoEquipamentos);
         }
     }

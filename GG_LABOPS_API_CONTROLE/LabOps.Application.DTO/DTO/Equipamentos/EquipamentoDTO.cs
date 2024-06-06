@@ -1,8 +1,6 @@
-﻿using LabOps.Application.DTO.Requests;
-
-namespace LabOps.Application.DTO.DTO.Equipamentos
+﻿namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class EquipamentoDTO : Request, ICloneable
+    public class EquipamentoDTO : ICloneable
     {
         public int IDEquipamento { get; private set; }
         public string Nome { get; private set; }
