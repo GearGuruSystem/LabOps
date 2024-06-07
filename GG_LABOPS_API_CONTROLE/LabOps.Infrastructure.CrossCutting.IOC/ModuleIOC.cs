@@ -8,7 +8,7 @@ namespace LabOps.Infrastructure.CrossCutting.IOC
         {
             #region Carrega IOC
 
-            ConfigurationIOC.Load(builder);
+            ConfigurationIOC_old.Load(builder);
 
             #endregion
         }
