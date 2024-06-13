@@ -1,23 +1,18 @@
-using Auth.LabOps.Presentation.WebAPI.Configuration;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
+using Auth.LabOps.Infrastructure.CrossCutting.IOC;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.DependencyInjected(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-builder.Host.ConfigureContainer<ContainerBuilder>(DependencyInjection.ConfigureContainer);
 
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseAuthorization();
+app.UseJwtConfiguration();
 app.MapControllers();
 app.Run();

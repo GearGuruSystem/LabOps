@@ -19,19 +19,16 @@ namespace Auth.LabOps.Infrastructure.Data.DataAcess
 
         public async Task<IEnumerable<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("SqlDataAcess")))
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("AppDataConnection")))
             {
                 var response = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                {
-                    return response;
-                }
-                throw new ArgumentNullException(nameof(response));
+                return response.ToList();
             }
         }
 
         public async Task<Task> SaveDataAsync<T>(string storedProcedure, T parameters)
         {
-            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("SqlDataAcess")))
+            using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString("AppDataConnection")))
             {
                 var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
                 if (result.GetHashCode() == 0)

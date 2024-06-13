@@ -23,9 +23,9 @@ namespace Auth.LabOps.Domain.Services.Services
             return await repository.Buscar(id);
         }
 
-        public virtual void Registrar(TEntity entity)
+        public virtual async void Registrar(TEntity entity)
         {
-            repository.Registrar(entity);
+            await repository.Registrar(entity);
         }
 
         public virtual Task<TEntity> Atualiza(TEntity entity)

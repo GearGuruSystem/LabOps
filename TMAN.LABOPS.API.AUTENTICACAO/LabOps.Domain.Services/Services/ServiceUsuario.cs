@@ -39,7 +39,7 @@ namespace Auth.LabOps.Domain.Services.Services
         public async Task<Usuario> ValidaUsuarioGeraToken(Usuario usuario)
         {
             var usuarioConsultado = await ConsultaUsuario(usuario);
-            var verificacao = await VerificaHash(usuarioConsultado);
+            var verificacao = await VerificaHash(usuario, usuarioConsultado.Senha);
             if (verificacao)
             {
                 AplicaToken(usuarioConsultado);
@@ -55,7 +55,6 @@ namespace Auth.LabOps.Domain.Services.Services
             {
                 return uConsultado;
             }
-            Console.WriteLine("NÃO FOI ENCONTRADO NENHUM USUARIO");
             throw new Exception("Não foi encontrado nenhum usuario");
         }
 
@@ -70,14 +69,10 @@ namespace Auth.LabOps.Domain.Services.Services
             throw new Exception("Não foi encontrado nenhum usuario");
         }
 
-        private static async Task<bool> VerificaHash(Usuario usuario)
+        private async Task<bool> VerificaHash(Usuario usuario, string hash)
         {
-            var verifica = await ServiceSecurity.ValidaAtualizaHashAsync(usuario, usuario.Senha);
-            if (verifica == false)
-            {
-                return false;
-            }
-            return true;
+            var verifica = await ServiceSecurity.ValidaAtualizaHashAsync(usuario, hash);
+            return verifica != false;
         }
 
         private void AplicaToken(Usuario usuario)

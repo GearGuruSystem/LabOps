@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Auth.LabOps.Presentation.WebAPI.Controllers
 {
     [ApiController]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     [Route("api/v1/[controller]")]
     public class UsuarioController : ControllerBase
     {
@@ -64,12 +66,12 @@ namespace Auth.LabOps.Presentation.WebAPI.Controllers
         {
             try
             {
-                var usuarioLogado = await applicationServiceUsuario.ValidaUsuarioGeraToken(usuarioDTO);
+                UsuarioLogadoDTO usuarioLogado = await applicationServiceUsuario.ValidaUsuarioGeraToken(usuarioDTO);
                 return Ok(usuarioLogado);
             }
-            catch (Exception)
-            {
-                return NotFound("Não foi possivel realizar o login!");
+            catch (Exception ex)
+            { 
+                return NotFound($"Não foi possivel realizar o login! Erro:{ex.Message}");
             }
         }
 

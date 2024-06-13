@@ -6,7 +6,7 @@ namespace Auth.LabOps.Domain.Services.Security
 {
     public static class ServiceSecurity
     {
-        private static readonly ServiceUsuario service;
+        private static readonly ServiceUsuario service = null!;
         private static ServiceUsuario Service => service;
 
         public static void ConverteSenhaEmHash(Usuario usuario)

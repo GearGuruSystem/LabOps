@@ -4,7 +4,7 @@
     {
         public Task<IEnumerable<TEntity>> BuscarTodos();
         public Task<TEntity> Buscar(int id);
-        public void Registrar(TEntity entity);
+        public Task<Task> Registrar(TEntity entity);
         public Task<TEntity> Atualizar(TEntity entity);
     }
 }

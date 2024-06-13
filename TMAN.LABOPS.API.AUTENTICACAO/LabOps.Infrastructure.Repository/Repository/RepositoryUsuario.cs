@@ -35,17 +35,22 @@ namespace Auth.LabOps.Infrastructure.Repository.Repository
         public async Task<Usuario> Buscar(string chave)
         {
             var query = UsuarioQueries.BuscarUsuarioPelaChave(chave);
-            var resultadoSql = await connection.QueryAsync<Usuario>(query.CodigoSql, query.Parametros);
+            var resultadoSql = await connection.QueryAsync<Usuario>(query.CodigoSql);
             return resultadoSql.FirstOrDefault();
         }
 
-        public override async void Registrar(Usuario entity)
+        public override async Task<Task> Registrar(Usuario entity)
         {
-            await sqlData.SaveDataAsync("[dbo].[LoSp_InserirUsuario]", new 
+            var response = await sqlData.SaveDataAsync("[dbo].[LoSp_InserirUsuario]", new 
             { 
-                @Login = entity.Login.ToUpper(),
+                @Login = entity.Login.ToLower(),
                 @Senha = entity.Senha 
             });
+            if (response.IsCompleted)
+            {
+                return Task.CompletedTask;
+            }
+            throw new Exception("Erro");
         }
 
         public Task<Usuario> Atualizar(Usuario entity)

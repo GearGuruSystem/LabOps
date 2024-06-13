@@ -8,39 +8,85 @@ using Auth.LabOps.Domain.Services.Services;
 using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map;
 using Auth.LabOps.Infrastructure.Data.DataAcess;
+using Auth.LabOps.Infrastructure.Data.DataContex;
 using Auth.LabOps.Infrastructure.Repository.Repository;
-using Autofac;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
 {
-    public class ConfigurationIOC
+    public static class ConfigurationIOC
     {
-        public static void Load(ContainerBuilder builder)
+        public static IServiceCollection DependencyInjected(this IServiceCollection services, IConfiguration configuration)
         {
             #region registra IOC
 
             #region IOC Application
-            builder.RegisterType<ApplicationServiceUsuario>().As<IApplicationServiceUsuario>();
+            services.AddScoped<IApplicationServiceUsuario, ApplicationServiceUsuario>();
             #endregion
 
             #region IOC Services 
-            builder.RegisterType<ServiceUsuario>().As<IServiceUsuario>();
+            services.AddScoped<IServiceUsuario, ServiceUsuario>();
             #region Security Jwt
-            builder.RegisterType<ServiceToken>().As<IServiceToken>();
+            services.AddScoped<IServiceToken, ServiceToken>();
             #endregion
             #endregion
 
             #region Repository SQL
-            builder.RegisterType<RepositoryUsuario>().As<IRepositoryUsuario>();
-            builder.RegisterType<SqlData>().As<ISqlData>();
-            builder.RegisterType<SqlFactory>().AsSelf().InstancePerLifetimeScope();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("AppDataConnection")));
+            services.AddScoped<IRepositoryUsuario, RepositoryUsuario>();
+            services.AddScoped<ISqlData, SqlData>();
+            services.AddScoped<SqlFactory>();
             #endregion
 
             #region IOC Mapper
-            builder.RegisterType<MapperUsuario>().As<IMapperUsuario>();
+            services.AddScoped<IMapperUsuario, MapperUsuario>();
             #endregion
 
             #endregion
+            return services;
+        }
+
+        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IServiceToken, ServiceToken>();
+
+            #region Criação de JWT Token
+            byte[] chave = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration.GetSection("JWT:Issuer").Value,
+                    ValidateAudience = true,
+                    ValidAudience = configuration.GetSection("JWT:Audience").Value,
+                    ValidateLifetime = true,
+                };
+            });
+            #endregion
+        }
+
+        public static void UseJwtConfiguration(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
         }
     }
 }

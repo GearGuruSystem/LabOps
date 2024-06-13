@@ -1,4 +1,4 @@
 ﻿namespace Auth.LabOps.Infrastructure.Repository.Queries.Records
 {
-    public record SqlModel(string CodigoSql, object Parametros);
+    public record SqlModel(string CodigoSql, object Parametros = null);
 }

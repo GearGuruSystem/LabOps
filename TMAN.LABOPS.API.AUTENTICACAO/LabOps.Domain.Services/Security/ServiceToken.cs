@@ -21,12 +21,12 @@ namespace Auth.LabOps.Domain.Services.Security
 
         public string GerarToken(Usuario usuario)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             //PESQUISAR SOBRE ARMAZENAMENTO DE SEGREDOS/SENHAS NA NUVEM (ATUALMENTE UTILIZANDO NO APPSETTINGS [NAO RECOMENDADO])
-            var chave = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
-            var claims = new List<Claim>
+            byte[] chave = Encoding.ASCII.GetBytes(configuration.GetSection("JWT:Secret").Value);
+            var claims = new List<Claim> 
             {
-                new Claim(ClaimTypes.Name, usuario.Login)
+                new Claim(ClaimTypes.Name, usuario.Login) 
             };
             claims.AddRange(usuario.UsuarioXGrupoUsuarios
                 .SelectMany(x => x.GrupoUsuario.GrupoUsuarioXAplicacoes)

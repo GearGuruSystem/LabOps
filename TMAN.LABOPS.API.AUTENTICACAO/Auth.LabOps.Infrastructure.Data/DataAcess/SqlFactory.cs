@@ -17,7 +17,7 @@ namespace Auth.LabOps.Infrastructure.Data.DataAcess
 
         public IDbConnection CreateConnection()
         {
-            var connectionString = configuration.GetConnectionString("SqlDataAcess");
+            var connectionString = configuration.GetConnectionString("AppDataConnection");
             return new SqlConnection(connectionString);
         }
     }
