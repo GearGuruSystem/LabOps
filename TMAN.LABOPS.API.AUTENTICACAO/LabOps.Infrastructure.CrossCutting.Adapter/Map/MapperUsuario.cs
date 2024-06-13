@@ -21,7 +21,6 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
                     Senha = item.Senha,
                     InseridoEm = item.InseridoEm,
                     AtualizadoEm = item.AtualizadoEm,
-                    Token = item.Token
                 };
                 UsuarioDTOs.Add(usuarioDTO);
             }
@@ -37,7 +36,6 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
                 Senha = usuario.Senha,
                 InseridoEm = usuario.InseridoEm,
                 AtualizadoEm = usuario.AtualizadoEm,
-                Token = usuario.Token
             };
 
             return usuarioDTO;
@@ -52,7 +50,6 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
                 Senha = usuarioDTO.Senha,
                 InseridoEm = usuarioDTO.InseridoEm,
                 AtualizadoEm = usuarioDTO.AtualizadoEm, 
-                Token = usuarioDTO.Token
             };
             return usuario;
         }
