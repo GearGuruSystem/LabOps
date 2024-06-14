@@ -15,7 +15,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 
         public IEnumerable<FabricanteDTO> MapperListaFabricantes(IEnumerable<Fabricante> fabricantes)
         {
-            foreach (var item in FabricanteDTOs)
+            foreach (var item in fabricantes)
             {
                 FabricanteDTO fabricanteDTO = new FabricanteDTO(
                     item.IDFabricante,
@@ -62,6 +62,16 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
                 cFabricanteDTO.Nome,
                 cFabricanteDTO.UsuarioAtualizacao,
                 cFabricanteDTO.AtualizadoEm);
+            return fabricante;
+        }
+
+        public Fabricante MapperToEntity(Atualizar aFabricanteDTO)
+        {
+            Fabricante fabricante = new Fabricante(
+                aFabricanteDTO.IDFabricante,
+                aFabricanteDTO.Nome,
+                aFabricanteDTO.UsuarioAtualizacao,
+                aFabricanteDTO.AtualizadoEm);
             return fabricante;
         }
     }

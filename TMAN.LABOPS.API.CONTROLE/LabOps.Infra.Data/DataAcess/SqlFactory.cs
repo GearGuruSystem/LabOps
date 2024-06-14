@@ -17,7 +17,6 @@ namespace LabOps.Infra.Data.DataAcess
             this.configuration = configuration;
         }
 
-        //METODO QUE FAZ A LEITURA NO BANCO
         public async Task<IList<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionName = "AppDBConnection")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
@@ -27,15 +26,14 @@ namespace LabOps.Infra.Data.DataAcess
             }
         }
 
-        //METODO QUE FAZ EXECUÇÃO NO BANCO
         public async Task<Task> SaveDataAsync<T>(string storedProcedure, T parameters, string connectionName = "AppDBConnection")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
                 var result = await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                if (result.GetHashCode() == 0)
+                if (result == 0)
                 {
-                    throw new Exception("Ocorreu um erro ao executar procedure.");
+                    throw new Exception("Não foi alterada nenhuma linha no banco de dados");
                 }
                 return Task.CompletedTask;
             }

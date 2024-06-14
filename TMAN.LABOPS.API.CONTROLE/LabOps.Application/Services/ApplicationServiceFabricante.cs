@@ -36,7 +36,7 @@ namespace LabOps.Application.Service
             serviceFabricante.Adicionar(objFabricante);
         }
 
-        public void AtualizaFabricante(FabricanteDTO obj)
+        public void AtualizaFabricante(Atualizar obj)
         {
             var objFabricante = mapperFabricante.MapperToEntity(obj);
             serviceFabricante.Atualiza(objFabricante);

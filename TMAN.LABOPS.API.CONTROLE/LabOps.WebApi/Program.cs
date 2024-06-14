@@ -1,4 +1,5 @@
 using LabOps.Infrastructure.CrossCutting.IOC;
+using LabOps.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,4 +17,5 @@ if (app.Environment.IsDevelopment())
 }
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(WebApiConfiguration.CorsPolicyName);
 app.Run();

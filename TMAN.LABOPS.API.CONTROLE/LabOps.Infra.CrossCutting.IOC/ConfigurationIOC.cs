@@ -59,5 +59,6 @@ namespace LabOps.Infrastructure.CrossCutting.IOC
             #endregion
             return service;
         }
+
     }
 }

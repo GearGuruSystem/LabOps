@@ -45,5 +45,6 @@ namespace LabOps.Domain.Entities
             UsuarioAtualizacao = usuarioAtualizacao;
             AtualizadoEm = atualizadoEm;
         }
+
     }
 }

@@ -20,11 +20,11 @@ namespace LabOps.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Faz uma varedura do mais recente cadastrado para o mais antigo.
+        /// Criado por Guian Rocha 14/06/2024 → Falta testes
         /// </summary>
-        /// <param name="numeroPagina"></param>
-        /// <param name="tamanhoPagina"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// Todos Fabricantes cadastrados.
+        /// </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("BuscarTodosFabricantes")]
@@ -74,7 +74,7 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPut("AtualizaFabricante")]
-        public IActionResult AtualizarFabricante([FromBody] FabricanteDTO fabricanteDTO)
+        public IActionResult AtualizarFabricante([FromBody] Atualizar fabricanteDTO)
         {
             if (ModelState.IsValid)
             {

@@ -19,7 +19,7 @@ namespace LabOps.Infra.Repository.Repository
 
         public override async Task<IEnumerable<Fabricante>> BuscarTodos()
         {
-            var resultSql = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("", new { });
+            var resultSql = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("[dbo].[LoSp_BuscarTodosFabricantes]", new { });
             if (resultSql.IsNullOrEmpty())
             {
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
@@ -39,7 +39,10 @@ namespace LabOps.Infra.Repository.Repository
 
         public override async Task<Fabricante> BuscarPorId(int id)
         {
-            var result = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("", new { });
+            var result = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("[dbo].[LoSp_SelecionarFabricante]", new 
+            { 
+                @IDFabricante = id
+            });
             if (result.IsNullOrEmpty())
             {
                 throw new Exception("Não foi encontrando nenhum registro no banco.");
@@ -47,23 +50,30 @@ namespace LabOps.Infra.Repository.Repository
             return result.FirstOrDefault();
         }
 
-        public override async void Atualizar(Fabricante obj)
+        public override async void Registrar(Fabricante obj)
         {
-            var result = await sqlFactory.SaveDataAsync("", new
+            try
             {
-            });
-            if (!result.IsCompleted)
+                await sqlFactory.SaveDataAsync("dbo.LoSp_InserirFabricante", new
+                {
+                    @NomeParam = obj.Nome,
+                    @UsuarioAtualizacaoParam = obj.UsuarioAtualizacao
+                });
+            }
+            catch (Exception ex)
             {
-                throw new Exception($"Falha ao inserir o {obj.Nome} no banco!");
+                Console.WriteLine(ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
-        public override async void Registrar(Fabricante obj)
+        public override async void Atualizar(Fabricante obj)
         {
-            await sqlFactory.SaveDataAsync("dbo.LoSp_InserirFabricante", new 
+            await sqlFactory.SaveDataAsync("[dbo].[LoSp_AtualizarFabricante]", new
             {
-                @Nome = obj.Nome,
-                @UsuarioAtualizacao = obj.UsuarioAtualizacao
+                obj.IDFabricante,
+                @NomeParam = obj.Nome.ToString(),
+                @UsuarioAtualizacaoParam = obj.UsuarioAtualizacao.ToString()
             });
         }
 
