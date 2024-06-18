@@ -1,12 +1,9 @@
-using GG_LabOps_Application.ApplicationModule;
-using GG_LabOps_Infra.InfrastructureModule;
+using LabOps.Infra.Data.CrossCutting.IOC;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services
-    .AddApplicationServices()
-    .AddInfrastructureServices(builder.Configuration);
+builder.Services.DependencyInjected(builder.Configuration);
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

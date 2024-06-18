@@ -1,37 +1,30 @@
-﻿using GG_LabOps_Domain.DTOs;
-using GG_LabOps_Domain.Entities;
-using GG_LabOps_Domain.Interfaces;
-using GG_LabOps_Infra.Useful;
+﻿using LabOps.Application.DTOs.Usuario;
+using LabOps.Application.Interfaces;
+using LabOps.Infra.Data.AuthApi.Usefull;
 
-#pragma warning disable IDE0290
-
-namespace GG_LabOps_Infra.Persistence.ApiClients
+namespace LabOps.Infra.Data.AuthApi.Services
 {
-    public class UsuarioApiClient : IUsuarioApiClient
+    public class ServiceAuth(IHttpClientFactory httpClientFactory) : IServiceAuth
     {
-        private readonly HttpClient _client;
+        private readonly HttpClient _client = httpClientFactory
+            .CreateClient($"{WebConfig.HttpClient_Usuario}");
 
-        public UsuarioApiClient(HttpClient client)
-        {
-            _client = client;
-        }
-
-        public async Task<Usuario> BuscaTodos()
+        public async Task<Usuario> BuscaTodosUsuarios()
         {
             try
             {
-                var resposta = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}");
+                var resposta = await _client.GetAsync($"{WebConfig.HttpClient_Usuario}");
                 return await resposta.ReadContentAs<Usuario>();
             }
             catch (Exception ex)
             {
-                return new Usuario(new Notificacao($"Ocorreu um erro {ex.Message}"));
+                throw new Exception();
             }
         }
 
         public async Task<Usuario> BuscaPorId(int id)
         {
-            var resposta = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}/{id}");
+            var resposta = await _client.GetAsync($"{WebConfig.HttpClient_Usuario}/{id}");
             if (resposta.IsSuccessStatusCode)
             {
                 return await resposta.ReadContentAs<Usuario>();
@@ -41,7 +34,7 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
 
         public async Task<Usuario> BuscaPorChave(string chaveUsuario)
         {
-            var resposta = await _client.GetAsync($"{EndpointsApiClient.UserEndpoint()}/{chaveUsuario}");
+            var resposta = await _client.GetAsync($"{WebConfig.HttpClient_Usuario}/{chaveUsuario}");
             if (resposta.IsSuccessStatusCode)
             {
                 return await resposta.ReadContentAs<Usuario>();
@@ -49,19 +42,19 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
             throw new Exception();
         }
 
-        public async Task<UserLoggedDTO> LoginUsuario(UserLoginDTO usuario)
+        public async Task<UsuarioLogado> LoginUsuario(UsuarioLogin usuario)
         {
-            var resposta = await _client.PostAsJson($"{EndpointsApiClient.UserEndpoint()}/Login", usuario);
+            var resposta = await _client.PostAsJson($"{WebConfig.HttpClient_Usuario}/Login", usuario);
             if (resposta.IsSuccessStatusCode)
             {
-                return await resposta.ReadContentAs<UserLoggedDTO>();
+                return await resposta.ReadContentAs<UsuarioLogado>();
             }
             throw new Exception();
         }
 
         public async Task<Usuario> RegistraUsuario(Usuario usuario)
         {
-            var resposta = await _client.PostAsJson($"{EndpointsApiClient.UserEndpoint()}/", usuario);
+            var resposta = await _client.PostAsJson($"{WebConfig.HttpClient_Usuario}/", usuario);
             if (resposta.IsSuccessStatusCode)
             {
                 return await resposta.ReadContentAs<Usuario>();
@@ -71,7 +64,7 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
 
         public async Task<Usuario> AtualizaUsuario(int id, Usuario usuario)
         {
-            var resposta = await _client.PutAsJson($"{EndpointsApiClient.UserEndpoint()}/Update/{id}", usuario);
+            var resposta = await _client.PutAsJson($"{WebConfig.HttpClient_Usuario}/Update/{id}", usuario);
             if (resposta.IsSuccessStatusCode)
             {
                 return await resposta.ReadContentAs<Usuario>();
@@ -79,7 +72,7 @@ namespace GG_LabOps_Infra.Persistence.ApiClients
             throw new Exception();
         }
 
-        public Task<bool> ValidUser(UserLoginDTO userDto)
+        public Task<bool> ValidUser(UsuarioLogin userDto)
         {
             throw new NotImplementedException();
         }

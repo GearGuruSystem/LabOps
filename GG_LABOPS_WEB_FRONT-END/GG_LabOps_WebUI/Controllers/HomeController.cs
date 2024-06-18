@@ -2,7 +2,7 @@ using GG_LabOps_WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace GG_LabOps_WebUI.Controllers
+namespace LabOps.WebUI.Controllers
 {
     public class HomeController : Controller
     {

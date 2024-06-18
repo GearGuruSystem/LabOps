@@ -7,18 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GG_LabOps_Domain\GG_LabOps_Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Validators\" />
+    <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
+    <ProjectReference Include="..\GG_LabOps_Infra\LabOps.Infra.ControlApi.csproj" />
+    <ProjectReference Include="..\LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj" />
   </ItemGroup>
 
 </Project>

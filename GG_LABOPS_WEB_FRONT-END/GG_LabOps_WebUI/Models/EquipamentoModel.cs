@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GG_LabOps_WebUI.Models
+namespace LabOps.WebUI.Models
 {
     public class EquipamentoModel
     {
         public int IDEquipamento { get; set; }
 
         [StringLength(120)]
-        public string Nome { get;  set; }
+        public string Nome { get; set; }
 
         public int IDSituacao { get; set; }
         public int IDTipoEquipamento { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GG_LabOps_WebUI.Models
+namespace LabOps.WebUI.Models
 {
     public class LoginModel
     {
@@ -10,7 +10,7 @@ namespace GG_LabOps_WebUI.Models
         [Required(ErrorMessage = "Digite a senha")]
         public string Senha { get; set; }
 
-        public string? Nome {  get; set; }
+        public string? Nome { get; set; }
 
         [EmailAddress]
         public string? Email { get; set; }

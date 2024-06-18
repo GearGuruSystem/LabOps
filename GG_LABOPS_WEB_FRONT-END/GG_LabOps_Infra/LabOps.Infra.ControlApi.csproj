@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GG_LabOps_Application\GG_LabOps_Application.csproj" />
+    <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
   </ItemGroup>
 
 </Project>

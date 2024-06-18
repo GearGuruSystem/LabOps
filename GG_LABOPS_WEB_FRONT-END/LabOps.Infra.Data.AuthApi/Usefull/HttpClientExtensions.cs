@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 #pragma warning disable IDE0090 // Use 'new(...)'
 
-namespace LabOps.Infra.ControlApi.Usefull
+namespace LabOps.Infra.Data.AuthApi.Usefull
 {
     internal static class HttpClientExtensions
     {

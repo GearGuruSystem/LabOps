@@ -1,4 +1,4 @@
-namespace GG_LabOps_WebUI.Models
+namespace LabOps.WebUI.Models
 {
     public class ErrorViewModel
     {

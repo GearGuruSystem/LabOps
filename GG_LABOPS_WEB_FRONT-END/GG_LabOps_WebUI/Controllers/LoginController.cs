@@ -1,17 +1,17 @@
-﻿using GG_LabOps_Domain.DTOs;
-using GG_LabOps_Domain.Interfaces;
-using GG_LabOps_WebUI.Models;
+﻿using LabOps.Application.DTOs.Usuario;
+using LabOps.Application.Interfaces;
+using LabOps.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
-namespace GG_LabOps_WebUI.Controllers
+namespace LabOps.WebUI.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserServices _services;
+        private readonly IServiceAuth _services;
 
-        public LoginController(IUserServices services)
+        public LoginController(IServiceAuth services)
         {
             _services = services;
         }
@@ -31,7 +31,7 @@ namespace GG_LabOps_WebUI.Controllers
                 try
                 {
                     var userDTO = ConvertInUserLoginDTO(loginModel);
-                    await _services.LoginUser(userDTO);
+                    await _services.LoginUsuario(userDTO);
                     return RedirectToAction(nameof(HomeController.Index));
                 }
                 catch (Exception ex)
@@ -62,9 +62,9 @@ namespace GG_LabOps_WebUI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private static UserLoginDTO ConvertInUserLoginDTO(LoginModel loginModel)
+        private static UsuarioLogin ConvertInUserLoginDTO(LoginModel loginModel)
         {
-            return new UserLoginDTO
+            return new UsuarioLogin
             {
                 ChaveUsuario = loginModel.Login,
                 Senha = loginModel.Senha
