@@ -12,14 +12,14 @@ namespace LabOps.WebApi
             {
                 opt.AddPolicy(WebApiConfiguration.CorsPolicyName,
                     buld => buld
-                    .WithOrigins(WebApiConfiguration.FrontEnd, WebApiConfiguration.ServiceNotification)
+                    .WithOrigins(WebApiConfiguration.FrontEnd, WebApiConfiguration.AuthApi, WebApiConfiguration.ServiceNotification)
                     .AllowAnyHeader()
                     .WithMethods("GET", "POST", "PUT", "DELETE"));
             });
             return services;
         }
 
-        public static void AddConfigurationLogger(this ILoggingBuilder builder)
+        public static ILoggingBuilder AddConfigurationLogger(this ILoggingBuilder builder)
         {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
@@ -37,6 +37,8 @@ namespace LabOps.WebApi
 
             Log.Information("Iniciado o WebApi");
             builder.AddSerilog(logger);
+
+            return builder;
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace LabOps.Infra.CrossCutting.IOC
+﻿namespace LabOps.Infra.CrossCutting.IOC
 {
     public static class WebApiConfiguration
     {
-        public static string CorsPolicyName = "wasm";
-        public static string FrontEnd = "";
-        public static string ServiceNotification = "";
+        public const string CorsPolicyName = "wasm";
+        public const string FrontEnd = "";
+        public const string ServiceNotification = "";
+        public const string AuthApi = "";
     }
 }

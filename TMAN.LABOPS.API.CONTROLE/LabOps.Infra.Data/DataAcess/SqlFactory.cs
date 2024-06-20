@@ -17,7 +17,8 @@ namespace LabOps.Infra.Data.DataAcess
             this.configuration = configuration;
         }
 
-        public async Task<IList<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters, string connectionName = "AppDBConnection")
+        public async Task<IList<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters = null, string connectionName = "AppDBConnection") 
+            where U : class
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {

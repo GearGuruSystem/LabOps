@@ -11,18 +11,16 @@ namespace LabOps.Infra.Repository.Repository
     public class RepositorySituacao : RepositoryBase<Situacao>, IRepositorySituacao
     {
         private readonly SqlFactory sqlFactory;
-        private readonly AppDbContext context;
 
         public RepositorySituacao(SqlFactory sqlFactory, AppDbContext context) : base(context)
         {
             this.sqlFactory = sqlFactory;
-            this.context = context;
         }
 
         #region Metodos Base
         public override async Task<IEnumerable<Situacao>> BuscarTodos()
         {
-            var resultadoSql = await sqlFactory.LoadDataAsync<Situacao, dynamic>("", new { });
+            var resultadoSql = await sqlFactory.LoadDataAsync<Situacao, dynamic>("");
             if (resultadoSql.IsNullOrEmpty())
             {
                 throw new Exception("Encontrado nenhum registro no banco");
@@ -52,12 +50,12 @@ namespace LabOps.Infra.Repository.Repository
 
         public override void Atualizar(Situacao obj)
         {
-            throw new NotImplementedException();
+            base.Atualizar(obj);
         }
 
         public override void Remove(Situacao obj)
         {
-            throw new NotImplementedException();
+            base.Remove(obj);
         }
         #endregion
     }

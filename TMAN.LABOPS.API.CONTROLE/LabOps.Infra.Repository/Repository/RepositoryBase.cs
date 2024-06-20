@@ -1,5 +1,6 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Infra.Data.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -14,11 +15,20 @@ namespace LabOps.Infra.Repository.Repository
             this.context = context;
         }
 
-        public abstract Task<IEnumerable<TEntity>> BuscarTodos();
+        public virtual async Task<IEnumerable<TEntity>> BuscarTodos()
+        {
+            return await context.Set<TEntity>().ToListAsync();
+        }
 
-        public abstract Task<TEntity> BuscarPorId(int id);
+        public virtual async Task<TEntity> BuscarPorId(int id)
+        {
+            return await context.Set<TEntity>().FindAsync(id);
+        }
 
-        public abstract Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj);
+        public virtual async Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj)
+        {
+            return await context.Set<TEntity>().Where(x => x.Equals(obj)).ToListAsync();
+        }
 
         public virtual async void Registrar(TEntity obj)
         {
@@ -26,8 +36,16 @@ namespace LabOps.Infra.Repository.Repository
             context.SaveChanges();
         }
 
-        public abstract void Atualizar(TEntity obj);
+        public virtual async void Atualizar(TEntity obj)
+        {
+            context.Update<TEntity>(obj);
+            await context.SaveChangesAsync();
+        }
 
-        public abstract void Remove(TEntity obj);
+        public virtual async void Remove(TEntity obj)
+        {
+            context.Remove<TEntity>(obj);
+            await context.SaveChangesAsync();
+        }
     }
 }

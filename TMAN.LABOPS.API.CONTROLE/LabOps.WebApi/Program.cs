@@ -1,6 +1,5 @@
 using LabOps.Infra.CrossCutting.IOC;
 using LabOps.WebApi;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddConfigurationLogger();
@@ -19,5 +18,4 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors(WebApiConfiguration.CorsPolicyName);
-//app.UseSerilogRequestLogging();
 app.Run();
