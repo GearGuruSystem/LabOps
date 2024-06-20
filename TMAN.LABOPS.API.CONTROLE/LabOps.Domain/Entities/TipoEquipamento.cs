@@ -4,7 +4,7 @@
     {
         public int IDTipoEquipamento { get; private set; }
         public string Descricao { get; private set; }
-        public int UsuarioAtualizacao { get; private set; }
+        public string UsuarioAtualizacao { get; private set; }
         public DateTime? AtualizadoEm { get; private set; }
 
         #region Navegação de Objetos
@@ -18,9 +18,16 @@
         {
         }
 
-        public TipoEquipamento(int iDTipoEquipamento, string descricao, int usuarioAtualizacao, DateTime? atualizadoEm)
+        public TipoEquipamento(int iDTipoEquipamento, string descricao, string usuarioAtualizacao, DateTime? atualizadoEm)
         {
             IDTipoEquipamento = iDTipoEquipamento;
+            Descricao = descricao;
+            UsuarioAtualizacao = usuarioAtualizacao;
+            AtualizadoEm = atualizadoEm;
+        }
+
+        public TipoEquipamento(string descricao, string usuarioAtualizacao, DateTime? atualizadoEm)
+        {
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;
             AtualizadoEm = atualizadoEm;

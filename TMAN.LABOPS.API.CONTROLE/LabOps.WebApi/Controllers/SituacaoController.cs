@@ -9,42 +9,29 @@ namespace LabOps.WebAPI.Controllers
     public class SituacaoController : ControllerBase
     {
         private readonly IApplicationServiceSituacao applicationService;
+        private readonly ILogger<SituacaoController> logger;
 
-        public SituacaoController(IApplicationServiceSituacao applicationService)
+        public SituacaoController(IApplicationServiceSituacao applicationService, ILogger<SituacaoController> logger)
         {
             this.applicationService = applicationService;
+            this.logger = logger;
         }
 
-        [HttpGet("BuscarTodasSituacao")]
-        public async Task<IActionResult> BuscaTodasSituacao()
+        [HttpGet("BuscarTodasSituaçõesAtivas")]
+        public async Task<IActionResult> BuscaTodasSituacaoAtiva()
         {
+            logger.LogInformation("Iniciando processo para buscar informações no banco");
             try
             {
-                var dados = await applicationService.BuscaTodasSituacao();
+                var dados = await applicationService.BuscaTodasSituacaoAtiva();
+                logger.LogInformation("Quantidade de dados retornados: {@Dados}", dados.Count());
                 return Ok(dados);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                logger.LogError("Ocorreu um erro: {@Mensagem}", ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, "Ocorreu um erro ao buscar as situações ativas.");
             }
-        }
-
-        [HttpPost("CadastraSituacao")]
-        public IActionResult CadastraSituacao([FromBody] SituacaoDTO situacaoDTO)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    applicationService.CadastraSituacao(situacaoDTO);
-                    return Ok();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            return BadRequest();
         }
     }
 }

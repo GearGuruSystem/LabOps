@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LabOps.Infrastructure.CrossCutting.IOC
+namespace LabOps.Infra.CrossCutting.IOC
 {
     public static class ConfigurationIOC
     {

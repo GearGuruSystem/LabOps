@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO;
+using LabOps.Application.DTO.DTO.TipoEquipamento;
 using LabOps.Domain.Entities;
 
 namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
@@ -12,6 +13,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
         TipoEquipamentoDTO MapperToDTO(TipoEquipamento tipoEquipamento);
 
         TipoEquipamento MapperToEntity(TipoEquipamentoDTO tipoEquipamentoDTO);
+        TipoEquipamento MapperToEntity(RegistroNovo tipoEquipamentoDTO);
 
         #endregion Mappers
     }

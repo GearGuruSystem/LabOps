@@ -3,7 +3,7 @@ using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace LabOps.WebUI.Pages.Fabricante
+namespace LabOps.Presentation.WebUI.Pages.Fabricante
 {
     public partial class CriaFabricantePage : ComponentBase
     {
@@ -17,19 +17,19 @@ namespace LabOps.WebUI.Pages.Fabricante
         #region Services
 
         [Inject]
-        public IServicesFabricante Services { get; set; }
+        public IServicesFabricante Services { get; set; } = null!;
 
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager NavigationManager { get; set; } = null!;
 
         [Inject]
-        public ISnackbar Snackbar { get; set; }
+        public ISnackbar Snackbar { get; set; } = null!;
 
         #endregion
 
         #region Metodos
 
-        public async Task OnValidSubmitAsync()
+        public async Task Banana()
         {
             IsBusy = true;
 
@@ -44,6 +44,7 @@ namespace LabOps.WebUI.Pages.Fabricante
             }
             catch (Exception ex)
             {
+                await Console.Out.WriteLineAsync(ex.Message);
                 Snackbar.Add(ex.Message, Severity.Error);
             }
             finally
@@ -51,8 +52,6 @@ namespace LabOps.WebUI.Pages.Fabricante
                 IsBusy = false;
             }
         }
-
-
 
         #endregion
     }

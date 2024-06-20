@@ -15,16 +15,9 @@ namespace LabOps.Infra.Data.ControlApi.Services
             try
             {
                 var result = await client.GetFromJsonAsync<List<Fabricante>>(new Uri(WebConfiguration.HttpClient_Fabricante));
-                if (result.Count >= 1)
-                {
-                    return result;
-                }
-                else
-                {
-                    throw new Exception("Erro. não foi encontrado nenhum valor no retorno da API");
-                }
+                throw new Exception("Erro. não foi encontrado nenhum valor no retorno da API");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new NotImplementedException();
             }

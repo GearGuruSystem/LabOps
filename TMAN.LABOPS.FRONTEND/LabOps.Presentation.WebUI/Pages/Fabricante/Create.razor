@@ -1,0 +1,20 @@
+﻿@page "/Fabricante/Cadastro"
+@inherits CriaFabricantePage
+
+<MudText Typo="Typo.h3">Cadastrar novo fabricante</MudText>
+
+<MudPaper Class="pa-8 mt-4">
+    <EditForm Model="@InputModel" OnInvalidSubmit="Banana">
+        <DataAnnotationsValidator />
+        <MudTextField Label="Nome"
+                     HelperText="Campo obrigatório"
+                     @bind-Value="InputModel.Nome"
+                     For="@(() => InputModel.Nome)" />
+
+        <MudButton ButtonType="ButtonType.Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary">
+                   Salvar
+               </MudButton>
+    </EditForm>
+</MudPaper>

@@ -25,9 +25,9 @@ namespace LabOps.Infra.Repository.Repository
             var resultadoSql = await sqlFactory.LoadDataAsync<Situacao, dynamic>("", new { });
             if (resultadoSql.IsNullOrEmpty())
             {
-                throw new Exception("Não foi encontrando nenhum registro no banco.");
+                throw new Exception("Encontrado nenhum registro no banco");
             }
-            return resultadoSql;
+            return resultadoSql.ToList();
         }
 
         public override async Task<Situacao> BuscarPorId(int id)

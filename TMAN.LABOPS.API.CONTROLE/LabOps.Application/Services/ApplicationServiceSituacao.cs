@@ -19,7 +19,7 @@ namespace LabOps.Application.Service
             this.mapperSituacao = mapperSituacao;
         }
 
-        public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacao()
+        public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
         {
             var objSituacao = await serviceSituacao.BuscarTodos();
             return mapperSituacao.MapperListaSituacao(objSituacao);

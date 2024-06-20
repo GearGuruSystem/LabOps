@@ -1,6 +1,6 @@
 ﻿using LabOps.Infra.Data.ControlApi;
 
-namespace LabOps.WebUI
+namespace LabOps.Presentation.WebUI
 {
     public static class Configuration
     {

@@ -40,7 +40,7 @@ namespace LabOps.Infra.Repository.Repository
 
         public override void Registrar(TipoEquipamento obj)
         {
-            throw new NotImplementedException();
+            base.Registrar(obj);
         }
 
         public override void Remove(TipoEquipamento obj)

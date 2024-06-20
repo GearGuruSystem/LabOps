@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO;
+using LabOps.Application.DTO.DTO.TipoEquipamento;
 using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
@@ -30,6 +31,15 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             TipoEquipamento tipoEquipamento = new TipoEquipamento(
                 tipoEquipamentoDTO.IDTipoEquipamento,
+                tipoEquipamentoDTO.Descricao,
+                tipoEquipamentoDTO.UsuarioAtualizacao,
+                tipoEquipamentoDTO.AtualizadoEm);
+            return tipoEquipamento;
+        }
+
+        public TipoEquipamento MapperToEntity(RegistroNovo tipoEquipamentoDTO)
+        {
+            TipoEquipamento tipoEquipamento = new TipoEquipamento(
                 tipoEquipamentoDTO.Descricao,
                 tipoEquipamentoDTO.UsuarioAtualizacao,
                 tipoEquipamentoDTO.AtualizadoEm);

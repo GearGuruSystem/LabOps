@@ -1,4 +1,5 @@
-﻿using LabOps.Application.Interfaces;
+﻿using LabOps.Application.DTO.DTO.TipoEquipamento;
+using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -16,16 +17,34 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpGet("BuscarTodosTiposDeEquipamentos")]
-        public IActionResult BuscarTodosTiposDeEquipamentos(int pageNumber, int pageSize)
+        public async Task<IActionResult> BuscarTodosTiposDeEquipamentos()
         {
             try
             {
-                var dados = applicationService.BuscarTodosTiposDeEquipamentos(pageNumber, pageSize);
+                var dados = await applicationService.BuscarTodosTiposDeEquipamentos();
                 return Ok(dados);
             }
             catch (Exception)
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpPost("RegistroTipoEquipamento")]
+        public async Task<IActionResult> RegistraTipoEquipamento([FromBody] RegistroNovo registroNovo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+            try
+            {
+                await applicationService.RegistraNovoTipoEquipamento(registroNovo);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, $"{ex.Message}");
             }
         }
     }

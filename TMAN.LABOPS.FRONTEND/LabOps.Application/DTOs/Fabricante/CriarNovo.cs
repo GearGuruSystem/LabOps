@@ -1,18 +1,18 @@
-﻿using LabOps.Application.Requests;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace LabOps.Application.DTOs.Fabricante
 {
-    public class CriarNovo : Request<CriarNovo>
+    public class CriarNovo
     {
         [Required]
+        [MaxLength(80)]
         public string Nome { get; set; } = string.Empty;
 
         [JsonIgnore]
-        public string UsuarioAtualizacao { get; set; } = string.Empty;
+        public string UsuarioAtualizacao { get; set; } = "Usuario Generico";
 
         [JsonIgnore]
-        public DateTime? AtualizadoEm { get; private set; }
+        public DateTime? AtualizadoEm { get; set; } = DateTime.Now;
     }
 }

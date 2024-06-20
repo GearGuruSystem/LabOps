@@ -4,7 +4,7 @@ namespace LabOps.Application.Interfaces
 {
     public interface IApplicationServiceSituacao
     {
-        Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacao();
+        Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva();
 
         void CadastraSituacao(SituacaoDTO situacaoDTO);
     }

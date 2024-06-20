@@ -13,10 +13,12 @@ namespace LabOps.WebAPI.Controllers
     public class FabricanteController : ControllerBase
     {
         private readonly IApplicationServiceFabricante applicationService;
+        private readonly ILogger<FabricanteController> logger;
 
-        public FabricanteController(IApplicationServiceFabricante applicationService)
+        public FabricanteController(IApplicationServiceFabricante applicationService, ILogger<FabricanteController> logger)
         {
             this.applicationService = applicationService;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -30,28 +32,34 @@ namespace LabOps.WebAPI.Controllers
         [HttpGet("BuscarTodosFabricantes")]
         public async Task<IActionResult> BuscarTodosFabricantes()
         {
+            logger.LogInformation("Iniciando processo para buscar informações no banco");
             try
             {
                 var data = await applicationService.BuscaTodosFabricantes();
+                logger.LogInformation("Quantidade de dados retornados: [{@Dados}]", data.Count());
                 return Ok(data);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                logger.LogError("Ocorreu um erro: [{@Mensagem}]", ex.Message);
+                return StatusCode(StatusCodes.Status404NotFound, "Ocorreu um erro ao buscar os fabricantes cadastrados.");
             }
         }
 
         [HttpGet("BuscarFabricantePeloId/{id:int}")]
         public async Task<IActionResult> BuscarFabricantePeloId(int id)
         {
+            logger.LogInformation("Iniciando processo para buscar informações no banco");
             try
             {
                 var data = await applicationService.BuscaFabricantesPeloId(id);
+                logger.LogInformation("Encontrado o seguinte fabricante: [{@Dados}]", data.Nome);
                 return Ok(data);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                logger.LogError("Ocorreu um erro: [{@Mensagem}]", ex.Message);
+                return StatusCode(StatusCodes.Status404NotFound, "Ocorreu um erro ao buscar os fabricantes cadastrados.");
             }
         }
 
@@ -67,10 +75,11 @@ namespace LabOps.WebAPI.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest(ex.Message);
+                    logger.LogError("Ocorreu um erro: [{@Mensagem}]", ex.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, "Não foi possivel fazer registro.");
                 }
             }
-            return BadRequest();
+            return StatusCode(StatusCodes.Status400BadRequest);
         }
 
         [HttpPut("AtualizaFabricante")]
@@ -83,9 +92,10 @@ namespace LabOps.WebAPI.Controllers
                     applicationService.AtualizaFabricante(fabricanteDTO);
                     return Ok();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    logger.LogError("Ocorreu um erro: [{@Mensagem}]", ex.Message);
+                    return StatusCode(StatusCodes.Status400BadRequest, "Não foi possivel realizar atualização.");
                 }
             }
             return BadRequest();
@@ -99,9 +109,10 @@ namespace LabOps.WebAPI.Controllers
                 applicationService.RemoveFabricante(fabricanteDTO);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                logger.LogError("Ocorreu um erro: [{@Mensagem}]", ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, "Não foi possivel realizar atualização.");
             }
         }
     }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMAN.LABOPS.FRONTEND", "TMAN.LABOPS.FRONTEND\TMAN.LABOPS.FRONTEND.csproj", "{E2FD0889-952D-4DCF-B6D7-E8D24747C6DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.WebUI", "TMAN.LABOPS.FRONTEND\LabOps.WebUI.csproj", "{E2FD0889-952D-4DCF-B6D7-E8D24747C6DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AC644E19-919E-40FE-AA96-7AB2815BA0CC}"
 EndProject
@@ -19,11 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1 - Infra.Data.ControlApi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 - Infra.Data.AuthApi", "3.2 - Infra.Data.AuthApi", "{7C99A2C1-A33C-43D7-959A-93E7831E8C80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabOps.Application", "LabOps.Application\LabOps.Application.csproj", "{A6A2FB60-852B-4EBB-857E-8FC6636000AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Application", "LabOps.Application\LabOps.Application.csproj", "{A6A2FB60-852B-4EBB-857E-8FC6636000AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabOps.Infra.Data.ControlApi", "LabOps.Infra.Data.ControlApi\LabOps.Infra.Data.ControlApi.csproj", "{183A8792-93ED-44F0-BC10-597D0D36FBD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Infra.Data.ControlApi", "LabOps.Infra.Data.ControlApi\LabOps.Infra.Data.ControlApi.csproj", "{183A8792-93ED-44F0-BC10-597D0D36FBD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabOps.Infra.Data.AuthApi", "LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj", "{0E532BD1-2E36-47AE-9363-469DF4C1FAB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Infra.Data.AuthApi", "LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj", "{0E532BD1-2E36-47AE-9363-469DF4C1FAB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Presentation.WebUI", "LabOps.Presentation.WebUI\LabOps.Presentation.WebUI.csproj", "{C13AF0A6-4F14-4AE0-9321-FEDABE865928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{0E532BD1-2E36-47AE-9363-469DF4C1FAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E532BD1-2E36-47AE-9363-469DF4C1FAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E532BD1-2E36-47AE-9363-469DF4C1FAB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13AF0A6-4F14-4AE0-9321-FEDABE865928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13AF0A6-4F14-4AE0-9321-FEDABE865928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13AF0A6-4F14-4AE0-9321-FEDABE865928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13AF0A6-4F14-4AE0-9321-FEDABE865928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +67,7 @@ Global
 		{A6A2FB60-852B-4EBB-857E-8FC6636000AA} = {740EB3D0-E78B-42C5-B89A-A3F4F547D4C5}
 		{183A8792-93ED-44F0-BC10-597D0D36FBD8} = {3ABCD08B-4251-4ACF-8300-6B6CFC72CCE3}
 		{0E532BD1-2E36-47AE-9363-469DF4C1FAB0} = {7C99A2C1-A33C-43D7-959A-93E7831E8C80}
+		{C13AF0A6-4F14-4AE0-9321-FEDABE865928} = {BDBF26C5-EC34-40CF-B01C-4B43CADD5B0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0B72F700-0D37-4976-AF5F-C29D1426C9A6}
