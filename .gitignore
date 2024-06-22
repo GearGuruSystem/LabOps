@@ -16,3 +16,5 @@
 /.vs/GearGuru/FileContentIndex/2f6a8384-1b2a-4e90-937b-a4b8730086ca.vsidx
 *.vsidx
 *.sqlite-journal
+*.config
+*.json
