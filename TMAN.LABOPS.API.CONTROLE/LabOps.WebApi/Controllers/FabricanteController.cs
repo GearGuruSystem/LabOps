@@ -64,7 +64,7 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPost("CadastraFabricante")]
-        public IActionResult CadastraFabricante([FromBody] CriarNovo fabricanteDTO)
+        public IActionResult CadastraFabricante([FromBody] CriarNovoFabricanteDTO fabricanteDTO)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPut("AtualizaFabricante")]
-        public IActionResult AtualizarFabricante([FromBody] Atualizar fabricanteDTO)
+        public IActionResult AtualizarFabricante([FromBody] AtualizarFabricanteDTO fabricanteDTO)
         {
             if (ModelState.IsValid)
             {

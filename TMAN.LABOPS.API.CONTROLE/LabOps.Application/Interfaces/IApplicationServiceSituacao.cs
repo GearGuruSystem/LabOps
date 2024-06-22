@@ -6,6 +6,6 @@ namespace LabOps.Application.Interfaces
     {
         Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva();
 
-        void CadastraSituacao(SituacaoDTO situacaoDTO);
+        void CadastraSituacao(AdicionarSituacaoDTO situacaoDTO);
     }
 }

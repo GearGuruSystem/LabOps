@@ -1,9 +1,7 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
-using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -11,13 +9,11 @@ namespace LabOps.Infra.Repository.Repository
 {
     public class RepositoryTipoEquipamento : RepositoryBase<TipoEquipamento>, IRepositoryTipoEquipamento
     {
-        private readonly SqlFactory sqlFactory;
         private readonly ILogger<RepositoryTipoEquipamento> logger;
 
-        public RepositoryTipoEquipamento(SqlFactory sqlFactory, AppDbContext context, ILogger<RepositoryTipoEquipamento> logger)
+        public RepositoryTipoEquipamento(AppDbContext context, ILogger<RepositoryTipoEquipamento> logger)
             : base(context)
         {
-            this.sqlFactory = sqlFactory;
             this.logger = logger;
         }
 

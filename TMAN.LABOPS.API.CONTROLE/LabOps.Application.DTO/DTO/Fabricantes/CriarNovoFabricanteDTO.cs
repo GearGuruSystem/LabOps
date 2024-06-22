@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace LabOps.Application.DTO.DTO.Fabricantes
 {
-    public class CriarNovo
+    public class CriarNovoFabricanteDTO
     {
         [Required]
         public string Nome { get; private set; }
@@ -14,12 +14,12 @@ namespace LabOps.Application.DTO.DTO.Fabricantes
         [JsonIgnore]
         public DateTime? AtualizadoEm { get; private set; }
 
-        public CriarNovo()
+        public CriarNovoFabricanteDTO()
         {
         }
 
         [JsonConstructor]
-        public CriarNovo(string nome, string usuarioAtualizacao, DateTime? atualizadoEm)
+        public CriarNovoFabricanteDTO(string nome, string usuarioAtualizacao, DateTime? atualizadoEm)
         {
             Nome = nome;
             UsuarioAtualizacao = "Guian";
@@ -30,13 +30,13 @@ namespace LabOps.Application.DTO.DTO.Fabricantes
 
         public object Clone()
         {
-            var fabricante = (CriarNovo)MemberwiseClone();
+            var fabricante = (CriarNovoFabricanteDTO)MemberwiseClone();
             return fabricante;
         }
 
-        public CriarNovo CloneTipado()
+        public CriarNovoFabricanteDTO CloneTipado()
         {
-            return (CriarNovo)Clone();
+            return (CriarNovoFabricanteDTO)Clone();
         }
 
         #endregion metodos clone

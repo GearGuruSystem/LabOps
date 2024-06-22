@@ -9,7 +9,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 {
     public class MapperTipoEquipamento : IMapperTipoEquipamento
     {
-        private readonly List<TipoEquipamentoDTO> tipoEquipamentos = null!;
+        private readonly List<TipoEquipamentoDTO> tipoEquipamentos = new List<TipoEquipamentoDTO>();
 
         public IEnumerable<TipoEquipamentoDTO> MapperListaTipoEquipamentos(IEnumerable<TipoEquipamento> tipoEquipamento)
         {
@@ -32,17 +32,15 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             TipoEquipamento tipoEquipamento = new TipoEquipamento(
                 tipoEquipamentoDTO.IDTipoEquipamento,
                 tipoEquipamentoDTO.Descricao,
-                tipoEquipamentoDTO.UsuarioAtualizacao,
-                tipoEquipamentoDTO.AtualizadoEm);
+                tipoEquipamentoDTO.UsuarioAtualizacao);
             return tipoEquipamento;
         }
 
-        public TipoEquipamento MapperToEntity(RegistroNovo tipoEquipamentoDTO)
+        public TipoEquipamento MapperToEntity(RegistroNovoTipoEquipamentoDTO tipoEquipamentoDTO)
         {
             TipoEquipamento tipoEquipamento = new TipoEquipamento(
                 tipoEquipamentoDTO.Descricao,
-                tipoEquipamentoDTO.UsuarioAtualizacao,
-                tipoEquipamentoDTO.AtualizadoEm);
+                tipoEquipamentoDTO.UsuarioAtualizcao);
             return tipoEquipamento;
         }
 

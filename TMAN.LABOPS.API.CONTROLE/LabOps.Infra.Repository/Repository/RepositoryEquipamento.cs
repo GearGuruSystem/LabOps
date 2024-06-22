@@ -4,7 +4,6 @@ using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using static Dapper.SqlMapper;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -22,7 +21,6 @@ namespace LabOps.Infra.Repository.Repository
             this.context = context;
         }
 
-        #region Metodos Base
         public override async Task<IEnumerable<Equipamento>> BuscarTodos()
         {
             var resultSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
@@ -49,11 +47,11 @@ namespace LabOps.Infra.Repository.Repository
             {
                 @idParam = id
             });
-            if (resultadoSql.Count != 0)
+            if (resultadoSql.Count < 0)
             {
-                return resultadoSql.FirstOrDefault();
+                throw new Exception("Não foi encontrando nenhum registro no banco.");
             }
-            throw new Exception("Não foi encontrando nenhum registro no banco.");
+            return resultadoSql.FirstOrDefault();
         }
 
         public override void Registrar(Equipamento obj)
@@ -61,28 +59,15 @@ namespace LabOps.Infra.Repository.Repository
             base.Registrar(obj);
         }
 
-        public override async void Atualizar(Equipamento obj)
+        public override void Atualizar(Equipamento obj)
         {
-            var result = await sqlFactory.SaveDataAsync("", new
-            {
-            });
-            if (!result.IsCompleted)
-            {
-                throw new Exception();
-            }
+            base.Atualizar(obj);
         }
 
-        public override async void Remove(Equipamento obj)
+        public override void Remove(Equipamento obj)
         {
-            var result = await sqlFactory.SaveDataAsync("", new
-            {
-            });
-            if (!result.IsCompleted)
-            {
-                throw new Exception();
-            }
+            base.Remove(obj);
         }
-        #endregion
 
         public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
         {

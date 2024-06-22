@@ -4,7 +4,7 @@
     {
         public int IDSituacao { get; set; }
         public string Descricao { get; set; }
-        public int UsuarioAtualizacao { get; set; }
+        public string UsuarioAtualizacao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
     }
 }

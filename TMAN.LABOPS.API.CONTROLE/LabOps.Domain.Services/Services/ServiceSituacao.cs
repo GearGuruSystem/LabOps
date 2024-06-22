@@ -15,5 +15,10 @@ namespace LabOps.Domain.Services.Services
         {
             this.repositorySituacao = repositorySituacao;
         }
+
+        public async Task<IEnumerable<Situacao>> BuscarSituacoesAtivas()
+        {
+            return await repositorySituacao.BuscarTodosComSituacaoAtiva();
+        }
     }
 }

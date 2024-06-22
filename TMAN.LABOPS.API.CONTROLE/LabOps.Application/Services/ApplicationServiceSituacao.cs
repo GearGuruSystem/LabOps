@@ -1,7 +1,6 @@
 ﻿using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
-using LabOps.Domain.Entities;
 using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -21,17 +20,11 @@ namespace LabOps.Application.Service
 
         public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
         {
-            var objSituacao = await serviceSituacao.BuscarTodos();
+            var objSituacao = await serviceSituacao.BuscarSituacoesAtivas();
             return mapperSituacao.MapperListaSituacao(objSituacao);
         }
 
-        public async Task<IEnumerable<SituacaoDTO>> BuscarSituacaoPorParametro(Situacao situacaoDTO)
-        {
-            var objSituacao = await serviceSituacao.BuscarPorParametro(situacaoDTO);
-            return mapperSituacao.MapperListaSituacao(objSituacao);
-        }
-
-        public void CadastraSituacao(SituacaoDTO situacaoDTO)
+        public void CadastraSituacao(AdicionarSituacaoDTO situacaoDTO)
         {
             var objSituacao = mapperSituacao.MapperToEntity(situacaoDTO);
             serviceSituacao.Adicionar(objSituacao);

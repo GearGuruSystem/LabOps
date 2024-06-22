@@ -12,6 +12,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
         Situacao MapperToEntity(SituacaoDTO situacaoDTO);
 
         SituacaoDTO MapperToDTO(Situacao situacao);
+        Situacao MapperToEntity(AdicionarSituacaoDTO situacaoDTO);
 
         #endregion Mappers
     }

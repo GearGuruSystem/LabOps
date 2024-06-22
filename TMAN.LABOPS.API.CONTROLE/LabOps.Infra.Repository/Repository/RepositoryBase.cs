@@ -1,6 +1,7 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 
 #pragma warning disable IDE0290 // Use primary constructor
 

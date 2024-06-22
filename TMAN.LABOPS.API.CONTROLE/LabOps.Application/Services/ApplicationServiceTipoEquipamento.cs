@@ -25,7 +25,7 @@ namespace LabOps.Application.Service
             return mapper.MapperListaTipoEquipamentos(tipoEquipamentos);
         }
 
-        public void RegistraNovoTipoEquipamento(RegistroNovo registroNovo)
+        public void RegistraNovoTipoEquipamento(RegistroNovoTipoEquipamentoDTO registroNovo)
         {
             var entity = mapper.MapperToEntity(registroNovo);
             serviceTipoEquipamento.Adicionar(entity);

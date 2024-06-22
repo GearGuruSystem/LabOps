@@ -30,13 +30,13 @@ namespace LabOps.Application.Service
             return mapperFabricante.MapperToDTO(objFabricante);
         }
 
-        public void RegistraFabricante(CriarNovo obj)
+        public void RegistraFabricante(CriarNovoFabricanteDTO obj)
         {
             var objFabricante = mapperFabricante.MapperToEntity(obj);
             serviceFabricante.Adicionar(objFabricante);
         }
 
-        public void AtualizaFabricante(Atualizar obj)
+        public void AtualizaFabricante(AtualizarFabricanteDTO obj)
         {
             var objFabricante = mapperFabricante.MapperToEntity(obj);
             serviceFabricante.Atualiza(objFabricante);

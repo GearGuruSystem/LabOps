@@ -3,22 +3,22 @@ using System.Text.Json.Serialization;
 
 namespace LabOps.Application.DTO.DTO.Fabricantes
 {
-    public class Atualizar
+    public record AtualizarFabricanteDTO
     {
-        public int IDFabricante { get; set; }
+        public int IDFabricante { get; init; }
 
         [MaxLength(25)]
-        public string Nome { get; set; }
+        public string Nome { get; init; }
 
         [MaxLength(40)]
-        public string UsuarioAtualizacao { get; set; }
+        public string UsuarioAtualizacao { get; init; }
 
         [JsonIgnore]
         [MaxLength(10)]
-        public DateTime? AtualizadoEm { get; set; }
+        public DateTime? AtualizadoEm { get; init; }
 
         [JsonConstructor]
-        public Atualizar(int IDFabricante, string Nome, string UsuarioAtualizacao)
+        public AtualizarFabricanteDTO(int IDFabricante, string Nome, string UsuarioAtualizacao)
         {
             this.IDFabricante = IDFabricante;
             this.Nome = Nome;

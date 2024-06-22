@@ -13,7 +13,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
         TipoEquipamentoDTO MapperToDTO(TipoEquipamento tipoEquipamento);
 
         TipoEquipamento MapperToEntity(TipoEquipamentoDTO tipoEquipamentoDTO);
-        TipoEquipamento MapperToEntity(RegistroNovo tipoEquipamentoDTO);
+        TipoEquipamento MapperToEntity(RegistroNovoTipoEquipamentoDTO tipoEquipamentoDTO);
 
         #endregion Mappers
     }

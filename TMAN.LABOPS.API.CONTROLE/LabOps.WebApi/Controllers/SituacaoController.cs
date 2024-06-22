@@ -1,5 +1,4 @@
-﻿using LabOps.Application.DTO.DTO.Situacao;
-using LabOps.Application.Interfaces;
+﻿using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 #pragma warning disable IDE0290 // Use primary constructor

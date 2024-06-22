@@ -6,6 +6,6 @@ namespace LabOps.Application.Interfaces
     public interface IApplicationServiceTipoEquipamento
     {
         public Task<IEnumerable<TipoEquipamentoDTO>> BuscarTodosTiposDeEquipamentos();
-        public void RegistraNovoTipoEquipamento(RegistroNovo registroNovo);
+        public void RegistraNovoTipoEquipamento(RegistroNovoTipoEquipamentoDTO registroNovo);
     }
 }

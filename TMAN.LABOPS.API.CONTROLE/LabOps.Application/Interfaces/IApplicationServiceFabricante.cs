@@ -6,8 +6,8 @@ namespace LabOps.Application.Interfaces
     {
         Task<IEnumerable<FabricanteDTO>> BuscaTodosFabricantes();
         Task<FabricanteDTO> BuscaFabricantesPeloId(int id);
-        void RegistraFabricante(CriarNovo obj);
-        void AtualizaFabricante(Atualizar obj);
+        void RegistraFabricante(CriarNovoFabricanteDTO obj);
+        void AtualizaFabricante(AtualizarFabricanteDTO obj);
         void RemoveFabricante(FabricanteDTO obj);
     }
 }

@@ -31,7 +31,7 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPost("RegistroTipoEquipamento")]
-        public async Task<IActionResult> RegistraTipoEquipamento([FromBody] RegistroNovo registroNovo)
+        public IActionResult RegistraTipoEquipamento([FromBody] RegistroNovoTipoEquipamentoDTO registroNovo)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace LabOps.WebAPI.Controllers
             }
             try
             {
-                await applicationService.RegistraNovoTipoEquipamento(registroNovo);
+                applicationService.RegistraNovoTipoEquipamento(registroNovo);
                 return Ok();
             }
             catch (Exception ex)

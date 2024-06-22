@@ -7,11 +7,11 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
     {
         #region Mappers
         IEnumerable<FabricanteDTO> MapperListaFabricantes(IEnumerable<Fabricante> fabricantes);
-        FabricanteDTO MapperToDTO(CriarNovo cFabricanteDTO);
+        FabricanteDTO MapperToDTO(CriarNovoFabricanteDTO cFabricanteDTO);
         FabricanteDTO MapperToDTO(Fabricante fabricante);
         Fabricante MapperToEntity(FabricanteDTO fabricanteDTO);
-        Fabricante MapperToEntity(CriarNovo cFabricanteDTO);
-        Fabricante MapperToEntity(Atualizar aFabricanteDTO);
+        Fabricante MapperToEntity(CriarNovoFabricanteDTO cFabricanteDTO);
+        Fabricante MapperToEntity(AtualizarFabricanteDTO aFabricanteDTO);
         #endregion Mappers
     }
 }

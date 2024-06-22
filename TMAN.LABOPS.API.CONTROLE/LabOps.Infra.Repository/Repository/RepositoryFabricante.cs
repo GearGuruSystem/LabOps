@@ -39,15 +39,19 @@ namespace LabOps.Infra.Repository.Repository
 
         public override async Task<Fabricante> BuscarPorId(int id)
         {
-            var result = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("[dbo].[LoSp_SelecionarFabricante]", new 
-            { 
-                @IDFabricante = id
-            });
-            if (result.IsNullOrEmpty())
-            {
-                throw new Exception("Não foi encontrando nenhum registro no banco.");
-            }
-            return result.FirstOrDefault();
+            
+            #region Metodo antigo
+            //var result = await sqlFactory.LoadDataAsync<Fabricante, dynamic>("[dbo].[LoSp_SelecionarFabricante]", new
+            //    {
+            //        @IDFabricante = id
+            //    });
+            //if (result.IsNullOrEmpty())
+            //{
+            //    throw new Exception("Não foi encontrando nenhum registro no banco.");
+            //}
+            //return result.FirstOrDefault();
+            #endregion
+            return await base.BuscarPorId(id);
         }
 
         public override async void Registrar(Fabricante obj)

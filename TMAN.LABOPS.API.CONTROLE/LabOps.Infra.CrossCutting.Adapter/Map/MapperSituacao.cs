@@ -48,5 +48,13 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
                 situacaoDTO.AtualizadoEm);
             return situacao;
         }
+
+        public Situacao MapperToEntity(AdicionarSituacaoDTO situacaoDTO)
+        {
+            Situacao situacao = new Situacao(situacaoDTO.Descricao,
+                situacaoDTO.UsuarioAtualizacao,
+                situacaoDTO.AtualizadoEm);
+            return situacao;
+        }
     }
 }

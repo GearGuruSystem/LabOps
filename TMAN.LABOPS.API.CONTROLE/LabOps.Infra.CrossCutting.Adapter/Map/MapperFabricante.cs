@@ -37,7 +37,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             return fabricanteDTO;
         }
 
-        public FabricanteDTO MapperToDTO(CriarNovo cFabricanteDTO)
+        public FabricanteDTO MapperToDTO(CriarNovoFabricanteDTO cFabricanteDTO)
         {
             FabricanteDTO fabricanteDTO = new FabricanteDTO(
                  cFabricanteDTO.Nome,
@@ -56,7 +56,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             return fabricante;
         }
 
-        public Fabricante MapperToEntity(CriarNovo cFabricanteDTO)
+        public Fabricante MapperToEntity(CriarNovoFabricanteDTO cFabricanteDTO)
         {
             Fabricante fabricante = new Fabricante(
                 cFabricanteDTO.Nome,
@@ -65,7 +65,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             return fabricante;
         }
 
-        public Fabricante MapperToEntity(Atualizar aFabricanteDTO)
+        public Fabricante MapperToEntity(AtualizarFabricanteDTO aFabricanteDTO)
         {
             Fabricante fabricante = new Fabricante(
                 aFabricanteDTO.IDFabricante,
