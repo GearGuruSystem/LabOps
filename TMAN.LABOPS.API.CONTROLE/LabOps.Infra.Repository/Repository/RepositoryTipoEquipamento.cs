@@ -3,24 +3,16 @@ using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.Extensions.Logging;
 
-#pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.Infra.Repository.Repository
 {
-    public class RepositoryTipoEquipamento : RepositoryBase<TipoEquipamento>, IRepositoryTipoEquipamento
+    public class RepositoryTipoEquipamento(AppDbContext context, ILogger<RepositoryTipoEquipamento> logger) : RepositoryBase<TipoEquipamento>(context), IRepositoryTipoEquipamento
     {
-        private readonly ILogger<RepositoryTipoEquipamento> logger;
+        private readonly ILogger<RepositoryTipoEquipamento> logger = logger;
 
-        public RepositoryTipoEquipamento(AppDbContext context, ILogger<RepositoryTipoEquipamento> logger)
-            : base(context)
-        {
-            this.logger = logger;
-        }
-
-        #region Metodos base
         public override async Task<IEnumerable<TipoEquipamento>> BuscarTodos()
         {
-            logger.LogInformation("Executando procedure para buscar tipos de equipamento.");
+            logger.LogInformation("Executando busca dos tipos de equipamentos cadastrados");
             var resultSql = await base.BuscarTodos();
             if (!resultSql.Any())
             {
@@ -44,6 +36,5 @@ namespace LabOps.Infra.Repository.Repository
         {
             base.Remove(obj);
         }
-        #endregion
     }
 }

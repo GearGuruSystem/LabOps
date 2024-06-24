@@ -15,18 +15,15 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 
         #endregion properties
 
-        #region Metodos
-
         public Equipamento MapperToEntity(EquipamentoDTO equipamentoDTO)
         {
-            Equipamento equipamento = new Equipamento(
+            var equipamento = new Equipamento(
                 equipamentoDTO.Nome,
                 equipamentoDTO.IDSituacao,
                 equipamentoDTO.IDTipoEquipamento,
                 equipamentoDTO.IDFabricante,
                 equipamentoDTO.IDLaboratorio,
-                equipamentoDTO.UsuarioInsercao,
-                equipamentoDTO.AtualizadoEm);
+                equipamentoDTO.UsuarioInsercao);
             return equipamento;
         }
 
@@ -34,33 +31,33 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             foreach (var item in equipamentos)
             {
-                EquipamentoDTO equipamentoDTO = new EquipamentoDTO(
-                    item.Nome,
-                    item.IDSituacao,
-                    item.IDTipoEquipamento,
-                    item.IDFabricante,
-                    item.IDLaboratorio,
-                    item.UsuarioInsercao,
-                    item.AtualizadoEm);
-
+                var equipamentoDTO = new EquipamentoDTO
+                {
+                    Nome = item.Nome,
+                    IDSituacao = item.IDSituacao,
+                    IDTipoEquipamento = item.IDTipoEquipamento,
+                    IDFabricante = item.IDFabricante,
+                    IDLaboratorio = item.IDLaboratorio,
+                    UsuarioInsercao = item.UsuarioInsercao,
+                    AtualizadoEm = item.AtualizadoEm
+                };
                 EquipamentoDTOs.Add(equipamentoDTO);
             }
             return EquipamentoDTOs;
         }
-
         public EquipamentoDTO MapperToDTO(Equipamento equipamento)
         {
-            EquipamentoDTO equipamentoDTO = new EquipamentoDTO(
-                equipamento.Nome,
-                equipamento.IDSituacao,
-                equipamento.IDTipoEquipamento,
-                equipamento.IDFabricante,
-                equipamento.IDLaboratorio,
-                equipamento.UsuarioInsercao,
-                equipamento.AtualizadoEm);
+            var equipamentoDTO = new EquipamentoDTO
+            {
+                Nome = equipamento.Nome,
+                IDSituacao = equipamento.IDSituacao,
+                IDTipoEquipamento = equipamento.IDTipoEquipamento,
+                IDFabricante = equipamento.IDFabricante,
+                IDLaboratorio = equipamento.IDLaboratorio,
+                UsuarioInsercao = equipamento.UsuarioInsercao,
+                AtualizadoEm = equipamento.AtualizadoEm
+            };
             return equipamentoDTO;
         }
-
-        #endregion Metodos
     }
 }

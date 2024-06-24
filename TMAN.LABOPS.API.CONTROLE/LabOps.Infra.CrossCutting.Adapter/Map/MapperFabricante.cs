@@ -51,8 +51,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             Fabricante fabricante = new Fabricante(
                 fabricanteDTO.IDFabricante,
                 fabricanteDTO.Nome,
-                fabricanteDTO.UsuarioAtualizacao,
-                fabricanteDTO.AtualizadoEm);
+                fabricanteDTO.UsuarioAtualizacao);
             return fabricante;
         }
 
@@ -60,8 +59,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             Fabricante fabricante = new Fabricante(
                 cFabricanteDTO.Nome,
-                cFabricanteDTO.UsuarioAtualizacao,
-                cFabricanteDTO.AtualizadoEm);
+                cFabricanteDTO.UsuarioAtualizacao);
             return fabricante;
         }
 
@@ -70,8 +68,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             Fabricante fabricante = new Fabricante(
                 aFabricanteDTO.IDFabricante,
                 aFabricanteDTO.Nome,
-                aFabricanteDTO.UsuarioAtualizacao,
-                aFabricanteDTO.AtualizadoEm);
+                aFabricanteDTO.UsuarioAtualizacao);
             return fabricante;
         }
     }

@@ -3,32 +3,26 @@ using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.IdentityModel.Tokens;
 using System.Net.Http.Headers;
 
-#pragma warning disable IDE0290 // Use primary constructor
-
 namespace LabOps.Infra.Repository.Repository
 {
-    public class RepositorySituacao : RepositoryBase<Situacao>, IRepositorySituacao
+    public class RepositorySituacao(AppDbContext context) : RepositoryBase<Situacao>(context), IRepositorySituacao
     {
-        private readonly SqlFactory sqlFactory;
-        private readonly AppDbContext context;
+        private readonly AppDbContext _context = context;
 
-        public RepositorySituacao(SqlFactory sqlFactory, AppDbContext context) : base(context)
-        {
-            this.sqlFactory = sqlFactory;
-            this.context = context;
-        }
         public async Task<IEnumerable<Situacao>> BuscarTodosComSituacaoAtiva()
         {
-            var resultadoSql = await context.Situacoes.Where(a => a.Descricao == "Ativo").ToListAsync();
+            var resultadoSql = await _context.Situacoes.Where(a => a.Descricao.Contains("Ativ")).ToListAsync();
             if (resultadoSql.Count < 1)
             {
                 throw new Exception("Encontrado nenhum registro no banco de dados");
             }
             return resultadoSql;
         }
+
         public override void Registrar(Situacao obj)
         {
             base.Registrar(obj);
@@ -38,6 +32,5 @@ namespace LabOps.Infra.Repository.Repository
         {
             base.Atualizar(obj);
         }
-
     }
 }

@@ -8,12 +8,11 @@ namespace LabOps.Domain.Entities
 
         [StringLength(120)]
         public string Nome { get; private set; }
-
         public int IDSituacao { get; private set; }
         public int IDTipoEquipamento { get; private set; }
         public int IDFabricante { get; private set; }
         public int? IDLaboratorio { get; private set; }
-        public int UsuarioInsercao { get; private set; }
+        public string UsuarioInsercao { get; private set; }
         public DateTime? AtualizadoEm { get; private set; }
 
         #region Navegação de Objetos
@@ -26,18 +25,18 @@ namespace LabOps.Domain.Entities
 
         #endregion Navegação de Objetos
 
-        #region Construtor vazio
-
         public Equipamento()
         {
         }
 
-        #endregion Construtor vazio
+        public Equipamento(string nome, int idSituacao, int idTipoEquipamento, int idFabricante, int? idLaboratorio,
+            string usuarioInsercao)
+        {
+            AdicionarEquipamento(nome, idSituacao, idTipoEquipamento, idFabricante, idLaboratorio, usuarioInsercao);
+        }
 
-        #region Construtor completo
-
-        public Equipamento(string nome, int iDSituacao, int iDTipoEquipamento, int iDFabricante, int? iDLaboratorio,
-            int usuarioInsercao, DateTime? atualizadoEm)
+        private void AdicionarEquipamento(string nome, int iDSituacao, int iDTipoEquipamento, int iDFabricante, int? iDLaboratorio,
+            string usuarioInsercao)
         {
             Nome = nome;
             IDSituacao = iDSituacao;
@@ -45,9 +44,7 @@ namespace LabOps.Domain.Entities
             IDFabricante = iDFabricante;
             IDLaboratorio = iDLaboratorio;
             UsuarioInsercao = usuarioInsercao;
-            AtualizadoEm = atualizadoEm;
+            AtualizadoEm = DateTime.Now;
         }
-
-        #endregion Construtor completo
     }
 }

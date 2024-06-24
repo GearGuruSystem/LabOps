@@ -25,25 +25,29 @@ namespace LabOps.Domain.Entities
 
         #endregion Navegação de Objetos
 
-        public Fabricante()
+        public Fabricante(string nome, string usuarioAtualizacao)
         {
+            AdicionaFabricante(nome, usuarioAtualizacao);
         }
 
-        public Fabricante(string nome, string usuarioAtualizacao,
-            DateTime? atualizadoEm)
+        public Fabricante(int idFabricante, string nome, string usuarioAtualizacao)
+        {
+            AdicionaFabricante(idFabricante, nome, usuarioAtualizacao);
+        }
+
+        private void AdicionaFabricante(string nome, string usuarioAtualizacao)
         {
             Nome = nome;
             UsuarioAtualizacao = usuarioAtualizacao;
-            AtualizadoEm = atualizadoEm;
+            AtualizadoEm = DateTime.Now;
         }
 
-        public Fabricante(int iDFabricante, string nome, string usuarioAtualizacao,
-            DateTime? atualizadoEm)
+        private void AdicionaFabricante(int idFabricante, string nome, string usuarioAtualizacao)
         {
-            IDFabricante = iDFabricante;
+            IDFabricante = idFabricante;
             Nome = nome;
             UsuarioAtualizacao = usuarioAtualizacao;
-            AtualizadoEm = atualizadoEm;
+            AtualizadoEm = DateTime.Now;
         }
 
     }

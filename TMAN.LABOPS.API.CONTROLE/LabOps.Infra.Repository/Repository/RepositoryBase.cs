@@ -1,7 +1,6 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http.Headers;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -18,7 +17,12 @@ namespace LabOps.Infra.Repository.Repository
 
         public virtual async Task<IEnumerable<TEntity>> BuscarTodos()
         {
-            return await context.Set<TEntity>().ToListAsync();
+            var result = await context.Set<TEntity>().ToListAsync();
+            if (result.Count < 1)
+            {
+                return Enumerable.Empty<TEntity>();
+            }
+            return result;
         }
 
         public virtual async Task<TEntity> BuscarPorId(int id)
@@ -33,19 +37,19 @@ namespace LabOps.Infra.Repository.Repository
 
         public virtual async void Registrar(TEntity obj)
         {
-            await context.AddAsync<TEntity>(obj);
-            context.SaveChanges();
+            await context.Set<TEntity>().AddAsync(obj);
+            await context.SaveChangesAsync();
         }
 
         public virtual async void Atualizar(TEntity obj)
         {
-            context.Update<TEntity>(obj);
+            await context.Set<TEntity>().AddAsync(obj);
             await context.SaveChangesAsync();
         }
 
         public virtual async void Remove(TEntity obj)
         {
-            context.Remove<TEntity>(obj);
+            context.Set<TEntity>().Remove(obj);
             await context.SaveChangesAsync();
         }
     }

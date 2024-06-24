@@ -1,4 +1,5 @@
 ﻿using LabOps.Domain.Entities;
+using LabOps.Infra.Data.MapDataBase;
 using Microsoft.EntityFrameworkCore;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -23,72 +24,14 @@ namespace LabOps.Infra.Data.DataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CaracteristicaTipo>()
-                .HasKey(ct => ct.IDCaracteristicaTipo);
-
-            modelBuilder.Entity<CaracteristicaTipoTipoEquipamento>()
-                .HasKey(ctte => new { ctte.CaracteristicaTipo_ID, ctte.TipoEquipamento_ID });
-
-            modelBuilder.Entity<CaracteristicaTipoTipoEquipamento>()
-                .HasOne(ctte => ctte.CaracteristicaTipo)
-                .WithMany(ct => ct.CaracteristicaTipoTipoEquipamentos)
-                .HasForeignKey(ctte => ctte.CaracteristicaTipo_ID);
-
-            modelBuilder.Entity<CaracteristicaTipoTipoEquipamento>()
-                .HasOne(ctte => ctte.TipoEquipamento)
-                .WithMany(te => te.CaracteristicaTipoTipoEquipamentos)
-                .HasForeignKey(ctte => ctte.TipoEquipamento_ID);
-
-            modelBuilder.Entity<CaracteristicaValor>()
-                .HasKey(cv => cv.IDCaracteristicaValor);
-
-            modelBuilder.Entity<Equipamento>()
-                .HasKey(e => e.IDEquipamento);
-
-            modelBuilder.Entity<EquipamentoCaracteristica>()
-                .HasKey(ec => ec.IDEquipamentoCaracteristica);
-
-            modelBuilder.Entity<EquipamentoCaracteristica>()
-                .HasOne(ec => ec.CaracteristicaTipo)
-                .WithMany()
-                .HasForeignKey(ec => ec.IDCaracteristicaTipo);
-
-            modelBuilder.Entity<EquipamentoCaracteristica>()
-                .HasOne(ec => ec.CaracteristicaValor)
-                .WithMany()
-                .HasForeignKey(ec => ec.IDCaracteristicaValor);
-
-            modelBuilder.Entity<Equipamento>()
-                .HasOne(e => e.Fabricante)
-                .WithMany()
-                .HasForeignKey(e => e.IDFabricante);
-
-            modelBuilder.Entity<Equipamento>()
-                .HasOne(e => e.Laboratorio)
-                .WithMany()
-                .HasForeignKey(e => e.IDLaboratorio);
-
-            modelBuilder.Entity<Equipamento>()
-                .HasOne(e => e.Situacao)
-                .WithMany()
-                .HasForeignKey(e => e.IDSituacao);
-
-            modelBuilder.Entity<Equipamento>()
-                .HasOne(e => e.TipoEquipamento)
-                .WithMany()
-                .HasForeignKey(e => e.IDTipoEquipamento);
-
-            modelBuilder.Entity<Fabricante>()
-                .HasKey(f => f.IDFabricante);
-
-            modelBuilder.Entity<Laboratorio>()
-                .HasKey(l => l.IDLaboratorio);
-
-            modelBuilder.Entity<Situacao>()
-                .HasKey(s => s.IDSituacao);
-
-            modelBuilder.Entity<TipoEquipamento>()
-                .HasKey(te => te.IDTipoEquipamento);
+            modelBuilder.ApplyConfiguration(new MapCaracteristicaTipo());
+            modelBuilder.ApplyConfiguration(new MapCaracteristicaTipoTipoEquipamento());
+            modelBuilder.ApplyConfiguration(new MapCaracteristicaValor());
+            modelBuilder.ApplyConfiguration(new MapEquipamentoCaracteristica());
+            modelBuilder.ApplyConfiguration(new MapEquipamento());
+            modelBuilder.ApplyConfiguration(new MapSituacao());
+            modelBuilder.ApplyConfiguration(new MapLaboratorio());
+            modelBuilder.ApplyConfiguration(new MapTipoEquipamento());
         }
     }
 }

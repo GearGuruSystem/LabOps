@@ -31,7 +31,7 @@ namespace LabOps.Domain.Services.Services
 
         public virtual void Adicionar(TEntity obj)
         {
-            _repository.Registrar(obj);
+             _repository.Registrar(obj);
         }
 
         public virtual void Atualiza(TEntity obj)
