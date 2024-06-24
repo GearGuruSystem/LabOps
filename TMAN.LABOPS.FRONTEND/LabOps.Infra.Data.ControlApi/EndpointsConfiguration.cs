@@ -1,6 +1,6 @@
 ﻿namespace LabOps.Infra.Data.ControlApi
 {
-    public static class WebConfiguration
+    public static class EndpointsConfiguration
     {
         public const string BaseAdressApi = "http://localhost:5182";
         public const string HttpClient_Fabricante = "api/v1/Fabricante";

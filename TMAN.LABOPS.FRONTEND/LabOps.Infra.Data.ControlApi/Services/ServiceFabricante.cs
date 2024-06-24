@@ -8,13 +8,13 @@ namespace LabOps.Infra.Data.ControlApi.Services
     public class ServiceFabricante(IHttpClientFactory httpClientFactory) : IServicesFabricante
     {
         private readonly HttpClient client = httpClientFactory
-            .CreateClient($"{WebConfiguration.HttpClient_Fabricante}");
+            .CreateClient($"{EndpointsConfiguration.HttpClient_Fabricante}");
 
         public async Task<IEnumerable<Fabricante>> BuscaTodosFabricantes()
         {
             try
             {
-                var result = await client.GetFromJsonAsync<List<Fabricante>>(new Uri(WebConfiguration.HttpClient_Fabricante));
+                var result = await client.GetFromJsonAsync<List<Fabricante>>(new Uri(EndpointsConfiguration.HttpClient_Fabricante));
                 throw new Exception("Erro. não foi encontrado nenhum valor no retorno da API");
             }
             catch (Exception)
@@ -32,7 +32,7 @@ namespace LabOps.Infra.Data.ControlApi.Services
         {
             try
             {
-                var result = await client.PostAsJsonAsync(new Uri(WebConfiguration.BaseAdressApi), novoFabricante);
+                var result = await client.PostAsJsonAsync(new Uri(EndpointsConfiguration.BaseAdressApi), novoFabricante);
                 if (result.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Codigo de retorno {result.StatusCode}");

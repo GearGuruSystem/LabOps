@@ -4,10 +4,10 @@ namespace LabOps.Presentation.WebUI
 {
     public static class Configuration
     {
-        public const string BaseAdressApi = WebConfiguration.BaseAdressApi;
-        public const string FabricanteClient = WebConfiguration.HttpClient_Fabricante;
-        public const string EquipamentoClient = WebConfiguration.HttpClient_Equipamento;
-        public const string SituacaoClient = WebConfiguration.HttpClient_Situacao;
-        public const string TipoEquipamentoClient = WebConfiguration.HttpClient_TipoEquipamento;
+        public const string BaseAdressApi = EndpointsConfiguration.BaseAdressApi;
+        public const string FabricanteClient = EndpointsConfiguration.HttpClient_Fabricante;
+        public const string EquipamentoClient = EndpointsConfiguration.HttpClient_Equipamento;
+        public const string SituacaoClient = EndpointsConfiguration.HttpClient_Situacao;
+        public const string TipoEquipamentoClient = EndpointsConfiguration.HttpClient_TipoEquipamento;
     }
 }
