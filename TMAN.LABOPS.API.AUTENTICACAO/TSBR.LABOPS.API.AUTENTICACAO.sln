@@ -23,17 +23,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 -  Infrastructure.Cross
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Infrastructure.Data", "4.1 - Infrastructure.Data", "{200100AE-9CB1-4A2B-AF18-351FB7CC0B06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infrastructure.CrossCutting.Adapter", "LabOps.Infrastructure.CrossCutting.Adapter\Auth.LabOps.Infrastructure.CrossCutting.Adapter.csproj", "{F082346A-94F5-4AC4-A265-45ED436B786D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infra.CrossCutting.Adapter", "LabOps.Infrastructure.CrossCutting.Adapter\Auth.LabOps.Infra.CrossCutting.Adapter.csproj", "{F082346A-94F5-4AC4-A265-45ED436B786D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infrastructure.Repository", "LabOps.Infrastructure.Repository\Auth.LabOps.Infrastructure.Repository.csproj", "{551DC0D6-08B6-4197-9B1D-50B6571DD870}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infra.Repository", "LabOps.Infrastructure.Repository\Auth.LabOps.Infra.Repository.csproj", "{551DC0D6-08B6-4197-9B1D-50B6571DD870}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infrastructure.CrossCutting.IOC", "Auth.LabOps.Infrastructure.CrossCutting.IOC\Auth.LabOps.Infrastructure.CrossCutting.IOC.csproj", "{EDC6DA59-9CBE-4DFB-B29C-41E67A9CF7BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infra.CrossCutting.IOC", "Auth.LabOps.Infrastructure.CrossCutting.IOC\Auth.LabOps.Infra.CrossCutting.IOC.csproj", "{EDC6DA59-9CBE-4DFB-B29C-41E67A9CF7BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation", "1. Presentation", "{C980673D-AB74-4B92-83F4-7A5222D055FC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Presentation.WebAPI", "Auth.LabOps.Presentation.WebAPI\Auth.LabOps.Presentation.WebAPI.csproj", "{DD75F043-9CF3-40B9-BCFB-53BD9320DA33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infrastructure.Data", "Auth.LabOps.Infrastructure.Data\Auth.LabOps.Infrastructure.Data.csproj", "{AED98520-8528-4C3E-B097-E8492BAA5DB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.LabOps.Infra.Data", "Auth.LabOps.Infrastructure.Data\Auth.LabOps.Infra.Data.csproj", "{AED98520-8528-4C3E-B097-E8492BAA5DB2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{209A3D17-2BCE-4009-AC55-6E3144EFC7B3}"
 EndProject
@@ -49,9 +49,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. InfrastructureTest", "4.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. FakeData", "5. FakeData", "{0A0D8A75-D564-4492-A4BA-4EC8D0522F52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationTests", "ControllerTests\PresentationTests.csproj", "{6AFED255-E0B9-41A5-9402-5A01387A61AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationTests", "ControllerTests\PresentationTests.csproj", "{6AFED255-E0B9-41A5-9402-5A01387A61AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeData", "FakeData\FakeData.csproj", "{B7B29377-37B4-4028-92DD-534C8142E7A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeData", "FakeData\FakeData.csproj", "{B7B29377-37B4-4028-92DD-534C8142E7A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

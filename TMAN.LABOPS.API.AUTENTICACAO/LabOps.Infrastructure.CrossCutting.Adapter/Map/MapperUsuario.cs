@@ -1,10 +1,11 @@
 ﻿using Auth.LabOps.Application.DTOs.DTOs.Usuario;
 using Auth.LabOps.Domain.Entities;
-using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
+using Auth.LabOps.Infra.CrossCutting.Adapter.Interfaces;
+
 
 #pragma warning disable IDE0028 // Simplificar a inicialização de coleção
 
-namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
+namespace Auth.LabOps.Infra.CrossCutting.Adapter.Map
 {
     public class MapperUsuario : IMapperUsuario
     {
@@ -49,7 +50,7 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
                 Login = usuarioDTO.Login,
                 Senha = usuarioDTO.Senha,
                 InseridoEm = usuarioDTO.InseridoEm,
-                AtualizadoEm = usuarioDTO.AtualizadoEm, 
+                AtualizadoEm = usuarioDTO.AtualizadoEm,
             };
             return usuario;
         }
@@ -79,7 +80,5 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map
             UsuarioLogadoDTO usuarioLogado = new UsuarioLogadoDTO(usuario.Login);
             return usuarioLogado;
         }
-
-        
     }
 }

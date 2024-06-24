@@ -5,8 +5,8 @@ using Auth.LabOps.Domain.Core.Services;
 using Auth.LabOps.Domain.Services.Interfaces;
 using Auth.LabOps.Domain.Services.Security;
 using Auth.LabOps.Domain.Services.Services;
-using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
-using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Map;
+using Auth.LabOps.Infra.CrossCutting.Adapter.Interfaces;
+using Auth.LabOps.Infra.CrossCutting.Adapter.Map;
 using Auth.LabOps.Infrastructure.Data.DataAcess;
 using Auth.LabOps.Infrastructure.Data.DataContex;
 using Auth.LabOps.Infrastructure.Repository.Repository;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
+namespace Auth.LabOps.Infra.CrossCutting.IOC
 {
     public static class ConfigurationIOC
     {
@@ -53,7 +53,7 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
             return services;
         }
 
-        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IServiceToken, ServiceToken>();
 
@@ -81,12 +81,14 @@ namespace Auth.LabOps.Infrastructure.CrossCutting.IOC
                 };
             });
             #endregion
+            return services;
         }
 
-        public static void UseJwtConfiguration(this IApplicationBuilder app)
+        public static IApplicationBuilder UseJwtConfiguration(this IApplicationBuilder app)
         {
             app.UseAuthentication();
             app.UseAuthorization();
+            return app;
         }
     }
 }

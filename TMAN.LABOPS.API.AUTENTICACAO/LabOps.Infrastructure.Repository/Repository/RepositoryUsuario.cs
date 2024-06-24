@@ -1,8 +1,8 @@
 ﻿using Auth.LabOps.Domain.Core.Interfaces;
 using Auth.LabOps.Domain.Entities;
 using Auth.LabOps.Infrastructure.Data.DataAcess;
-using Auth.LabOps.Infrastructure.Repository.Queries;
-using Dapper;
+using Auth.LabOps.Infrastructure.Data.DataContex;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -13,44 +13,33 @@ namespace Auth.LabOps.Infrastructure.Repository.Repository
     {
         private readonly ISqlData sqlData;
         private readonly IDbConnection connection;
+        private readonly AppDbContext context;
 
-        public RepositoryUsuario(ISqlData sqlData, SqlFactory sqlFactory)
+        public RepositoryUsuario(ISqlData sqlData, SqlFactory sqlFactory, AppDbContext context) : base(context)
         {
             this.sqlData = sqlData;
             connection = sqlFactory.CreateConnection();
         }
 
-        public async override Task<IEnumerable<Usuario>> BuscarTodos()
+        public async override Task<List<Usuario>> BuscarTodos()
         {
-            var resultadoSql = await sqlData.LoadDataAsync<Usuario, dynamic>("[dbo].[LoSp_BuscaTodosUsuarios]", new { });
+            var resultadoSql = await sqlData.LoadDataAsync<Usuario, dynamic>("[dbo].[LoSp_BuscaTodosUsuarios]");
             return resultadoSql.ToList();
         }
 
         public override async Task<Usuario> Buscar(int id)
         {
-            var resultadoSql = await sqlData.LoadDataAsync<Usuario, dynamic>("", new { @Id = id });
-            return resultadoSql.FirstOrDefault();
+            return await base.Buscar(id);
         }
 
         public async Task<Usuario> Buscar(string chave)
         {
-            var query = UsuarioQueries.BuscarUsuarioPelaChave(chave);
-            var resultadoSql = await connection.QueryAsync<Usuario>(query.CodigoSql);
-            return resultadoSql.FirstOrDefault();
+            return await context.Usuarios.FirstOrDefaultAsync(u => u.Login == chave);
         }
 
         public override async Task<Task> Registrar(Usuario entity)
         {
-            var response = await sqlData.SaveDataAsync("[dbo].[LoSp_InserirUsuario]", new 
-            { 
-                @Login = entity.Login.ToLower(),
-                @Senha = entity.Senha 
-            });
-            if (response.IsCompleted)
-            {
-                return Task.CompletedTask;
-            }
-            throw new Exception("Erro");
+            return await base.Registrar(entity);
         }
 
         public Task<Usuario> Atualizar(Usuario entity)

@@ -4,13 +4,14 @@
     {
         public string Token { get; private set; }
 
-        public UsuarioLogadoDTO()
-        {
-        }
-
         public UsuarioLogadoDTO(string token)
         {
-            Token = token;
+            AdicionaToken(token);
+        }
+
+        private void AdicionaToken(string token)
+        {
+            Token = token.Trim();
         }
     }
 }

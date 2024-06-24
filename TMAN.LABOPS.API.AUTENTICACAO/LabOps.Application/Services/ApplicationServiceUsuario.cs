@@ -2,7 +2,8 @@
 using Auth.LabOps.Application.Interfaces;
 using Auth.LabOps.Domain.Core.Services;
 using Auth.LabOps.Domain.Entities;
-using Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
+using Auth.LabOps.Infra.CrossCutting.Adapter.Interfaces;
+
 
 #pragma warning disable IDE0290 // Use primary constructor
 

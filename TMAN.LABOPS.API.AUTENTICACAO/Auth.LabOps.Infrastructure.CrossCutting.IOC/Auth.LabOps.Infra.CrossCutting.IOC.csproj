@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LabOps.Application\Auth.LabOps.Application.csproj" />
-    <ProjectReference Include="..\LabOps.Infrastructure.Repository\Auth.LabOps.Infrastructure.Repository.csproj" />
+    <ProjectReference Include="..\LabOps.Infrastructure.Repository\Auth.LabOps.Infra.Repository.csproj" />
   </ItemGroup>
 
 </Project>

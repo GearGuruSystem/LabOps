@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Auth.LabOps.Infrastructure.Data\Auth.LabOps.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\Auth.LabOps.Infrastructure.Data\Auth.LabOps.Infra.Data.csproj" />
     <ProjectReference Include="..\LabOps.Domain.Core\Auth.LabOps.Domain.Core.csproj" />
   </ItemGroup>
 

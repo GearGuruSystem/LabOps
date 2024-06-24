@@ -1,4 +1,5 @@
 ﻿using Auth.LabOps.Infrastructure.Repository.Queries.Records;
+using System;
 
 namespace Auth.LabOps.Infrastructure.Repository.Queries
 {
@@ -10,6 +11,15 @@ namespace Auth.LabOps.Infrastructure.Repository.Queries
                 SELECT [IDUsuario], [Login], [Senha]
                 FROM [dbo].[Usuario]
                 WHERE [Login] = '{chave}'";
+            return new SqlModel(consultaSql);
+        }
+
+        public static SqlModel BuscarUsuarioPeloId(int id)
+        {
+            var consultaSql = $@"
+                SELECT [IDUsuario], [Login], [Senha]
+                FROM [dbo].[Usuario]
+                WHERE [Login] = '{id}'";
             return new SqlModel(consultaSql);
         }
     }

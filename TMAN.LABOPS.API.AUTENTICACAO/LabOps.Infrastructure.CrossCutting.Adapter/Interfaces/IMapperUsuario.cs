@@ -1,7 +1,7 @@
 ﻿using Auth.LabOps.Application.DTOs.DTOs.Usuario;
 using Auth.LabOps.Domain.Entities;
 
-namespace Auth.LabOps.Infrastructure.CrossCutting.Adapter.Interfaces
+namespace Auth.LabOps.Infra.CrossCutting.Adapter.Interfaces
 {
     public interface IMapperUsuario
     {
