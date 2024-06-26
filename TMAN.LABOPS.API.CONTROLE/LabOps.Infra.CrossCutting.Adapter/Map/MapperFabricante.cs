@@ -18,7 +18,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             foreach (var item in fabricantes)
             {
                 FabricanteDTO fabricanteDTO = new FabricanteDTO(
-                    item.IDFabricante,
+                    item.Id,
                     item.Nome,
                     item.UsuarioAtualizacao,
                     item.AtualizadoEm);
@@ -30,7 +30,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         public FabricanteDTO MapperToDTO(Fabricante fabricante)
         {
             FabricanteDTO fabricanteDTO = new FabricanteDTO(
-                fabricante.IDFabricante,
+                fabricante.Id,
                 fabricante.Nome,
                 fabricante.UsuarioAtualizacao,
                 fabricante.AtualizadoEm);

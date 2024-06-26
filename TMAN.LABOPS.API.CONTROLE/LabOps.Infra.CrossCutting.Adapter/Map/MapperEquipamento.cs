@@ -15,18 +15,6 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
 
         #endregion properties
 
-        public Equipamento MapperToEntity(EquipamentoDTO equipamentoDTO)
-        {
-            var equipamento = new Equipamento(
-                equipamentoDTO.Nome,
-                equipamentoDTO.IDSituacao,
-                equipamentoDTO.IDTipoEquipamento,
-                equipamentoDTO.IDFabricante,
-                equipamentoDTO.IDLaboratorio,
-                equipamentoDTO.UsuarioInsercao);
-            return equipamento;
-        }
-
         public IEnumerable<EquipamentoDTO> MapperListaEquipamentos(IEnumerable<Equipamento> equipamentos)
         {
             foreach (var item in equipamentos)
@@ -34,10 +22,12 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
                 var equipamentoDTO = new EquipamentoDTO
                 {
                     Nome = item.Nome,
-                    IDSituacao = item.IDSituacao,
-                    IDTipoEquipamento = item.IDTipoEquipamento,
-                    IDFabricante = item.IDFabricante,
-                    IDLaboratorio = item.IDLaboratorio,
+                    Hostname = item.Hostname,
+                    Inventario = item.Inventario,
+                    SerialNumber = item.SerialNumber,
+                    IDSituacao = item.IdSituacao,
+                    IDTipoEquipamento = item.IdTipoEquipamento,
+                    IDFabricante = item.IdFabricante,
                     UsuarioInsercao = item.UsuarioInsercao,
                     AtualizadoEm = item.AtualizadoEm
                 };
@@ -45,15 +35,29 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             }
             return EquipamentoDTOs;
         }
+
+        public Equipamento MapperToEntity(EquipamentoDTO equipamentoDTO)
+        {
+            var equipamento = new Equipamento(
+                equipamentoDTO.Nome,
+                equipamentoDTO.Hostname,
+                equipamentoDTO.Inventario,
+                equipamentoDTO.SerialNumber,
+                equipamentoDTO.IDSituacao,
+                equipamentoDTO.IDTipoEquipamento,
+                equipamentoDTO.IDFabricante,
+                equipamentoDTO.UsuarioInsercao);
+            return equipamento;
+        }
+
         public EquipamentoDTO MapperToDTO(Equipamento equipamento)
         {
             var equipamentoDTO = new EquipamentoDTO
             {
                 Nome = equipamento.Nome,
-                IDSituacao = equipamento.IDSituacao,
-                IDTipoEquipamento = equipamento.IDTipoEquipamento,
-                IDFabricante = equipamento.IDFabricante,
-                IDLaboratorio = equipamento.IDLaboratorio,
+                IDSituacao = equipamento.IdSituacao,
+                IDTipoEquipamento = equipamento.IdTipoEquipamento,
+                IDFabricante = equipamento.IdFabricante,
                 UsuarioInsercao = equipamento.UsuarioInsercao,
                 AtualizadoEm = equipamento.AtualizadoEm
             };

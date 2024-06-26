@@ -6,12 +6,10 @@
 
         Task<TEntity> BuscarPorId(int id);
 
-        Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj);
-
         void Adicionar(TEntity obj);
 
-        void Atualiza(TEntity obj);
+        void Atualizar(TEntity obj);
 
-        void Remove(TEntity obj);
+        void Remover(TEntity obj);
     }
 }

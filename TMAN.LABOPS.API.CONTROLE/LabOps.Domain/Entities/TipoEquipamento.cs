@@ -1,38 +1,46 @@
-﻿namespace LabOps.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LabOps.Domain.Entities
 {
     public class TipoEquipamento
     {
-        public int IDTipoEquipamento { get; private set; }
+        [Required, Column("Cl_IdTipoEquipamento")]
+        public int Id { get; private set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, MaxLength(120), Column("Cl_Descricao")]
         public string Descricao { get; private set; }
+
+        [Required, Column("Cl_UsuarioAtualizacao")]
         public string UsuarioAtualizacao { get; private set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; private set; }
-
-        #region Navegação de Objetos
-
+        /*-------------------------------------------------------------------------------------------------*/
         public ICollection<Equipamento> Equipamentos { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
         public ICollection<CaracteristicaTipoTipoEquipamento> CaracteristicaTipoTipoEquipamentos { get; set; }
-
-        #endregion Navegação de Objetos
+        /*-------------------------------------------------------------------------------------------------*/
 
         public TipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
         {
-            AdicionaTipoEquipamento(idTipoEquipamento, descricao, usuarioAtualizacao);
+            AddTipoEquipamento(idTipoEquipamento, descricao, usuarioAtualizacao);
         }
 
         public TipoEquipamento(string descricao, string usuarioAtualizacao)
         {
-            AdicionaTipoEquipamento(descricao, usuarioAtualizacao);
+            AddTipoEquipamento(descricao, usuarioAtualizacao);
         }
 
-        private void AdicionaTipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
+        private void AddTipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
         {
-            IDTipoEquipamento = idTipoEquipamento;
+            Id = idTipoEquipamento;
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;
             AtualizadoEm = DateTime.Now;
         }
 
-        private void AdicionaTipoEquipamento(string descricao, string usuarioAtualizacao)
+        private void AddTipoEquipamento(string descricao, string usuarioAtualizacao)
         {
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;

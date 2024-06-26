@@ -31,9 +31,9 @@ namespace LabOps.Infra.Repository.Repository
             base.Atualizar(obj);
         }
 
-        public override void Remove(Fabricante obj)
+        public override void Deletar(Fabricante obj)
         {
-            base.Remove(obj);
+            base.Deletar(obj);
         }
     }
 }

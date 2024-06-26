@@ -39,13 +39,13 @@ namespace LabOps.Application.Service
         public void AtualizaFabricante(AtualizarFabricanteDTO obj)
         {
             var objFabricante = mapperFabricante.MapperToEntity(obj);
-            serviceFabricante.Atualiza(objFabricante);
+            serviceFabricante.Atualizar(objFabricante);
         }
 
         public void RemoveFabricante(FabricanteDTO obj)
         {
             var objFabricante = mapperFabricante.MapperToEntity(obj);
-            serviceFabricante.Remove(objFabricante);
+            serviceFabricante.Remover(objFabricante);
         }
     }
 }

@@ -45,13 +45,13 @@ namespace LabOps.Application.Service
         public void AtualizaEquipamento(EquipamentoDTO obj)
         {
             var objEquipamento = mapperEquipamento.MapperToEntity(obj);
-            serviceEquipamento.Atualiza(objEquipamento);
+            serviceEquipamento.Atualizar(objEquipamento);
         }
 
         public void RemoveEquipamento(EquipamentoDTO obj)
         {
             var objEquipamento = mapperEquipamento.MapperToEntity(obj);
-            serviceEquipamento.Remove(objEquipamento);
+            serviceEquipamento.Remover(objEquipamento);
         }
     }
 }

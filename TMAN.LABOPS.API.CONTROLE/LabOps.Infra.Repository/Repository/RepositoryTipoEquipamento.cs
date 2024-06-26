@@ -32,9 +32,9 @@ namespace LabOps.Infra.Repository.Repository
             base.Registrar(obj);
         }
 
-        public override void Remove(TipoEquipamento obj)
+        public override void Deletar(TipoEquipamento obj)
         {
-            base.Remove(obj);
+            base.Deletar(obj);
         }
     }
 }

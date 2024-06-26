@@ -8,7 +8,8 @@ namespace LabOps.Infra.Data.MapDataBase
     {
         public void Configure(EntityTypeBuilder<TipoEquipamento> builder)
         {
-            builder.HasKey(te => te.IDTipoEquipamento);
+            builder.ToTable("Tb_TipoEquipamento");
+            builder.HasKey(te => te.Id);
         }
     }
 }

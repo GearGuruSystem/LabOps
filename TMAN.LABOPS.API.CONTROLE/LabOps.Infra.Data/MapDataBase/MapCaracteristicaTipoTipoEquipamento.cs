@@ -8,15 +8,17 @@ namespace LabOps.Infra.Data.MapDataBase
     {
         public void Configure(EntityTypeBuilder<CaracteristicaTipoTipoEquipamento> builder)
         {
-            builder.HasKey(ctte => new { ctte.CaracteristicaTipo_ID, ctte.TipoEquipamento_ID });
+            builder.ToTable("Tb_CaracteristicaTipoTipoEquipamento");
+
+            builder.HasKey(ctte => new { ctte.IdCaracteristicaTipo, ctte.IdTipoEquipamento });
 
             builder.HasOne(ctte => ctte.CaracteristicaTipo)
                 .WithMany(ct => ct.CaracteristicaTipoTipoEquipamentos)
-                .HasForeignKey(ctte => ctte.CaracteristicaTipo_ID);
+                .HasForeignKey(ctte => ctte.IdCaracteristicaTipo);
 
             builder.HasOne(ctte => ctte.TipoEquipamento)
                 .WithMany(te => te.CaracteristicaTipoTipoEquipamentos)
-                .HasForeignKey(ctte => ctte.TipoEquipamento_ID);
+                .HasForeignKey(ctte => ctte.IdTipoEquipamento);
         }
     }
 }

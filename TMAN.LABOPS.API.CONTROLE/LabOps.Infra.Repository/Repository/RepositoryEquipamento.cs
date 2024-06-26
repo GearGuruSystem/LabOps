@@ -31,16 +31,6 @@ namespace LabOps.Infra.Repository.Repository
             return resultSql;
         }
 
-        public override async Task<IEnumerable<Equipamento>> BuscarPorParametro(Equipamento obj)
-        {
-            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
-            if (resultadoSql.IsNullOrEmpty())
-            {
-                throw new Exception("Não foi encontrando nenhum registro no banco.");
-            }
-            return resultadoSql;
-        }
-
         public override async Task<Equipamento> BuscarPorId(int id)
         {
             var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new
@@ -64,9 +54,9 @@ namespace LabOps.Infra.Repository.Repository
             base.Atualizar(obj);
         }
 
-        public override void Remove(Equipamento obj)
+        public override void Deletar(Equipamento obj)
         {
-            base.Remove(obj);
+            base.Deletar(obj);
         }
 
         public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)

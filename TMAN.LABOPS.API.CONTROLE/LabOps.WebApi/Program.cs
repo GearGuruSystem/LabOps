@@ -1,5 +1,6 @@
 using LabOps.Infra.CrossCutting.IOC;
 using LabOps.WebApi;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.AddConfigurationLogger();
@@ -12,6 +13,7 @@ builder.Services.ConfigurationCorsPolicy();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
+    Log.Logger.Debug($"Iniciando WebApi -> {DateTime.Now.Date}");
     app.UseSwagger();
     app.UseSwaggerUI();
 }

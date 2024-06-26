@@ -4,6 +4,7 @@ using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabOps.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240626114731_V1.0.0")]
+    partial class V100
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,11 +113,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("Cl_AtualizadoEm");
 
-                    b.Property<string>("Hostname")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("Cl_Hostname");
-
                     b.Property<int>("IdFabricante")
                         .HasColumnType("int")
                         .HasColumnName("Cl_IdFabricante");
@@ -127,11 +125,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Cl_IdTipoEquipamento");
 
-                    b.Property<string>("Inventario")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)")
-                        .HasColumnName("Cl_Inventario");
-
                     b.Property<long>("LaboratorioId")
                         .HasColumnType("bigint");
 
@@ -140,12 +133,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("Cl_Nome");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("Cl_SerialNumber");
 
                     b.Property<string>("UsuarioInsercao")
                         .IsRequired()
@@ -179,17 +166,20 @@ namespace LabOps.Infra.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("Cl_AtualizadoEm");
 
+                    b.Property<long>("EquipamentoId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("IdCaracteristicaTipo")
                         .HasColumnType("int")
-                        .HasColumnName("Cl_IdCaracteristicaTipo");
+                        .HasColumnName("Cl_CaracteristicaTipo");
 
                     b.Property<int?>("IdCaracteristicaValor")
                         .HasColumnType("int")
-                        .HasColumnName("Cl_IdCaracteristicaValor");
+                        .HasColumnName("Cl_CaracteristicaValor");
 
                     b.Property<long>("IdEquipamento")
                         .HasColumnType("bigint")
-                        .HasColumnName("Cl_IdEquipamentos");
+                        .HasColumnName("Cl_Equipamento");
 
                     b.Property<string>("UsuarioAtualizacao")
                         .IsRequired()
@@ -202,11 +192,11 @@ namespace LabOps.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EquipamentoId");
+
                     b.HasIndex("IdCaracteristicaTipo");
 
                     b.HasIndex("IdCaracteristicaValor");
-
-                    b.HasIndex("IdEquipamento");
 
                     b.ToTable("Tb_EquipamentoCaracteristica", (string)null);
                 });
@@ -262,6 +252,10 @@ namespace LabOps.Infra.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Cl_ChaveDoResponsavel");
+
+                    b.Property<long>("IdEquipamento")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Cl_IdEquipamentos");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -401,6 +395,12 @@ namespace LabOps.Infra.Data.Migrations
 
             modelBuilder.Entity("LabOps.Domain.Entities.EquipamentoCaracteristica", b =>
                 {
+                    b.HasOne("LabOps.Domain.Entities.Equipamento", "Equipamento")
+                        .WithMany("EquipamentoCaracteristicas")
+                        .HasForeignKey("EquipamentoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("LabOps.Domain.Entities.CaracteristicaTipo", "CaracteristicaTipo")
                         .WithMany("EquipamentoCaracteristicas")
                         .HasForeignKey("IdCaracteristicaTipo")
@@ -410,12 +410,6 @@ namespace LabOps.Infra.Data.Migrations
                     b.HasOne("LabOps.Domain.Entities.CaracteristicaValor", "CaracteristicaValor")
                         .WithMany("EquipamentoCaracteristicas")
                         .HasForeignKey("IdCaracteristicaValor");
-
-                    b.HasOne("LabOps.Domain.Entities.Equipamento", "Equipamento")
-                        .WithMany("EquipamentoCaracteristicas")
-                        .HasForeignKey("IdEquipamento")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
 
                     b.Navigation("CaracteristicaTipo");
 

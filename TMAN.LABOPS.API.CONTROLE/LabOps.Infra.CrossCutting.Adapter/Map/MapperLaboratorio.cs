@@ -17,9 +17,9 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             {
                 LaboratorioDTO laboratorioDTO = new LaboratorioDTO
                 {
-                    IDLaboratorio = item.IDLaboratorio,
+                    IDLaboratorio = item.Id,
                     Nome = item.Nome,
-                    IDUsuarioResponsavel = item.IDUsuarioResponsavel,
+                    UsuarioResponsavel = item.UsuarioResponsavel,
                     ChaveResponsavel = item.ChaveResponsavel,
                     UsuarioAtualizacao = item.UsuarioAtualizacao,
                     AtualizadoEm = item.AtualizadoEm
@@ -33,9 +33,9 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             LaboratorioDTO laboratorioDTO = new LaboratorioDTO
             {
-                IDLaboratorio = laboratorio.IDLaboratorio,
+                IDLaboratorio = laboratorio.Id,
                 Nome = laboratorio.Nome,
-                IDUsuarioResponsavel = laboratorio.IDUsuarioResponsavel,
+                UsuarioResponsavel = laboratorio.UsuarioResponsavel,
                 ChaveResponsavel = laboratorio.ChaveResponsavel,
                 UsuarioAtualizacao = laboratorio.UsuarioAtualizacao,
                 AtualizadoEm = laboratorio.AtualizadoEm
@@ -47,9 +47,9 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             Laboratorio laboratorio = new Laboratorio
             {
-                IDLaboratorio = laboratorioDTO.IDLaboratorio,
+                Id = laboratorioDTO.IDLaboratorio,
                 Nome = laboratorioDTO.Nome,
-                IDUsuarioResponsavel = laboratorioDTO.IDUsuarioResponsavel,
+                UsuarioResponsavel = laboratorioDTO.UsuarioResponsavel,
                 ChaveResponsavel = laboratorioDTO.ChaveResponsavel,
                 UsuarioAtualizacao = laboratorioDTO.UsuarioAtualizacao,
                 AtualizadoEm = laboratorioDTO.AtualizadoEm

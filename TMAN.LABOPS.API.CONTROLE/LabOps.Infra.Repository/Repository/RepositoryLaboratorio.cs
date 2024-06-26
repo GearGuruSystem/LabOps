@@ -16,7 +16,7 @@ namespace LabOps.Infra.Repository.Repository
         {
             this.sqlFactory = sqlFactory;
         }
-        #region Metodos Base
+
         public override Task<IEnumerable<Laboratorio>> BuscarTodos()
         {
             throw new NotImplementedException();
@@ -27,14 +27,9 @@ namespace LabOps.Infra.Repository.Repository
             throw new NotImplementedException();
         }
 
-        public override Task<IEnumerable<Laboratorio>> BuscarPorParametro(Laboratorio obj)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Atualizar(Laboratorio obj)
         {
-            throw new NotImplementedException();
+            base.Atualizar(obj);
         }
 
         public override void Registrar(Laboratorio obj)
@@ -42,10 +37,9 @@ namespace LabOps.Infra.Repository.Repository
             base.Registrar(obj);
         }
 
-        public override void Remove(Laboratorio obj)
+        public override void Deletar(Laboratorio obj)
         {
-            throw new NotImplementedException();
+            base.Deletar(obj);
         }
-        #endregion
     }
 }

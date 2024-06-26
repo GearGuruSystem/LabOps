@@ -4,6 +4,7 @@ using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabOps.Infra.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240626121636_V1.0.1")]
+    partial class V101
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,11 +113,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("Cl_AtualizadoEm");
 
-                    b.Property<string>("Hostname")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("Cl_Hostname");
-
                     b.Property<int>("IdFabricante")
                         .HasColumnType("int")
                         .HasColumnName("Cl_IdFabricante");
@@ -127,11 +125,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("Cl_IdTipoEquipamento");
 
-                    b.Property<string>("Inventario")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)")
-                        .HasColumnName("Cl_Inventario");
-
                     b.Property<long>("LaboratorioId")
                         .HasColumnType("bigint");
 
@@ -140,12 +133,6 @@ namespace LabOps.Infra.Data.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)")
                         .HasColumnName("Cl_Nome");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("Cl_SerialNumber");
 
                     b.Property<string>("UsuarioInsercao")
                         .IsRequired()
@@ -262,6 +249,10 @@ namespace LabOps.Infra.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("Cl_ChaveDoResponsavel");
+
+                    b.Property<long>("IdEquipamento")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Cl_IdEquipamentos");
 
                     b.Property<string>("Nome")
                         .IsRequired()

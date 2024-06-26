@@ -17,7 +17,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
             {
                 TipoEquipamentoDTO tipoEquipamentoDTO = new TipoEquipamentoDTO
                 {
-                    IDTipoEquipamento = item.IDTipoEquipamento,
+                    IDTipoEquipamento = item.Id,
                     Descricao = item.Descricao,
                     UsuarioAtualizacao = item.UsuarioAtualizacao,
                     AtualizadoEm = item.AtualizadoEm
@@ -48,7 +48,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         {
             TipoEquipamentoDTO tipoEquipamentoDTO = new TipoEquipamentoDTO
             {
-                IDTipoEquipamento = tipoEquipamento.IDTipoEquipamento,
+                IDTipoEquipamento = tipoEquipamento.Id,
                 Descricao = tipoEquipamento.Descricao,
                 UsuarioAtualizacao = tipoEquipamento.UsuarioAtualizacao,
                 AtualizadoEm = tipoEquipamento.AtualizadoEm

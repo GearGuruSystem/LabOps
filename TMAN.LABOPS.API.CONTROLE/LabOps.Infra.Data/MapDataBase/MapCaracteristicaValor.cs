@@ -8,7 +8,8 @@ namespace LabOps.Infra.Data.MapDataBase
     {
         public void Configure(EntityTypeBuilder<CaracteristicaValor> builder)
         {
-            builder.HasKey(cv => cv.IDCaracteristicaValor);
+            builder.ToTable("Tb_CaracteristicaValor");
+            builder.HasKey(cv => cv.Id);
         }
     }
 }

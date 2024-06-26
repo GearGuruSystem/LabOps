@@ -2,11 +2,11 @@
 {
     public class LaboratorioDTO
     {
-        public int IDLaboratorio { get; set; }
+        public long IDLaboratorio { get; set; }
         public string Nome { get; set; }
-        public int? IDUsuarioResponsavel { get; set; }
+        public string? UsuarioResponsavel { get; set; }
         public string ChaveResponsavel { get; set; }
-        public int UsuarioAtualizacao { get; set; }
+        public string UsuarioAtualizacao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
     }
 }

@@ -7,5 +7,5 @@ namespace LabOps.Domain.Core.Services
         Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize);
     }
 
-    // ADICIONAR METODOSO PROPRIOS
+    
 }

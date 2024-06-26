@@ -30,11 +30,6 @@ namespace LabOps.Infra.Repository.Repository
             return await context.Set<TEntity>().FindAsync(id);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> BuscarPorParametro(TEntity obj)
-        {
-            return await context.Set<TEntity>().Where(x => x.Equals(obj)).ToListAsync();
-        }
-
         public virtual async void Registrar(TEntity obj)
         {
             await context.Set<TEntity>().AddAsync(obj);
@@ -47,7 +42,7 @@ namespace LabOps.Infra.Repository.Repository
             await context.SaveChangesAsync();
         }
 
-        public virtual async void Remove(TEntity obj)
+        public virtual async void Deletar(TEntity obj)
         {
             context.Set<TEntity>().Remove(obj);
             await context.SaveChangesAsync();

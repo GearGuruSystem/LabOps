@@ -1,18 +1,29 @@
-﻿namespace LabOps.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LabOps.Domain.Entities
 {
     public class Laboratorio
     {
-        public int IDLaboratorio { get; set; }
+        [Key, Required, Column("Cl_IdLaboratorio")]
+        public long Id { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, StringLength(100), Column("Cl_Nome")]
         public string Nome { get; set; }
-        public int? IDUsuarioResponsavel { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, StringLength(40), Column("Cl_UsuarioResponsavel")]
+        public string? UsuarioResponsavel { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, StringLength(20), Column("Cl_ChaveDoResponsavel")]
         public string ChaveResponsavel { get; set; }
-        public int UsuarioAtualizacao { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, StringLength(20), Column("Cl_UsuarioAtualizacao")]
+        public string UsuarioAtualizacao { get; set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; set; }
-
-        #region Navegação de Objetos
-
+        /*-------------------------------------------------------------------------------------------------*/
         public ICollection<Equipamento> Equipamentos { get; set; }
-
-        #endregion Navegação de Objetos
+        /*-------------------------------------------------------------------------------------------------*/
     }
 }

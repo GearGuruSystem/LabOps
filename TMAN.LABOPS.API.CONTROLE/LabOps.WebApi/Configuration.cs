@@ -23,7 +23,7 @@ namespace LabOps.WebApi
         {
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("LabOps", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.File("C:/ProjetosDev/LogLabOpsDev/logs/log-.log",
                     rollingInterval: RollingInterval.Day,
@@ -35,7 +35,7 @@ namespace LabOps.WebApi
                 logEvent.Properties.TryGetValue("RequestPath", out var path) && path.ToString().Contains("/swagger"))
                 .CreateLogger();
 
-            Log.Information("Iniciado o WebApi");
+            Log.Information($"Log iniciada -> {DateTime.Now.Date}");
             builder.AddSerilog(logger);
 
             return builder;

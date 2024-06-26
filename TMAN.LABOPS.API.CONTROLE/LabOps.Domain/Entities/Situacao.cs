@@ -1,39 +1,48 @@
-﻿namespace LabOps.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LabOps.Domain.Entities
 {
     public class Situacao
     {
-        public int IDSituacao { get; private set; }
+        [Key, Required, Column("Cl_IdSituacao")]
+        public int Id { get; private set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, Column("Cl_Situacao")]
         public string Descricao { get; private set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, Column("Cl_UsuarioAtualizacao")]
         public string UsuarioAtualizacao { get; private set; }
+        /*-------------------------------------------------------------------------------------------------*/
+        [Required, Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; private set; }
-
-        #region Navegação de Objetos
+        /*-------------------------------------------------------------------------------------------------*/
         public ICollection<Equipamento> Equipamentos { get; set; }
-        #endregion Navegação de Objetos
+        /*-------------------------------------------------------------------------------------------------*/
 
-        public Situacao(string descricao, string usuarioAtualizacao, DateTime? atualizadoEm = null)
+        public Situacao(string descricao, string usuarioAtualizacao)
         {
-            AdicionaSituacao(descricao, usuarioAtualizacao, atualizadoEm);
+            AdicionaSituacao(descricao, usuarioAtualizacao);
         }
 
-        public Situacao(int iDSituacao, string descricao, string usuarioAtualizacao, DateTime? atualizadoEm = null)
+        public Situacao(int idSituacao, string descricao, string usuarioAtualizacao)
         {
-            AdicionaSituacao(iDSituacao, descricao, usuarioAtualizacao, atualizadoEm);
+            AdicionaSituacao(idSituacao, descricao, usuarioAtualizacao);
         }
 
-        private void AdicionaSituacao(int iDSituacao, string descricao, string usuarioAtualizacao, DateTime? atualizadoEm = null)
+        private void AdicionaSituacao(int idSituacao, string descricao, string usuarioAtualizacao)
         {
-            IDSituacao = iDSituacao;
+            Id = idSituacao;
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;
             AtualizadoEm = DateTime.Now;
         }
 
-        private void AdicionaSituacao(string descricao, string usuarioAtualizacao, DateTime? atualizadoEm = null)
+        private void AdicionaSituacao(string descricao, string usuarioAtualizacao)
         {
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;
-            AtualizadoEm = DateTime.Now;
+            AtualizadoEm = DateTime.Now.Date;
         }
     }
 }
