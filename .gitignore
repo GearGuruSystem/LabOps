@@ -17,10 +17,10 @@
 *.vsidx
 *.sqlite-journal
 *.config
-*.json
 /TMAN.LABOPS.FRONTEND/.vs/ProjectEvaluation/tman.labops.frontend.metadata.v8.bin
 /TMAN.LABOPS.FRONTEND/.vs/ProjectEvaluation/tman.labops.frontend.projects.v8.bin
 /TMAN.LABOPS.FRONTEND/.vs/ProjectEvaluation/tman.labops.frontend.strings.v8.bin
 /TMAN.LABOPS.FRONTEND/.vs/TMAN.LABOPS.FRONTEND/DesignTimeBuild/.dtbcache.v2
 /TMAN.LABOPS.FRONTEND/.vs/TMAN.LABOPS.FRONTEND/v17/.futdcache.v2
 /TMAN.LABOPS.FRONTEND/.vs/TMAN.LABOPS.FRONTEND/v17/.wsuo
+/.vs/GearGuru/v17/DocumentLayout.json
