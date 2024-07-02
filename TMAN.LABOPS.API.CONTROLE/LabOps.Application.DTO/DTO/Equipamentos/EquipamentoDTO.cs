@@ -1,4 +1,8 @@
-﻿namespace LabOps.Application.DTO.DTO.Equipamentos
+﻿using LabOps.Application.DTO.DTO.Fabricantes;
+using LabOps.Application.DTO.DTO.Situacao;
+using LabOps.Application.DTO.DTO.TipoEquipamento;
+
+namespace LabOps.Application.DTO.DTO.Equipamentos
 {
     public class EquipamentoDTO : ICloneable
     {
@@ -7,9 +11,9 @@
         public string? Hostname { get; set; }
         public string? Inventario { get; set; }
         public string SerialNumber { get; set; }
-        public int IDSituacao { get; set; }
-        public int IDTipoEquipamento { get; set; }
-        public int IDFabricante { get; set; }
+        public SituacaoDTO SituacaoDto { get; set; }
+        public TipoEquipamentoDTO TipoEquipamentoDto { get; set; }
+        public FabricanteDTO FabricanteDto { get; set; }
         public string UsuarioInsercao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
 

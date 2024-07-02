@@ -1,7 +1,8 @@
-﻿using LabOps.Application.DTO.DTO.Fabricantes;
+﻿using AutoMapper;
+using LabOps.Application.DTO.DTO.Fabricantes;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
-using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
+using LabOps.Domain.Entities;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -9,43 +10,43 @@ namespace LabOps.Application.Service
 {
     public class ApplicationServiceFabricante : IApplicationServiceFabricante
     {
-        private readonly IServiceFabricante serviceFabricante;
-        private readonly IMapperFabricante mapperFabricante;
+        private readonly IServiceFabricante _serviceFabricante;
+        private readonly IMapper _mapper;
 
-        public ApplicationServiceFabricante(IServiceFabricante serviceFabricante, IMapperFabricante mapperFabricante)
+        public ApplicationServiceFabricante(IServiceFabricante serviceFabricante, IMapper mapper)
         {
-            this.serviceFabricante = serviceFabricante;
-            this.mapperFabricante = mapperFabricante;
+            _serviceFabricante = serviceFabricante;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<FabricanteDTO>> BuscaTodosFabricantes()
         {
-            var objFabricante = await serviceFabricante.BuscarTodos();
-            return mapperFabricante.MapperListaFabricantes(objFabricante);
+            var objFabricante = await _serviceFabricante.BuscarTodos();
+            return _mapper.Map<IEnumerable<FabricanteDTO>>(objFabricante);
         }
 
         public async Task<FabricanteDTO> BuscaFabricantesPeloId(int id)
         {
-            var objFabricante = await serviceFabricante.BuscarPorId(id);
-            return mapperFabricante.MapperToDTO(objFabricante);
+            var objFabricante = await _serviceFabricante.BuscarPorId(id);
+            return _mapper.Map<FabricanteDTO>(objFabricante);
         }
 
         public void RegistraFabricante(CriarNovoFabricanteDTO obj)
         {
-            var objFabricante = mapperFabricante.MapperToEntity(obj);
-            serviceFabricante.Adicionar(objFabricante);
+            var objFabricante = _mapper.Map<Fabricante>(obj);
+            _serviceFabricante.Adicionar(objFabricante);
         }
 
         public void AtualizaFabricante(AtualizarFabricanteDTO obj)
         {
-            var objFabricante = mapperFabricante.MapperToEntity(obj);
-            serviceFabricante.Atualizar(objFabricante);
+            var objFabricante = _mapper.Map<Fabricante>(obj);
+            _serviceFabricante.Atualizar(objFabricante);
         }
 
         public void RemoveFabricante(FabricanteDTO obj)
         {
-            var objFabricante = mapperFabricante.MapperToEntity(obj);
-            serviceFabricante.Remover(objFabricante);
+            var objFabricante = _mapper.Map<Fabricante>(obj);
+            _serviceFabricante.Remover(objFabricante);
         }
     }
 }

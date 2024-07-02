@@ -1,57 +1,50 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
 using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlTypes;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.WebAPI.Controllers
 {
     [ApiController]
-    
+    [Consumes("application/json")]
+    [Produces("application/json")]
     [Route("api/v1/[controller]")]
     public class EquipamentoController : ControllerBase
     {
-        private readonly IApplicationServiceEquipamento applicationService;
+        private readonly IApplicationServiceEquipamento _appService;
+        private readonly ILogger<EquipamentoController> _logger;
 
-        public EquipamentoController(IApplicationServiceEquipamento applicationService)
+        public EquipamentoController(IApplicationServiceEquipamento applicationService, ILogger<EquipamentoController> logger)
         {
-            this.applicationService = applicationService;
+            this._appService = applicationService;
+            this._logger = logger;
         }
 
         [HttpGet("BuscarEquipamentos")]
         public async Task<IActionResult> BuscaTodosEquipamentos()
         {
+            _logger.LogInformation("Iniciado busca de equipamentos");
             try
             {
-                var data = await applicationService.BuscaTodosEquipamentos();
+                var data = await _appService.BuscaTodosEquipamentos();
+                _logger.LogInformation("Retornando 200OK");
                 return Ok(data);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                _logger.LogError("Retornando 404NOTFOUND");
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
 
-        [HttpGet("BuscarTodosComPaginacao")]
-        public async Task<IActionResult> BuscaTodosEquipamentosPorPagina([FromQuery] int numeroPagina, [FromQuery] int tamanhoPagina)
-        {
-            try
-            {
-                var data = await applicationService.BuscaTodosPorPagina(numeroPagina, tamanhoPagina);
-                return Ok(data);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-        }
-
-        [HttpGet("BuscarEquipamentoPeloId/{id:int}")]
+        [HttpGet("BuscaEquipamentosPeloId/{id:int}")]
         public async Task<IActionResult> BuscaEquipamentosPeloId(int id)
         {
             try
             {
-                var data = await applicationService.BuscaEquipamentoPeloId(id);
+                var data = await _appService.BuscaPeloId(id);
                 return Ok(data);
             }
             catch (Exception ex)
@@ -61,14 +54,14 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPost("CadastraEquipamento")]
-        public IActionResult CadastraEquipamento([FromBody] EquipamentoDTO equipamentDTO)
+        public IActionResult CadastraEquipamento([FromBody] CriarNovo equipamentoDTO)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    applicationService.RegistraEquipamento(equipamentDTO);
-                    return Created(nameof(BuscaEquipamentosPeloId), equipamentDTO.IDEquipamento);
+                    _appService.RegistraEquipamento(equipamentoDTO);
+                    return Created();
                 }
                 catch (Exception ex)
                 {
@@ -79,11 +72,11 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpPut("AtualizaEquipamento")]
-        public IActionResult AtualizaEquipamento([FromBody] EquipamentoDTO equipament)
+        public IActionResult AtualizaEquipamento([FromBody] EquipamentoDTO equipamento)
         {
             try
             {
-                applicationService.AtualizaEquipamento(equipament);
+                _appService.AtualizaEquipamento(equipamento);
                 return Ok();
             }
             catch (Exception ex)
@@ -97,7 +90,7 @@ namespace LabOps.WebAPI.Controllers
         {
             try
             {
-                applicationService.RemoveEquipamento(equipamentoDTO);
+                _appService.RemoveEquipamento(equipamentoDTO);
                 return Ok();
             }
             catch (Exception ex)

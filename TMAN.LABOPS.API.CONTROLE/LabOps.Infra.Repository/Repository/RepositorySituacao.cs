@@ -1,11 +1,7 @@
 ﻿using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
-using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Microsoft.IdentityModel.Tokens;
-using System.Net.Http.Headers;
 
 namespace LabOps.Infra.Repository.Repository
 {

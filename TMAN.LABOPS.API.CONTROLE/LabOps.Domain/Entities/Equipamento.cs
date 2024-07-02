@@ -22,7 +22,7 @@ namespace LabOps.Domain.Entities
 
         [Required, Column("Cl_IdSituacao")]
         public int IdSituacao { get; private set; }
-        public Situacao Situacao { get; private set; }
+        public Situacao Situacao { get; set; }
 
         [Required, Column("Cl_IdTipoEquipamento")]
         public int IdTipoEquipamento { get; private set; }
@@ -46,14 +46,34 @@ namespace LabOps.Domain.Entities
         }
         
         public Equipamento(string nome, string? hostname, string? inventario, string serialNumber,
-            int idSituacao, int idTipoEquipamento, int idFabricante, string usuarioInsercao)
+            Situacao situacao, TipoEquipamento tipoEquipamento, Fabricante fabricante, string usuarioInsercao)
         {
-            AdicionarEquipamento(nome,  hostname, inventario, serialNumber, idSituacao, 
-                idTipoEquipamento, idFabricante, usuarioInsercao);
+            AdicionarEquipamento(nome,  hostname, inventario, serialNumber, situacao, 
+                tipoEquipamento, fabricante, usuarioInsercao);
         }
-        
+
+        public Equipamento(string nome, string? hostname, string? inventario, string serialNumber,
+            string usuarioInsercao, int idSituacao, int idTipoEquipamento, int idFabricante)
+        {
+            AdicionarEquipamento(nome, hostname, inventario, serialNumber, usuarioInsercao, idSituacao, idTipoEquipamento, idFabricante);
+        }
+
         private void AdicionarEquipamento(string nome, string? hostname, string? inventario, string serialNumber,
-            int idSituacao, int idTipoEquipamento, int idFabricante, string usuarioInsercao)
+            Situacao situacao, TipoEquipamento tipoEquipamento, Fabricante fabricante, string usuarioInsercao)
+        {
+            Nome = nome;
+            Hostname = hostname;
+            Inventario = inventario;
+            SerialNumber = serialNumber;
+            Situacao = situacao;
+            TipoEquipamento = tipoEquipamento;
+            Fabricante = fabricante;
+            UsuarioInsercao = usuarioInsercao;
+            AtualizadoEm = DateTime.Now;
+        }
+
+        private void AdicionarEquipamento(string nome, string? hostname, string? inventario, string serialNumber,
+            string usuarioInsercao, int idSituacao, int idTipoEquipamento, int idFabricante)
         {
             Nome = nome;
             Hostname = hostname;

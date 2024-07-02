@@ -2,38 +2,15 @@
 {
     public class BuscarTodosEquipamentos
     {
-        public int IDEquipamento { get; private set; }
-        public string Nome { get; private set; }
-        public int IDSituacao { get; private set; }
-        public int IDTipoEquipamento { get; private set; }
-        public int IDFabricante { get; private set; }
-        public int? IDLaboratorio { get; private set; }
-        public int UsuarioInsercao { get; private set; }
-        public DateTime? AtualizadoEm { get; private set; }
-
-        #region Construtor Completo
-
-        public BuscarTodosEquipamentos(string nome, int iDSituacao, int iDTipoEquipamento, int iDFabricante, int? iDLaboratorio,
-            int usuarioInsercao, DateTime? atualizadoEm)
-        {
-            Nome = nome;
-            IDSituacao = iDSituacao;
-            IDTipoEquipamento = iDTipoEquipamento;
-            IDFabricante = iDFabricante;
-            IDLaboratorio = iDLaboratorio;
-            UsuarioInsercao = usuarioInsercao;
-            AtualizadoEm = atualizadoEm;
-        }
-
-        #endregion Construtor Completo
-
-        #region Contrutor vazio
-
-        public BuscarTodosEquipamentos()
-        {
-        }
-
-        #endregion Contrutor vazio
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Hostname { get; set; }
+        public string SerialNumber { get; set; }
+        public string UsuarioInsercao { get; set; }
+        public DateTime AtualizadoEm {  get; set; }
+        public string SituacaoDescricao { get; set; }
+        public string TipoEquipamentoDescricao { get; set; }
+        public string FabricanteNome { get; set; }
 
         #region Metodos clone
 

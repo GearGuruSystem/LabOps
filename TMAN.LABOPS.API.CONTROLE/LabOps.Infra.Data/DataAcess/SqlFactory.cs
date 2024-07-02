@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 #pragma warning disable IDE0063 // Use simple 'using' statement
 #pragma warning disable IDE0290 // Use primary constructor
@@ -17,13 +18,16 @@ namespace LabOps.Infra.Data.DataAcess
             this.configuration = configuration;
         }
 
-        public async Task<IList<T>> LoadDataAsync<T, U>(string storedProcedure, U parameters = null, string connectionName = "AppDBConnection")
-            where U : class
+        public async Task<IQueryable<T>> LoadDataAsync<T>(string storedProcedure, object parameters = null, string connectionName = "AppDBConnection")
         {
             using (IDbConnection connection = new SqlConnection(configuration.GetConnectionString(connectionName)))
             {
                 var response = await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                return response.ToList();
+                if (response.Any())
+                {
+                    return response.AsQueryable();
+                }
+                throw new SqlNullValueException("Não encontrado nenhum valor no banco");
             }
         }
 

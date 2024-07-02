@@ -7,19 +7,17 @@ namespace LabOps.Domain.Entities
     {
         [Key, Required, Column("Cl_IdSituacao")]
         public int Id { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, Column("Cl_Situacao")]
         public string Descricao { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+        
         [Required, Column("Cl_UsuarioAtualizacao")]
         public string UsuarioAtualizacao { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+        
         [Required, Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
         public ICollection<Equipamento> Equipamentos { get; set; }
-        /*-------------------------------------------------------------------------------------------------*/
-
+        
         public Situacao(string descricao, string usuarioAtualizacao)
         {
             AdicionaSituacao(descricao, usuarioAtualizacao);

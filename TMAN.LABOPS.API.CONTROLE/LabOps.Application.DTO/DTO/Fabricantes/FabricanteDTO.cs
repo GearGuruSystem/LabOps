@@ -2,10 +2,10 @@
 {
     public class FabricanteDTO : ICloneable
     {
-        public int IDFabricante { get; private set; }
-        public string Nome { get; private set; }
-        public string UsuarioAtualizacao { get; private set; }
-        public DateTime? AtualizadoEm { get; private set; }
+        public int IDFabricante { get; set; }
+        public string Nome { get; set; }
+        public string UsuarioAtualizacao { get; set; }
+        public DateTime? AtualizadoEm { get; set; }
 
         public FabricanteDTO()
         {

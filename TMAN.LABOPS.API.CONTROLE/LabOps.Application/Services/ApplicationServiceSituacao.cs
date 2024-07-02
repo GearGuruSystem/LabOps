@@ -1,7 +1,8 @@
-﻿using LabOps.Application.DTO.DTO.Situacao;
+﻿using AutoMapper;
+using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
-using LabOps.Infrastructure.CrossCutting.Adapter.Interfaces;
+using LabOps.Domain.Entities;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -9,25 +10,25 @@ namespace LabOps.Application.Service
 {
     public class ApplicationServiceSituacao : IApplicationServiceSituacao
     {
-        private readonly IServiceSituacao serviceSituacao;
-        private readonly IMapperSituacao mapperSituacao;
+        private readonly IServiceSituacao _serviceSituacao;
+        private readonly IMapper _mapper;
 
-        public ApplicationServiceSituacao(IServiceSituacao serviceSituacao, IMapperSituacao mapperSituacao)
+        public ApplicationServiceSituacao(IServiceSituacao serviceSituacao, IMapper mapper)
         {
-            this.serviceSituacao = serviceSituacao;
-            this.mapperSituacao = mapperSituacao;
+            _serviceSituacao = serviceSituacao;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
         {
-            var objSituacao = await serviceSituacao.BuscarSituacoesAtivas();
-            return mapperSituacao.MapperListaSituacao(objSituacao);
+            var objSituacao = await _serviceSituacao.BuscarSituacoesAtivas();
+            return _mapper.Map<IEnumerable<SituacaoDTO>>(objSituacao);
         }
 
         public void CadastraSituacao(AdicionarSituacaoDTO situacaoDTO)
         {
-            var objSituacao = mapperSituacao.MapperToEntity(situacaoDTO);
-            serviceSituacao.Adicionar(objSituacao);
+            var objSituacao = _mapper.Map<Situacao>(situacaoDTO);
+            _serviceSituacao.Adicionar(objSituacao);
         }
     }
 }

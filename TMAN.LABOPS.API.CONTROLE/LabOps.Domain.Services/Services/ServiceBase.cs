@@ -7,36 +7,36 @@ namespace LabOps.Domain.Services.Services
 {
     public abstract class ServiceBase<TEntity> : IServiceBase<TEntity> where TEntity : class
     {
-        private readonly IRepositoryBase<TEntity> _repository;
+        private readonly IRepositoryBase<TEntity> repository;
 
-        public ServiceBase(IRepositoryBase<TEntity> Repository)
+        public ServiceBase(IRepositoryBase<TEntity> repository)
         {
-            _repository = Repository;
+            this.repository = repository;
         }
 
         public virtual async Task<IEnumerable<TEntity>> BuscarTodos()
         {
-            return await _repository.BuscarTodos();
+            return await repository.BuscarTodos();
         }
 
         public virtual async Task<TEntity> BuscarPorId(int id)
         {
-            return await _repository.BuscarPorId(id);
+            return await repository.BuscarPorId(id);
         }
 
         public virtual void Adicionar(TEntity obj)
         {
-             _repository.Registrar(obj);
+             repository.Registrar(obj);
         }
 
         public virtual void Atualizar(TEntity obj)
         {
-            _repository.Atualizar(obj);
+            repository.Atualizar(obj);
         }
 
         public virtual void Remover(TEntity obj)
         {
-            _repository.Deletar(obj);
+            repository.Deletar(obj);
         }
     }
 }

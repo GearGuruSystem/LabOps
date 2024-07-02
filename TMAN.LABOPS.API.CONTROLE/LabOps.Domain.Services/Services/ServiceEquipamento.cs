@@ -1,4 +1,5 @@
-﻿using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
 
@@ -14,6 +15,11 @@ namespace LabOps.Domain.Services.Services
             : base(repositoryEquipamento)
         {
             this.repositoryEquipamento = repositoryEquipamento;
+        }
+
+        public new async Task<IEnumerable<BuscarTodosEquipamentos>> BuscarTodos()
+        {
+            return await repositoryEquipamento.BuscarTodos();
         }
 
         public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)

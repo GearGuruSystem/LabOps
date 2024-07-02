@@ -1,5 +1,4 @@
-﻿using LabOps.Application.DTO.DTO;
-using LabOps.Application.DTO.DTO.TipoEquipamento;
+﻿using LabOps.Application.DTO.DTO.TipoEquipamento;
 
 namespace LabOps.Application.Interfaces
 {

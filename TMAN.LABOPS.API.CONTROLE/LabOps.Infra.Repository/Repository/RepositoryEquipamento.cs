@@ -1,47 +1,70 @@
-﻿using LabOps.Domain.Core.Interfaces;
+﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Logging;
+using System.Data.SqlTypes;
 
-#pragma warning disable IDE0290 // Use primary constructor
+#pragma warning disable IDE0290
+#pragma warning disable IDE0301
+#pragma warning disable IDE0305
 
 namespace LabOps.Infra.Repository.Repository
 {
     public class RepositoryEquipamento : RepositoryBase<Equipamento>, IRepositoryEquipamento
     {
-        private readonly SqlFactory sqlFactory;
-        private readonly AppDbContext context;
+        private readonly SqlFactory _sqlFactory;
+        private readonly AppDbContext _context;
+        private readonly ILogger<RepositoryEquipamento> _logger;
 
-        public RepositoryEquipamento(SqlFactory sqlFactory, AppDbContext context)
+        public RepositoryEquipamento(SqlFactory sqlFactory, AppDbContext context, ILogger<RepositoryEquipamento> logger)
             : base(context)
         {
-            this.sqlFactory = sqlFactory;
-            this.context = context;
+            this._sqlFactory = sqlFactory;
+            this._context = context;
+            this._logger = logger;
         }
 
-        public override async Task<IEnumerable<Equipamento>> BuscarTodos()
+        public new async Task<IEnumerable<BuscarTodosEquipamentos>> BuscarTodos()
         {
-            var resultSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new { });
-            if (resultSql.IsNullOrEmpty())
+            _logger.LogInformation("Iniciando processo de busca no banco de dados");
+            try
             {
-                throw new Exception("Não foi encontrando nenhum registro no banco.");
+                var resultSql = await _sqlFactory.LoadDataAsync<BuscarTodosEquipamentos>("[dbo].[BuscarEquipamentosInfosCompletas]");
+                return resultSql.ToList();
             }
-            return resultSql;
+            catch (SqlNullValueException ex)
+            {
+                _logger.LogError("Retornado o seguinte erro da consulta {@erroConsul}", ex);
+                return Enumerable.Empty<BuscarTodosEquipamentos>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro inesperado durante a consulta. [{@erro}]", ex);
+                return Enumerable.Empty<BuscarTodosEquipamentos>();
+            }
         }
 
         public override async Task<Equipamento> BuscarPorId(int id)
         {
-            var resultadoSql = await sqlFactory.LoadDataAsync<Equipamento, dynamic>("", new
+            try
             {
-                @idParam = id
-            });
-            if (resultadoSql.Count < 0)
-            {
-                throw new Exception("Não foi encontrando nenhum registro no banco.");
+                var parameters = new { @idParam = id };
+                var resultadoSql = await _sqlFactory.LoadDataAsync<Equipamento>("", parameters);
+                return resultadoSql.FirstOrDefault();
             }
-            return resultadoSql.FirstOrDefault();
+            catch (SqlNullValueException ex)
+            {
+                _logger.LogError("Retornado o seguinte erro da consulta {@erroConsul}", ex);
+                return Enumerable.Empty<Equipamento>().FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro inesperado durante a consulta. [{@erro}]", ex);
+                return Enumerable.Empty<Equipamento>().FirstOrDefault();
+            }
         }
 
         public override void Registrar(Equipamento obj)
@@ -61,7 +84,7 @@ namespace LabOps.Infra.Repository.Repository
 
         public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
         {
-            return await context.Equipamentos.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            return await _context.Equipamentos.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }
