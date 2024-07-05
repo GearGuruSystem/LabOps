@@ -1,0 +1,20 @@
+﻿@page "/equipamentos";
+@inherits IndexCode;
+
+<MudTable Items="@Equipamentos.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Nome</MudTh>
+        <MudTh>Hostname</MudTh>
+        <MudTh>SerialNumber</MudTh>
+        <MudTh>Ultima Atualizacao</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Nome">@context.Nome</MudTd>
+        <MudTd DataLabel="Hostname">@context.Hostname</MudTd>
+        <MudTd DataLabel="SerialNumber">@context.SerialNumber</MudTd>
+        <MudTd DataLabel="Ultima atualizacao">@context.AtualizadoEm</MudTd>
+    </RowTemplate>
+</MudTable>
+<MudSwitch @bind-Value="_loading">Show Loading</MudSwitch>

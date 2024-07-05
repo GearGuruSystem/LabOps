@@ -1,0 +1,31 @@
+﻿@page "/fabricante-cadastro";
+@inherits CadastroFabricanteCode;
+
+<MudText Typo="Typo.h4">Cadastro de Fabricante</MudText>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudCard>
+                <MudForm @ref="MudForm">
+                    <MudCardContent>
+                        <MudTextField Label="Nome do Fabricante" 
+                            Required="true" 
+                            RequiredError="Informe o nome do fabricante" 
+                            @bind-Value="Model.Nome">
+                        </MudTextField>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton 
+                            OnClick="(() => OnValidSubmitAsync())" 
+                            Variant="Variant.Filled"
+                            StartIcon="@Icons.Material.Filled.Save"
+                            Color="Color.Primary">
+                            Salvar
+                        </MudButton>
+                    </MudCardActions>
+                </MudForm>
+            </MudCard>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

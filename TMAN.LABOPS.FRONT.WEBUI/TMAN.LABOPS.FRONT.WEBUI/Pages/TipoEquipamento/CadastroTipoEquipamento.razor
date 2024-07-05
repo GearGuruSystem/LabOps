@@ -1,0 +1,30 @@
+﻿@page "/tipoequipamento-cadastro";
+@inherits CadastroTipoEquipamentoCode;
+
+<MudText Typo="Typo.h4">Registro de Tipos de equipamentos</MudText>
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudCard>
+                <MudForm @ref="MudForm">
+                    <MudCardContent>
+                        <MudTextField Label="Tipo do Equipamento"
+                                      Required="true"
+                                      RequiredError="Informe o Tipo de equipamento"
+                                      @bind-Value="Model.Descricao">
+                        </MudTextField>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton OnClick="(() => OnValidSubmitAsync())"
+                                   Variant="Variant.Filled"
+                                   StartIcon="@Icons.Material.Filled.Save"
+                                   Color="Color.Primary">
+                            Salvar
+                        </MudButton>
+                    </MudCardActions>
+                </MudForm>
+            </MudCard>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

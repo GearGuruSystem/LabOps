@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>annotations</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
-    <ProjectReference Include="..\GG_LabOps_Infra\LabOps.Infra.ControlApi.csproj" />
-    <ProjectReference Include="..\LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj" />
+    <ProjectReference Include="..\TMAN.LABOPS.FRONT.WEBUI.APPLICATION\Tman.LabOps.WebUI.Application.csproj" />
   </ItemGroup>
 
 </Project>

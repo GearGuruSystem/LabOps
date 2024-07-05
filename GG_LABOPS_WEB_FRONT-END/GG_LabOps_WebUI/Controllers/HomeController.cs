@@ -1,4 +1,4 @@
-using GG_LabOps_WebUI.Models;
+using LabOps.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

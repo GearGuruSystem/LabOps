@@ -56,7 +56,8 @@ namespace LabOps.Infra.CrossCutting.IOC
             service.AddScoped<IRepositoryTipoEquipamento, RepositoryTipoEquipamento>();
             service.AddScoped<IRepositoryLaboratorio, RepositoryLaboratorio>();
 
-            #endregion Repository SQL
+            #endregion Repository SQL
+
             #region IOC Mapper
 
             var mappingConfig = new MapperConfiguration(mc =>

@@ -2,12 +2,12 @@
 
 namespace LabOps.Application.Interfaces
 {
-    public interface IServiceFabricante
+    public interface IServicesFabricante
     {
         void AtualizaFabricante(Fabricante fabricante);
         Task<Fabricante> BuscaFabricantesPeloId(int id);
         Task<IEnumerable<Fabricante>> BuscaTodosFabricantes();
-        Task<Fabricante> RegistraFabricante(CriarNovo novoFabricante);
+        Task<Fabricante> CadastraFabricante(CriarNovo novoFabricante);
         void RemoveFabricante(Fabricante fabricante);
     }
 }

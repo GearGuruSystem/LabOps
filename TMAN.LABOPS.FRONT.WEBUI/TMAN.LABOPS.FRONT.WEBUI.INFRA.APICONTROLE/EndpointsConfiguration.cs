@@ -1,6 +1,6 @@
-﻿namespace LabOps.Infra.ControlApi
+﻿namespace TMAN.LABOPS.FRONT.WEBUI.INFRA.APICONTROLE
 {
-    internal static class WebConfig
+    internal static class EndpointsConfiguration
     {
         public const string BaseAdressApi = "http://localhost:5182";
         public const string HttpClient_Fabricante = "api/v1/Fabricante";
