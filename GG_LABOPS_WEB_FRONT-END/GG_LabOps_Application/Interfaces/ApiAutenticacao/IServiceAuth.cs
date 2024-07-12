@@ -1,6 +1,6 @@
 ﻿using LabOps.Application.DTOs.Usuario;
 
-namespace LabOps.Application.Interfaces
+namespace LabOps.Application.Interfaces.ApiAutenticacao
 {
     public interface IServiceAuth
     {

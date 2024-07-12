@@ -1,44 +1,73 @@
-﻿using LabOps.WebUI.Models;
+﻿using LabOps.Application.DTOs.Equipamentos;
+using LabOps.Application.Interfaces.ApiControle;
+using LabOps.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
+
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.WebUI.Controllers
 {
     public class EquipamentoController : Controller
     {
-        [HttpGet]
-        public IActionResult Index()
+        private readonly IServicesEquipamento _service;
+
+        public EquipamentoController(IServicesEquipamento service)
         {
-            var dadosFicticios = new List<EquipamentosModel>
+            _service = service;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var dados = await _service.GetAllEquipament();
+            var modelDados = new List<EquipamentosModel>();
+            foreach (var item in dados)
             {
-                new() {
-                    Id = 1,
-                    Nome = "XENTRY",
-                    Inventario = "554010020345",
-                    Hostname = "M154DS10020345",
-                    FabricanteNome = "PANASONIC",
-                    TipoEquipamentoDescricao = "TABLET",
-                    SituacaoDescricao = "ATIVO"
-                },
-                new() {
-                    Id = 2,
-                    Nome = "XDXD9203",
-                    Inventario = "J0050505",
-                    Hostname = "M154DS10050505",
-                    FabricanteNome = "DELL",
-                    TipoEquipamentoDescricao = "MONITOR",
-                    SituacaoDescricao = "RESERVADO"
-                },
-                new() {
-                    Id = 3,
-                    Nome = "OPTIPLEX 6666",
-                    Inventario = "J0022222",
-                    Hostname = "M154DSX0022222",
-                    FabricanteNome = "DELL",
-                    TipoEquipamentoDescricao = "DESKTOP",
-                    SituacaoDescricao = "ATIVO"
-                }
+                var model = new EquipamentosModel()
+                {
+                    Id = item.Id,
+                    Nome = item.Nome,
+                    Hostname = item.Hostname,
+                    SerialNumber = item.SerialNumber,
+                    UsuarioInsercao = item.UsuarioInsercao,
+                    AtualizadoEm = item.AtualizadoEm,
+                    SituacaoDescricao = item.SituacaoDescricao,
+                    TipoEquipamentoDescricao = item.TipoEquipamentoDescricao,
+                    FabricanteNome = item.FabricanteNome
+                };
+                modelDados.Add(model);
+            }
+            return View(modelDados);
+        }
+
+        public async Task<IActionResult> Detalhes(int id)
+        {
+            var dados = await _service.GetEquipamentById(id);
+            var model = new EquipamentosModel()
+            {
+                Id = dados.Id,
+                Nome = dados.Nome,
+                Hostname = dados.Hostname,
+                SerialNumber = dados.SerialNumber,
+                UsuarioInsercao = dados.UsuarioInsercao,
+                AtualizadoEm = dados.AtualizadoEm,
+                SituacaoDescricao = dados.SituacaoDescricao,
+                TipoEquipamentoDescricao = dados.TipoEquipamentoDescricao,
+                FabricanteNome = dados.FabricanteNome
             };
-            return View(dadosFicticios);
+            return PartialView("_Detalhes", model);
+        }
+
+        public IActionResult Cadastro()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastro(CriarNovoE criarNovoE)
+        {
+            await _service.RegisterEquipament(criarNovoE);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

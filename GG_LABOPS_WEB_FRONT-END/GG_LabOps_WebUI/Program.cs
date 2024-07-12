@@ -1,4 +1,4 @@
-using LabOps.Infra.Data.CrossCutting.IOC;
+using LabOps.Infra.Data.CrossCutting;
 
 var builder = WebApplication.CreateBuilder(args);
 

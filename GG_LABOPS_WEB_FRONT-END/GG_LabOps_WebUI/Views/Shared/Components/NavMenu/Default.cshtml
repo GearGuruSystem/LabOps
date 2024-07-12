@@ -1,0 +1,36 @@
+﻿<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: black; font-weight: bold;">LabOps</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Equipamento" asp-action="Index">Equipamentos</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">Cadastros</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" asp-area="" asp-controller="Fabricante" asp-action="Index">Fabricante</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-area="" asp-controller="TipoEquipamento" asp-action="Index">Tipo de Equipamento</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-area="" asp-controller="Situacao" asp-action="Index">Situações</a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown" aria-disabled="true">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" disabled style="color: darkgray">Administração</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" asp-area="" asp-controller="" asp-action="Cadastro">Usuarios</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

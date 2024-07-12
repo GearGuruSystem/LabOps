@@ -1,5 +1,5 @@
 ﻿using LabOps.Application.DTOs.Fabricantes;
-using LabOps.Application.Interfaces;
+using LabOps.Application.Interfaces.ApiControle;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabOps.WebUI.Controllers

@@ -9,11 +9,11 @@
 {
     <div class="alert alert-danger" role="alert">
         <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
-        @TempData["MsgError"]
+        @TempData["MensagemErro"]
     </div>
 }
 
-<form asp-controller="Login" method="post">
+<form asp-controller="ToDoLogin" method="post">
     <div class="section">
         <div class="container">
             <div class="row full-height justify-content-center">
@@ -42,7 +42,7 @@
                                             </div>
                                             <button asp-action="Login" class="btn mt-4">Faça Login</button>
                                             <p class="mb-0 mt-4 text-center">
-                                                <button asp-action="EsqueciSenha" class="link">Esqueceu sua senha?</button>
+                                                <a asp-action="EsqueciSenha" class="link:hover">Esqueceu a senha?</a>
                                             </p>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                                 <input asp-for="Senha" type="password" name="logpass" class="form-style" placeholder="Crie uma Senha" autocomplete="off">
                                                 <i class="input-icon uil uil-key-skeleton-alt"></i>
                                             </div>
-                                            <button asp-action="SolicitarAcesso" class="btn mt-4">Enviar</button>
+                                            <button asp-action="RequestAcess" class="btn mt-4">Enviar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -80,3 +80,7 @@
         </div>
     </div>
 </form>
+
+@section scripts {
+    <script src="~/js/tela-login.js"></script>
+}

@@ -1,6 +1,6 @@
 ﻿using LabOps.Application.DTOs.Fabricantes;
 
-namespace LabOps.Application.Interfaces
+namespace LabOps.Application.Interfaces.ApiControle
 {
     public interface IServicesFabricante
     {

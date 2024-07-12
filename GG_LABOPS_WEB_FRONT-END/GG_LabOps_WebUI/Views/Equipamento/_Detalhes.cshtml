@@ -1,0 +1,35 @@
+﻿@model LabOps.WebUI.Models.EquipamentosModel
+
+<div class="container-fluid">
+    <div class="modal-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+            <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Inventario)</dt>
+            <dd>@Html.DisplayFor(model => model.Inventario)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Hostname)</dt>
+            <dd>@Html.DisplayFor(model => model.Hostname)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.SerialNumber)</dt>
+            <dd>@Html.DisplayFor(model => model.SerialNumber)</dd>
+
+            <dt>@Html.DisplayNameFor(Model => Model.FabricanteNome)</dt>
+            <dd>@Html.DisplayFor(model => model.FabricanteNome)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.TipoEquipamentoDescricao)</dt>
+            <dd>@Html.DisplayFor(model => model.TipoEquipamentoDescricao)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.AtualizadoEm)</dt>
+            <dd>@Html.DisplayFor(model => model.AtualizadoEm)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.UsuarioInsercao)</dt>
+            <dd>@Html.DisplayFor(model => model.UsuarioInsercao)</dd>
+        </dl>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+    </div>
+</div>

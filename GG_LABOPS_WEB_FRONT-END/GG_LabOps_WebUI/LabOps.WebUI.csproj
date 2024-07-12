@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
     <ProjectReference Include="..\GG_LabOps_Infra\LabOps.Infra.ControlApi.csproj" />
-    <ProjectReference Include="..\LabOps.Infra.Data.CrossCutting.IOC\LabOps.Infra.Data.CrossCutting.IOC.csproj" />
+    <ProjectReference Include="..\LabOps.Infra.Data.CrossCutting.IOC\LabOps.Infra.Data.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>

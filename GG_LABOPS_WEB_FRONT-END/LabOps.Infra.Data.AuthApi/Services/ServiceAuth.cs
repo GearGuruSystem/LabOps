@@ -1,5 +1,5 @@
 ﻿using LabOps.Application.DTOs.Usuario;
-using LabOps.Application.Interfaces;
+using LabOps.Application.Interfaces.ApiAutenticacao;
 using LabOps.Infra.Data.AuthApi.Usefull;
 
 namespace LabOps.Infra.Data.AuthApi.Services

@@ -23,9 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.1 LabOps.Infra.Data", "3.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2 LabOps.Infra.CrossCutting", "3.2 LabOps.Infra.CrossCutting", "{5BFEB92E-7D3D-4BFE-9414-A6350850D0D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabOps.Infra.Data.AuthApi", "LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj", "{29031F1D-77D4-4436-A79D-101725D4E8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Infra.Data.AuthApi", "LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj", "{29031F1D-77D4-4436-A79D-101725D4E8FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Infra.Data.CrossCutting.IOC", "LabOps.Infra.Data.CrossCutting.IOC\LabOps.Infra.Data.CrossCutting.IOC.csproj", "{013DAFA3-7E10-4ABA-B51D-A9AF7628290C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabOps.Infra.Data.CrossCutting", "LabOps.Infra.Data.CrossCutting.IOC\LabOps.Infra.Data.CrossCutting.csproj", "{013DAFA3-7E10-4ABA-B51D-A9AF7628290C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

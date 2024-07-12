@@ -1,5 +1,5 @@
 ﻿using LabOps.Application.DTOs.Usuario;
-using LabOps.Application.Interfaces;
+using LabOps.Application.Interfaces.ApiAutenticacao;
 using LabOps.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 

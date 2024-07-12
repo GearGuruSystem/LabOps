@@ -1,5 +1,5 @@
 ﻿using LabOps.Application.DTOs.Fabricantes;
-using LabOps.Application.Interfaces;
+using LabOps.Application.Interfaces.ApiControle;
 using System.Net.Http.Json;
 
 #pragma warning disable IDE0290 // Use primary constructor
