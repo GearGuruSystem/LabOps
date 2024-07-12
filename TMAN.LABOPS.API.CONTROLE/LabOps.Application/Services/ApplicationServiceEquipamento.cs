@@ -20,7 +20,7 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BuscarTodosEquipamentos>> BuscaTodosEquipamentos()
+        public async Task<IEnumerable<BuscarEquipamentos>> BuscaTodosEquipamentos()
         {
             var data = await _serviceEquipamento.BuscarTodos();
             if (data.Any())
@@ -36,10 +36,14 @@ namespace LabOps.Application.Service
             return _mapper.Map<IEnumerable<EquipamentoDTO>>(objEquipamento);
         }
 
-        public async Task<EquipamentoDTO> BuscaPeloId(int id)
+        public async Task<BuscarEquipamentos> BuscaPeloId(int id)
         {
-            var objEquipamento = await _serviceEquipamento.BuscarPorId(id);
-            return _mapper.Map<EquipamentoDTO>(objEquipamento);
+            var data = await _serviceEquipamento.BuscarPorId(id);
+            if (data.Id > 0 )
+            {
+                return data;
+            }
+            throw new Exception();
         }
 
         public void RegistraEquipamento(CriarNovo obj)

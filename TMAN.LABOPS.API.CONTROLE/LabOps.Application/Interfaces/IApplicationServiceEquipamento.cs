@@ -4,8 +4,8 @@ namespace LabOps.Application.Interfaces
 {
     public interface IApplicationServiceEquipamento
     {
-        Task<IEnumerable<BuscarTodosEquipamentos>> BuscaTodosEquipamentos();
-        Task<EquipamentoDTO> BuscaPeloId(int id);
+        Task<IEnumerable<BuscarEquipamentos>> BuscaTodosEquipamentos();
+        Task<BuscarEquipamentos> BuscaPeloId(int id);
         void RegistraEquipamento(CriarNovo obj);
         void AtualizaEquipamento(EquipamentoDTO obj);
         void RemoveEquipamento(EquipamentoDTO obj);

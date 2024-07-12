@@ -27,43 +27,43 @@ namespace LabOps.Infra.Repository.Repository
             this._logger = logger;
         }
 
-        public new async Task<IEnumerable<BuscarTodosEquipamentos>> BuscarTodos()
+        public new async Task<IEnumerable<BuscarEquipamentos>> BuscarTodos()
         {
             _logger.LogInformation("Iniciando processo de busca no banco de dados");
             try
             {
-                var resultSql = await _sqlFactory.LoadDataAsync<BuscarTodosEquipamentos>("[dbo].[BuscarEquipamentosInfosCompletas]");
+                var resultSql = await _sqlFactory.LoadDataAsync<BuscarEquipamentos>("[dbo].[BuscarEquipamentosInfosCompletas]");
                 return resultSql.ToList();
             }
             catch (SqlNullValueException ex)
             {
                 _logger.LogError("Retornado o seguinte erro da consulta {@erroConsul}", ex);
-                return Enumerable.Empty<BuscarTodosEquipamentos>();
+                return Enumerable.Empty<BuscarEquipamentos>();
             }
             catch (Exception ex)
             {
                 _logger.LogError("Erro inesperado durante a consulta. [{@erro}]", ex);
-                return Enumerable.Empty<BuscarTodosEquipamentos>();
+                return Enumerable.Empty<BuscarEquipamentos>();
             }
         }
 
-        public override async Task<Equipamento> BuscarPorId(int id)
+        public new async Task<BuscarEquipamentos> BuscarPorId(int id)
         {
             try
             {
-                var parameters = new { @idParam = id };
-                var resultadoSql = await _sqlFactory.LoadDataAsync<Equipamento>("", parameters);
+                var parameters = new { @IdParam = id };
+                var resultadoSql = await _sqlFactory.LoadDataAsync<BuscarEquipamentos>("[dbo].[BuscarEquipamentosInfosCompletasPorId]", parameters);
                 return resultadoSql.FirstOrDefault();
             }
             catch (SqlNullValueException ex)
             {
                 _logger.LogError("Retornado o seguinte erro da consulta {@erroConsul}", ex);
-                return Enumerable.Empty<Equipamento>().FirstOrDefault();
+                return Enumerable.Empty<BuscarEquipamentos>().FirstOrDefault();
             }
             catch (Exception ex)
             {
                 _logger.LogError("Erro inesperado durante a consulta. [{@erro}]", ex);
-                return Enumerable.Empty<Equipamento>().FirstOrDefault();
+                return Enumerable.Empty<BuscarEquipamentos>().FirstOrDefault();
             }
         }
 

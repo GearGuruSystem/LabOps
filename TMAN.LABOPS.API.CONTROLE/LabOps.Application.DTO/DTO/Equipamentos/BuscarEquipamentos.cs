@@ -1,6 +1,6 @@
 ﻿namespace LabOps.Application.DTO.DTO.Equipamentos
 {
-    public class BuscarTodosEquipamentos
+    public class BuscarEquipamentos
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -16,13 +16,13 @@
 
         public object Clone()
         {
-            var equipamento = (BuscarTodosEquipamentos)MemberwiseClone();
+            var equipamento = (BuscarEquipamentos)MemberwiseClone();
             return equipamento;
         }
 
-        public BuscarTodosEquipamentos CloneTipado()
+        public BuscarEquipamentos CloneTipado()
         {
-            return (BuscarTodosEquipamentos)Clone();
+            return (BuscarEquipamentos)Clone();
         }
 
         #endregion

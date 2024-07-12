@@ -14,8 +14,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
                 .ForMember(equipDto => equipDto.TipoEquipamentoDto, opt => opt.MapFrom(equip => equip.TipoEquipamento))
                 .ReverseMap();
             CreateMap<Equipamento, CriarNovo>().ReverseMap();
-            CreateMap<Equipamento, BuscarEquipamentoPorId>().ReverseMap();
-            CreateMap<Equipamento, BuscarTodosEquipamentos>().ReverseMap();
+            CreateMap<Equipamento, BuscarEquipamentos>().ReverseMap();
         }
     }
 }
