@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
     <ProjectReference Include="..\GG_LabOps_Infra\LabOps.Infra.ControlApi.csproj" />
     <ProjectReference Include="..\LabOps.Infra.Data.AuthApi\LabOps.Infra.Data.AuthApi.csproj" />
+    <ProjectReference Include="..\LabOps.Infra.Data.CrossCutting.Adapter\LabOps.Infra.Data.CrossCutting.Adapter.csproj" />
   </ItemGroup>
 
 </Project>

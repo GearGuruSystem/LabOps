@@ -34,7 +34,7 @@
                     <td>@Html.DisplayFor(e => equipamento.TipoEquipamentoDescricao)</td>
                     <td>@Html.DisplayFor(e => equipamento.FabricanteNome)</td>
                     <td>
-                        <a href="javascript:" idEquipamento="@equipamento.Id" class="btn btn-primary btn-sm btn-detalhes">Detalhes</a>
+                        <a href="javascript:" class="btn btn-primary btn-sm btn-detalhes" idEquipamento="@equipamento.Id">Detalhes</a>
                         <a asp-action="Editar" class="btn btn-info btn-sm" asp-route-id="@equipamento.Id">Editar</a>
                         <a asp-action="Deletar" class="btn btn-danger btn-sm" asp-route-id="@equipamento.Id">Deletar</a>
                     </td>

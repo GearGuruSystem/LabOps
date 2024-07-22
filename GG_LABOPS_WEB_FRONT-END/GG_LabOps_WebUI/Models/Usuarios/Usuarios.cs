@@ -1,4 +1,4 @@
-﻿namespace LabOps.WebUI.Models
+﻿namespace LabOps.WebUI.Models.Usuarios
 {
     public class Usuarios
     {

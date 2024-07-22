@@ -1,7 +1,8 @@
-﻿using LabOps.Application.Interfaces.ApiAutenticacao;
-using LabOps.Application.Interfaces.ApiControle;
+﻿using AutoMapper;
 using LabOps.Infra.ControlApi.Services;
 using LabOps.Infra.Data.AuthApi.Services;
+using LabOps.Infra.Data.CrossCutting.Adapter.Interfaces.ApiAutenticacao;
+using LabOps.Infra.Data.CrossCutting.Adapter.Interfaces.ApiControle;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
@@ -10,15 +11,17 @@ namespace LabOps.Infra.Data.CrossCutting
 {
     public static class ConfigurationIOC
     {
-        public static IServiceCollection DependencyInjected(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddServicesInjected(this IServiceCollection services, IConfiguration configuration)
         {
-            #region IOC Application
+            #region IOC Services
 
             services.AddScoped<IServiceAuth, ServiceAuth>();
+            services.AddScoped<IServicesEquipament, ServicesEquipamento>();
             services.AddScoped<IServicesFabricante, ServicesFabricante>();
-            services.AddScoped<IServicesEquipamento, ServicesEquipamento>();
+            services.AddScoped<IServicesTipoEquipamento, ServicesTipoEquipamento>();
+            services.AddScoped<IServicesSituacao, ServicesSituacao>();
 
-            #endregion IOC Application
+            #endregion IOC Services
 
             #region IOC Infrastructure HttpClient
 

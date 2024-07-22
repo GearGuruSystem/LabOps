@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GG_LabOps_Application\LabOps.Application.csproj" />
+    <ProjectReference Include="..\LabOps.Infra.Data.CrossCutting.Adapter\LabOps.Infra.Data.CrossCutting.Adapter.csproj" />
   </ItemGroup>
 
 </Project>

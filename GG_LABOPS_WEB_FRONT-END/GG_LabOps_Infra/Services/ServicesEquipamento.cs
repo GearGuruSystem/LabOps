@@ -1,12 +1,12 @@
-﻿using LabOps.Application.DTOs.Equipamentos;
-using LabOps.Application.Interfaces.ApiControle;
+﻿using LabOps.Infra.Data.CrossCutting.Adapter.DTOs.Equipamentos;
+using LabOps.Infra.Data.CrossCutting.Adapter.Interfaces.ApiControle;
 using System.Net.Http.Json;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.Infra.ControlApi.Services
 {
-    public class ServicesEquipamento : IServicesEquipamento
+    public class ServicesEquipamento : IServicesEquipament
     {
         private readonly HttpClient _client;
 
@@ -15,38 +15,31 @@ namespace LabOps.Infra.ControlApi.Services
             _client = httpClientFactory.CreateClient("ApiControl");
         }
 
-        public async Task<IEnumerable<Equipamento>> GetAllEquipament()
+        public async Task<IEnumerable<EquipamentoSimplesDTO>> GetAllEquipament()
         {
             var resultClient = await _client.GetAsync("api/v1/Equipamento/BuscarEquipamentos");
-            return await resultClient.Content.ReadFromJsonAsync<IEnumerable<Equipamento>>();
+            return await resultClient.Content.ReadFromJsonAsync<IEnumerable<EquipamentoSimplesDTO>>();
         }
 
-        public async Task<Equipamento> GetEquipamentById(int id)
+        public async Task<EquipamentoDTO> GetEquipamentById(int id)
         {
-            var resultClient = await _client.GetAsync($"/api/v1/Equipamento/BuscaEquipamentosPeloId/{id}");
-            return await resultClient.Content.ReadFromJsonAsync<Equipamento>();
+            var resultClient = await _client.GetAsync($"/api/v1/Equipamento/BuscarEquipamentoPeloId/{id}");
+            return await resultClient.Content.ReadFromJsonAsync<EquipamentoDTO>();
         }
 
-        public async Task<Equipamento> RegisterEquipament(CriarNovoE novoEquipamento)
+        public async Task<EquipamentoSimplesDTO> RegisterEquipament(CriarNovoEDTO novoEquipamento)
         {
-            var resultClient = await _client.PostAsJsonAsync("api/v1/Equipamento/CadastraEquipamento", novoEquipamento);
+            var resultClient = await _client.PostAsJsonAsync("api/v1/Equipamento/CadastrarEquipamento", novoEquipamento);
             if (resultClient.IsSuccessStatusCode)
             {
-                return new Equipamento();
+                return new EquipamentoSimplesDTO();
             }
             throw new Exception("Ocorreu um erro");
         }
 
-        public void UpdateEquipament(Equipamento equipamento)
+        public void UpdateEquipament(EquipamentoDTO equipamento)
         {
-            _client.PutAsJsonAsync("api/v1/Equipamento/AtualizaEquipamento", equipamento);
-        }
-
-        [Obsolete("Metodo esta Obsoleto pois não esta terminado")]
-        public void RemoveEquipament(Equipamento equipamento)
-        {
-            var getType = typeof(Equipamento);
-            _client.DeleteFromJsonAsync("api/v1/Equipamento/DesabilitaEquipamento", getType);
+            _client.PutAsJsonAsync("api/v1/Equipamento/AtualizarEquipamento", equipamento);
         }
     }
 }

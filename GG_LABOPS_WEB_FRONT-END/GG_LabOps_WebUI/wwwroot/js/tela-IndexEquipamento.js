@@ -56,7 +56,6 @@
 
     $(".btn-detalhes").click(function () {
         var id = $(this).attr('idEquipamento');
-        console.log(id)
 
         $.ajax({
             type: 'GET',
@@ -64,14 +63,10 @@
             success: function (result) {
                 $("#detalhesEquipamento").html(result);
                 $('#modalDetalhesEquipamentos').modal("show");
-            }, error: function () {
-                console.log("Deu bololo");
+            }, error: function (xhr) {
+                var err = JSON.parse(xhr.responseText);
+                alert(err.Message)
             }
         });
     });
-
-
-
-
-
 });

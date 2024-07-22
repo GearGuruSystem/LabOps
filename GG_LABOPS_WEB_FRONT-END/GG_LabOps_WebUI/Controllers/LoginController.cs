@@ -1,6 +1,7 @@
-﻿using LabOps.Application.DTOs.Usuario;
-using LabOps.Application.Interfaces.ApiAutenticacao;
-using LabOps.WebUI.Models;
+﻿using AutoMapper;
+using LabOps.Infra.Data.CrossCutting.Adapter.DTOs.Usuarios;
+using LabOps.Infra.Data.CrossCutting.Adapter.Interfaces.ApiAutenticacao;
+using LabOps.WebUI.Models.Usuarios;
 using Microsoft.AspNetCore.Mvc;
 
 #pragma warning disable IDE0290 // Use primary constructor
@@ -10,10 +11,12 @@ namespace LabOps.WebUI.Controllers
     public class LoginController : Controller
     {
         private readonly IServiceAuth _services;
+        private readonly IMapper _mapper;
 
-        public LoginController(IServiceAuth services)
+        public LoginController(IServiceAuth services, IMapper mapper)
         {
             _services = services;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,8 +33,7 @@ namespace LabOps.WebUI.Controllers
             {
                 try
                 {
-                    var userDTO = ConvertInUserLoginDTO(loginModel);
-                    await _services.LoginUsuario(userDTO);
+                    await _services.LoginUsuario(_mapper.Map<UsuarioLoginDTO>(loginModel));
                     return RedirectToAction(nameof(HomeController.Index));
                 }
                 catch (Exception ex)
@@ -60,15 +62,6 @@ namespace LabOps.WebUI.Controllers
         public IActionResult Sair()
         {
             return RedirectToAction(nameof(Index));
-        }
-
-        private static UsuarioLogin ConvertInUserLoginDTO(LoginModel loginModel)
-        {
-            return new UsuarioLogin
-            {
-                ChaveUsuario = loginModel.Login,
-                Senha = loginModel.Senha
-            };
         }
     }
 }

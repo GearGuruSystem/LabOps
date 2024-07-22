@@ -1,14 +1,14 @@
-﻿@model CriarNovoEModel
+﻿@model EditarEquipamentoModel
 
 <h4>
-    Cadastro de equipamento novo
+    Editar equipamento: @Model.SerialNumber 
 </h4>
 <form asp-action="Cadastro" asp-controller="Equipamento" method="post">
     <div class="container">
 
         <div class="mb-3">
             <label asp-for="Nome" class="form-label"></label>
-            <input asp-for="Nome" type="text" class="form-control" placeholder="De um nome ao equipamento → Recomendado utilizar o modelo" required />
+            <input asp-for="Nome" type="text" class="form-control" placeholder="Informe o modelo do equipamento" required />
         </div>
 
         <div class="mb-3">
@@ -47,9 +47,10 @@
         </div>
 
         <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Salvar</button>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary" type="submit">Salvar</button>
+            </div>
         </div>
-        
+
     </div>
 </form>
-
