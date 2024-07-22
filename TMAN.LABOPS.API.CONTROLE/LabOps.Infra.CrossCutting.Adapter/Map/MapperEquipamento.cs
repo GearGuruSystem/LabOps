@@ -9,10 +9,11 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
         public MapperEquipamento()
         {
             CreateMap<Equipamento, EquipamentoDTO>()
-                .ForMember(equipDto => equipDto.FabricanteDto, opt => opt.MapFrom(equip => equip.Fabricante))
-                .ForMember(equipDto => equipDto.SituacaoDto, opt => opt.MapFrom(equip => equip.Situacao))
-                .ForMember(equipDto => equipDto.TipoEquipamentoDto, opt => opt.MapFrom(equip => equip.TipoEquipamento))
+                .ForMember(dest => dest.FabricanteDto, opt => opt.MapFrom(src => src.Fabricante))
+                .ForMember(dest => dest.SituacaoDto, opt => opt.MapFrom(src => src.Situacao))
+                .ForMember(dest => dest.TipoEquipamentoDto, opt => opt.MapFrom(src => src.TipoEquipamento))
                 .ReverseMap();
+
             CreateMap<Equipamento, CriarNovo>().ReverseMap();
             CreateMap<Equipamento, BuscarEquipamentos>().ReverseMap();
         }

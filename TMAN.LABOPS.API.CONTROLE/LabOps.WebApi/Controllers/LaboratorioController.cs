@@ -8,11 +8,11 @@ namespace LabOps.WebAPI.Controllers
     [Route("api/v1/[controller]")]
     public class LaboratorioController : ControllerBase
     {
-        private readonly IApplicationServiceLaboratorio applicationService;
+        private readonly IApplicationServiceLaboratorio _appService;
 
         public LaboratorioController(IApplicationServiceLaboratorio applicationService)
         {
-            this.applicationService = applicationService;
+            _appService = applicationService;
         }
 
         [HttpGet("BuscarTodosLaboratorios")]

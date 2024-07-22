@@ -21,19 +21,19 @@ namespace LabOps.Infra.Repository.Repository
             return await base.BuscarPorId(id);
         }
 
-        public override void Registrar(Fabricante obj)
+        public override async Task Registrar(Fabricante obj)
         {
-            base.Registrar(obj);
+            await base.Registrar(obj);
         }
 
-        public override void Atualizar(Fabricante obj)
+        public override async Task Atualizar(Fabricante obj)
         {
-            base.Atualizar(obj);
+            await base.Atualizar(obj);
         }
 
-        public override void Deletar(Fabricante obj)
+        public override async Task Deletar(Fabricante obj)
         {
-            base.Deletar(obj);
+            await base.Deletar(obj);
         }
     }
 }

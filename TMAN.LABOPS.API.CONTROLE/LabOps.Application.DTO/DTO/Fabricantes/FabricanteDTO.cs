@@ -2,7 +2,7 @@
 {
     public class FabricanteDTO : ICloneable
     {
-        public int IDFabricante { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string UsuarioAtualizacao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
@@ -18,9 +18,9 @@
             AtualizadoEm = atualizadoEm;
         }
 
-        public FabricanteDTO(int iDFabricante, string nome, string usuarioAtualizacao, DateTime? atualizadoEm)
+        public FabricanteDTO(int IdFabricante, string nome, string usuarioAtualizacao, DateTime? atualizadoEm)
         {
-            IDFabricante = iDFabricante;
+            Id = IdFabricante;
             Nome = nome;
             UsuarioAtualizacao = usuarioAtualizacao;
             AtualizadoEm = atualizadoEm;

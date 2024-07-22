@@ -22,6 +22,11 @@ namespace LabOps.Domain.Services.Services
             return await repositoryEquipamento.BuscarTodos();
         }
 
+        public async Task<Equipamento> BuscarComRetornoId(int id)
+        {
+            return await repositoryEquipamento.BuscarComRetornoId(id);
+        }
+
         public new async Task<BuscarEquipamentos> BuscarPorId(int id)
         {
             return await repositoryEquipamento.BuscarPorId(id);

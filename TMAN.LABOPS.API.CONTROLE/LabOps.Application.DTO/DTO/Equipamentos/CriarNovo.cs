@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LabOps.Application.DTO.DTO.Equipamentos
 {
     public class CriarNovo : ICloneable
     {
-        public int IDEquipamento { get; set; }
-
         [Required(ErrorMessage = "Informe um nome")]
         [MaxLength(120, ErrorMessage = "Nome maximo de até 120 caracteres")]
         public string Nome { get; set; }
@@ -24,9 +24,12 @@ namespace LabOps.Application.DTO.DTO.Equipamentos
 
         [Required(ErrorMessage = "Informe o ID do usuário")]
         public string UsuarioInsercao { get; set; }
+
         public string? Hostname { get; set; }
         public string? Inventario { get; set; }
         public string SerialNumber { get; set; }
+
+        [JsonIgnore]
         public DateTime? AtualizadoEm { get; set; }
 
         #region Metodos Clone

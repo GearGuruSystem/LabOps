@@ -9,11 +9,11 @@ namespace LabOps.WebAPI.Controllers
     [Route("api/v1/[controller]")]
     public class TipoEquipamentoController : ControllerBase
     {
-        private readonly IApplicationServiceTipoEquipamento applicationService;
+        private readonly IApplicationServiceTipoEquipamento _applicationService;
 
         public TipoEquipamentoController(IApplicationServiceTipoEquipamento applicationService)
         {
-            this.applicationService = applicationService;
+            _applicationService = applicationService;
         }
 
         [HttpGet("BuscarTodosTiposDeEquipamentos")]
@@ -21,7 +21,7 @@ namespace LabOps.WebAPI.Controllers
         {
             try
             {
-                var dados = await applicationService.BuscarTodosTiposDeEquipamentos();
+                var dados = await _applicationService.BuscarTodosTiposDeEquipamentos();
                 return Ok(dados);
             }
             catch (Exception)
@@ -39,7 +39,7 @@ namespace LabOps.WebAPI.Controllers
             }
             try
             {
-                applicationService.RegistraNovoTipoEquipamento(registroNovo);
+                _applicationService.RegistraNovoTipoEquipamento(registroNovo);
                 return Ok();
             }
             catch (Exception ex)

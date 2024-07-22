@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace LabOps.Domain.Entities
 {
@@ -7,18 +8,19 @@ namespace LabOps.Domain.Entities
     {
         [Required, Column("Cl_IdFabricante")]
         public int Id { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, MaxLength(25), Column("Cl_Nome")] 
         public string Nome { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, MaxLength(30), Column("Cl_UsuarioAtualizacao")]
         public string UsuarioAtualizacao { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, MaxLength(10), Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
-        public ICollection<Equipamento> Equipamentos { get; set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
+        [JsonIgnore]
+        public ICollection<Equipamento>? Equipamentos { get; set; }
+
         public Fabricante(string nome, string usuarioAtualizacao)
         {
             AdicionaFabricante(nome, usuarioAtualizacao);

@@ -67,19 +67,29 @@ namespace LabOps.Infra.Repository.Repository
             }
         }
 
-        public override void Registrar(Equipamento obj)
+        public async Task<Equipamento> BuscarComRetornoId(long id)
         {
-            base.Registrar(obj);
+            var data = await _context.Equipamentos
+                .Include(x => x.Fabricante)
+                .Include(x => x.TipoEquipamento)
+                .Include(x => x.Situacao)
+                .FirstOrDefaultAsync(x => x.Id == id);
+            return data;
         }
 
-        public override void Atualizar(Equipamento obj)
+        public override async Task Registrar(Equipamento obj)
         {
-            base.Atualizar(obj);
+            await base.Registrar(obj);
         }
 
-        public override void Deletar(Equipamento obj)
+        public override async Task Atualizar(Equipamento obj)
         {
-            base.Deletar(obj);
+            await base.Atualizar(obj);
+        }
+
+        public override async Task Deletar(Equipamento obj)
+        {
+            await base.Deletar(obj);
         }
 
         public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)

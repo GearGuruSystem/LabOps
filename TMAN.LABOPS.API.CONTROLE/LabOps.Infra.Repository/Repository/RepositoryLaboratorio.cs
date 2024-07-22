@@ -27,19 +27,19 @@ namespace LabOps.Infra.Repository.Repository
             throw new NotImplementedException();
         }
 
-        public override void Atualizar(Laboratorio obj)
+        public override async Task Atualizar(Laboratorio obj)
         {
-            base.Atualizar(obj);
+            await base.Atualizar(obj);
         }
 
-        public override void Registrar(Laboratorio obj)
+        public override async Task Registrar(Laboratorio obj)
         {
-            base.Registrar(obj);
+            await base.Registrar(obj);
         }
 
-        public override void Deletar(Laboratorio obj)
+        public override async Task Deletar(Laboratorio obj)
         {
-            base.Deletar(obj);
+            await base.Deletar(obj);
         }
     }
 }

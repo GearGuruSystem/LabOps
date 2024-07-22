@@ -63,5 +63,16 @@ namespace LabOps.Application.Service
             var objEquipamento = _mapper.Map<Equipamento>(obj);
             _serviceEquipamento.Remover(objEquipamento);
         }
+
+        public async Task<EquipamentoDTO> BuscarEquipamentoRetornoId(int id)
+        {
+            var data = await _serviceEquipamento.BuscarComRetornoId(id);
+            if(data.Id < 0)
+            {
+                throw new Exception();
+            }
+            var map = _mapper.Map<EquipamentoDTO>(data);
+            return map;
+        }
     }
 }

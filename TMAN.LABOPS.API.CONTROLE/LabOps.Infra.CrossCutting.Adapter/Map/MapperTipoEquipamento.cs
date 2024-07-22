@@ -8,7 +8,7 @@ namespace LabOps.Infrastructure.CrossCutting.Adapter.Map
     {
         public MapperTipoEquipamento()
         {
-            CreateMap<TipoEquipamento, TipoEquipamento>().ReverseMap();
+            CreateMap<TipoEquipamento, TipoEquipamentoDTO>().ReverseMap();
             CreateMap<TipoEquipamento, RegistroNovoTipoEquipamentoDTO>().ReverseMap();
         }
     }

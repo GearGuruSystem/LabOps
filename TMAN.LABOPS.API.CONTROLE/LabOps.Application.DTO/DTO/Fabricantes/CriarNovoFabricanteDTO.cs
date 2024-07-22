@@ -6,25 +6,13 @@ namespace LabOps.Application.DTO.DTO.Fabricantes
     public class CriarNovoFabricanteDTO
     {
         [Required]
-        public string Nome { get; private set; }
+        public string Nome { get; set; }
+
+        [Required]
+        public string UsuarioAtualizacao { get; set; }
 
         [JsonIgnore]
-        public string UsuarioAtualizacao { get; private set; }
-
-        [JsonIgnore]
-        public DateTime? AtualizadoEm { get; private set; }
-
-        public CriarNovoFabricanteDTO()
-        {
-        }
-
-        [JsonConstructor]
-        public CriarNovoFabricanteDTO(string nome, string usuarioAtualizacao, DateTime? atualizadoEm)
-        {
-            Nome = nome;
-            UsuarioAtualizacao = "Guian";
-            AtualizadoEm = atualizadoEm;
-        }
+        public DateTime? AtualizadoEm { get; set; } = DateTime.Now;
 
         #region metodos clone
 

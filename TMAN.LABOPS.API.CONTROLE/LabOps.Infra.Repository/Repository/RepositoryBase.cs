@@ -8,16 +8,18 @@ namespace LabOps.Infra.Repository.Repository
 {
     public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
-        private readonly AppDbContext context;
+        private readonly AppDbContext _context;
+        private readonly DbSet<TEntity> _dbSet;
 
         public RepositoryBase(AppDbContext context)
         {
-            this.context = context;
+            _context = context;
+            _dbSet = context.Set<TEntity>();
         }
 
         public virtual async Task<IEnumerable<TEntity>> BuscarTodos()
         {
-            var result = await context.Set<TEntity>().ToListAsync();
+            var result = await _context.Set<TEntity>().ToListAsync();
             if (result.Count < 1)
             {
                 return Enumerable.Empty<TEntity>();
@@ -27,25 +29,25 @@ namespace LabOps.Infra.Repository.Repository
 
         public virtual async Task<TEntity> BuscarPorId(int id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return await _context.Set<TEntity>().FindAsync(id);
         }
 
-        public virtual async void Registrar(TEntity obj)
+        public virtual async Task Registrar(TEntity obj)
         {
-            await context.Set<TEntity>().AddAsync(obj);
-            await context.SaveChangesAsync();
+            await _dbSet.AddAsync(obj);
+            await _context.SaveChangesAsync();
         }
 
-        public virtual async void Atualizar(TEntity obj)
+        public virtual async Task Atualizar(TEntity obj)
         {
-            await context.Set<TEntity>().AddAsync(obj);
-            await context.SaveChangesAsync();
+            _dbSet.Update(obj);
+            await _context.SaveChangesAsync();
         }
 
-        public virtual async void Deletar(TEntity obj)
+        public virtual async Task Deletar(TEntity obj)
         {
-            context.Set<TEntity>().Remove(obj);
-            await context.SaveChangesAsync();
+            _dbSet.Remove(obj);
+            await _context.SaveChangesAsync();
         }
     }
 }

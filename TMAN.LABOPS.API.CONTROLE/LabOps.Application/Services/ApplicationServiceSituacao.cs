@@ -19,6 +19,12 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<SituacaoDTO>> BuscarTodasSituacoes()
+        {
+            var objSituacao = await _serviceSituacao.BuscarTodos();
+            return _mapper.Map<IEnumerable<SituacaoDTO>>(objSituacao);
+        }
+
         public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
         {
             var objSituacao = await _serviceSituacao.BuscarSituacoesAtivas();

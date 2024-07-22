@@ -27,8 +27,6 @@ namespace LabOps.WebAPI.Controllers
         /// <returns>
         /// Todos Fabricantes cadastrados.
         /// </returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("BuscarTodosFabricantes")]
         public async Task<IActionResult> BuscarTodosFabricantes()
         {
@@ -71,7 +69,7 @@ namespace LabOps.WebAPI.Controllers
                 try
                 {
                     applicationService.RegistraFabricante(fabricanteDTO);
-                    return Created("api/v1/fabricante", fabricanteDTO);
+                    return Created();
                 }
                 catch (Exception ex)
                 {

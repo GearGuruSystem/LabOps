@@ -18,8 +18,8 @@ namespace LabOps.WebAPI.Controllers
 
         public EquipamentoController(IApplicationServiceEquipamento applicationService, ILogger<EquipamentoController> logger)
         {
-            this._appService = applicationService;
-            this._logger = logger;
+            _appService = applicationService;
+            _logger = logger;
         }
 
         [HttpGet("BuscarEquipamentos")]
@@ -39,21 +39,25 @@ namespace LabOps.WebAPI.Controllers
             }
         }
 
-        [HttpGet("BuscaEquipamentosPeloId/{id:int}")]
-        public async Task<IActionResult> BuscaEquipamentosPeloId(int id)
+        [HttpGet("BuscarEquipamentoPeloId/{id:int}")]
+        public async Task<IActionResult> BuscarEquipamentoComRetornoId(int id)
         {
+            _logger.LogInformation("Iniciado busca de equipamentos");
             try
             {
-                var data = await _appService.BuscaPeloId(id);
+                var data = await _appService.BuscarEquipamentoRetornoId(id);
+                _logger.LogInformation("Retornando 200OK");
                 return Ok(data);
             }
             catch (Exception ex)
             {
-                return NotFound(ex);
+                _logger.LogError("Ocorreu um erro durante a busca. \nMensagem de erro: {error}", ex.Message);
+                _logger.LogError("Retornando 404NOTFOUND");
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
 
-        [HttpPost("CadastraEquipamento")]
+        [HttpPost("CadastrarEquipamento")]
         public IActionResult CadastraEquipamento([FromBody] CriarNovo equipamentoDTO)
         {
             if (ModelState.IsValid)
@@ -71,7 +75,7 @@ namespace LabOps.WebAPI.Controllers
             return BadRequest();
         }
 
-        [HttpPut("AtualizaEquipamento")]
+        [HttpPut("AtualizarEquipamento")]
         public IActionResult AtualizaEquipamento([FromBody] EquipamentoDTO equipamento)
         {
             try
@@ -85,7 +89,7 @@ namespace LabOps.WebAPI.Controllers
             }
         }
 
-        [HttpDelete("DesabilitaEquipamento")]
+        [HttpDelete("DesabilitarEquipamento")]
         public IActionResult DesabilitaEquipamento([FromBody] EquipamentoDTO equipamentoDTO)
         {
             try

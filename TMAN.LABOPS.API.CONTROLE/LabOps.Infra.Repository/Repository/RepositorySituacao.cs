@@ -19,14 +19,19 @@ namespace LabOps.Infra.Repository.Repository
             return resultadoSql;
         }
 
-        public override void Registrar(Situacao obj)
+        public override Task<IEnumerable<Situacao>> BuscarTodos()
         {
-            base.Registrar(obj);
+            return base.BuscarTodos();
         }
 
-        public override void Atualizar(Situacao obj)
+        public override async Task Registrar(Situacao obj)
         {
-            base.Atualizar(obj);
+            await base.Registrar(obj);
+        }
+        
+        public override async Task Atualizar(Situacao obj)
+        {
+            await base.Atualizar(obj);
         }
     }
 }

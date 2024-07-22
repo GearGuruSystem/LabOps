@@ -3,38 +3,38 @@ using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataContext;
 using Microsoft.Extensions.Logging;
 
+#pragma warning disable IDE0290 // Use primary constructor
 
 namespace LabOps.Infra.Repository.Repository
 {
-    public class RepositoryTipoEquipamento(AppDbContext context, ILogger<RepositoryTipoEquipamento> logger) : RepositoryBase<TipoEquipamento>(context), IRepositoryTipoEquipamento
+    public class RepositoryTipoEquipamento : RepositoryBase<TipoEquipamento>, IRepositoryTipoEquipamento
     {
-        private readonly ILogger<RepositoryTipoEquipamento> logger = logger;
+        private readonly ILogger<RepositoryTipoEquipamento> _logger;
+
+        public RepositoryTipoEquipamento(AppDbContext context, ILogger<RepositoryTipoEquipamento> logger) 
+            : base(context) 
+        {
+            _logger = logger;
+        }
 
         public override async Task<IEnumerable<TipoEquipamento>> BuscarTodos()
         {
-            logger.LogInformation("Executando busca dos tipos de equipamentos cadastrados");
-            var resultSql = await base.BuscarTodos();
-            if (!resultSql.Any())
-            {
-                logger.LogError("Não foi encontrado nenhum registro no banco");
-                throw new Exception("Não foi encontrado nenhum registro no banco de dados");
-            }
-            return resultSql.ToList();
+            return await base.BuscarTodos();
         }
 
-        public override void Atualizar(TipoEquipamento obj)
+        public override async Task Atualizar(TipoEquipamento obj)
         {
-            base.Atualizar(obj);
+            await base.Atualizar(obj);
         }
 
-        public override void Registrar(TipoEquipamento obj)
+        public override async Task Registrar(TipoEquipamento obj)
         {
-            base.Registrar(obj);
+            await base.Registrar(obj);
         }
 
-        public override void Deletar(TipoEquipamento obj)
+        public override async Task Deletar(TipoEquipamento obj)
         {
-            base.Deletar(obj);
+            await base.Deletar(obj);
         }
     }
 }

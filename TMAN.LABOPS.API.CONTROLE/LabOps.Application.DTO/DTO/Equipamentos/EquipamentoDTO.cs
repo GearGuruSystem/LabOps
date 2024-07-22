@@ -6,7 +6,7 @@ namespace LabOps.Application.DTO.DTO.Equipamentos
 {
     public class EquipamentoDTO : ICloneable
     {
-        public int IDEquipamento { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string? Hostname { get; set; }
         public string? Inventario { get; set; }
@@ -18,6 +18,7 @@ namespace LabOps.Application.DTO.DTO.Equipamentos
         public DateTime? AtualizadoEm { get; set; }
 
         #region metodos clone
+
         public object Clone()
         {
             var equipamento = (EquipamentoDTO)MemberwiseClone();
@@ -28,6 +29,7 @@ namespace LabOps.Application.DTO.DTO.Equipamentos
         {
             return (EquipamentoDTO)Clone();
         }
-        #endregion
+
+        #endregion metodos clone
     }
 }

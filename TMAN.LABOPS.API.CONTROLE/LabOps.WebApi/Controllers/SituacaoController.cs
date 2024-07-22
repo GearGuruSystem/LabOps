@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LabOps.WebAPI.Controllers
 {
+    [Route("api/v1/Situacao")]
     public class SituacaoController : ControllerBase
     {
         private readonly IApplicationServiceSituacao applicationService;
@@ -16,7 +17,23 @@ namespace LabOps.WebAPI.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("BuscarTodasSituaçõesAtivas")]
+        [HttpGet("BuscarTodasSituacoes")]
+        public async Task<IActionResult> BuscarTodasSituacoes()
+        {
+            logger.LogInformation("Iniciando processo para buscar informações no banco");
+            try
+            {
+                var dados = await applicationService.BuscarTodasSituacoes();
+                return Ok(dados);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Ocorreu um erro: {@Mensagem}", ex.Message);
+                return StatusCode(StatusCodes.Status400BadRequest, "Ocorreu um erro ao buscar as situações.");
+            }
+        }
+
+        [HttpGet("BuscarTodasSituacoesAtivas")]
         public async Task<IActionResult> BuscaTodasSituacaoAtiva()
         {
             logger.LogInformation("Iniciando processo para buscar informações no banco");

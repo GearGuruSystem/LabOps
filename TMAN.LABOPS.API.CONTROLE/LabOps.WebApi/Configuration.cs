@@ -11,11 +11,12 @@ namespace LabOps.WebApi
             services.AddCors(opt =>
             {
                 opt.AddPolicy(WebApiConfiguration.CorsPolicyName,
-                    buld => buld
+                    build => build
                     .WithOrigins(WebApiConfiguration.FrontEnd, WebApiConfiguration.AuthApi, WebApiConfiguration.ServiceNotification)
                     .AllowAnyHeader()
                     .WithMethods("GET", "POST", "PUT", "DELETE"));
             });
+
             return services;
         }
 

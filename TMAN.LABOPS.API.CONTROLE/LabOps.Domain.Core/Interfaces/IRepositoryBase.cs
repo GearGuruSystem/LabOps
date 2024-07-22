@@ -6,10 +6,10 @@
 
         Task<TEntity> BuscarPorId(int id);
 
-        void Registrar(TEntity obj);
+        Task Registrar(TEntity obj);
 
-        void Atualizar(TEntity obj);
+        Task Atualizar(TEntity obj);
 
-        void Deletar(TEntity obj);
+        Task Deletar(TEntity obj);
     }
 }
