@@ -9,11 +9,11 @@ namespace LabOps.WebAPI.Controllers
     [Route("api/v1/[controller]")]
     public class TipoEquipamentoController : ControllerBase
     {
-        private readonly IApplicationServiceTipoEquipamento _applicationService;
+        private readonly IApplicationServiceTipoEquipamento _appService;
 
         public TipoEquipamentoController(IApplicationServiceTipoEquipamento applicationService)
         {
-            _applicationService = applicationService;
+            _appService = applicationService;
         }
 
         [HttpGet("BuscarTodosTiposDeEquipamentos")]
@@ -21,7 +21,7 @@ namespace LabOps.WebAPI.Controllers
         {
             try
             {
-                var dados = await _applicationService.BuscarTodosTiposDeEquipamentos();
+                var dados = await _appService.BuscarTodosTiposDeEquipamentos();
                 return Ok(dados);
             }
             catch (Exception)
@@ -30,22 +30,22 @@ namespace LabOps.WebAPI.Controllers
             }
         }
 
-        [HttpPost("RegistroTipoEquipamento")]
+        [HttpPost("RegistrarTipoEquipamento")]
         public IActionResult RegistraTipoEquipamento([FromBody] RegistroNovoTipoEquipamentoDTO registroNovo)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return StatusCode(StatusCodes.Status400BadRequest);
+                try
+                {
+                    _appService.RegistraNovoTipoEquipamento(registroNovo);
+                    return Created();
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, $"{ex.Message}");
+                }
             }
-            try
-            {
-                _applicationService.RegistraNovoTipoEquipamento(registroNovo);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, $"{ex.Message}");
-            }
+            return StatusCode(StatusCodes.Status400BadRequest);
         }
     }
 }

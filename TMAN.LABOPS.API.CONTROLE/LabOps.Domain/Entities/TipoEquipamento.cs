@@ -7,32 +7,35 @@ namespace LabOps.Domain.Entities
     {
         [Required, Column("Cl_IdTipoEquipamento")]
         public int Id { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, MaxLength(120), Column("Cl_Descricao")]
         public string Descricao { get; private set; }
 
         [Required, Column("Cl_UsuarioAtualizacao")]
         public string UsuarioAtualizacao { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
         [Required, Column("Cl_AtualizadoEm")]
         public DateTime? AtualizadoEm { get; private set; }
-        /*-------------------------------------------------------------------------------------------------*/
-        public ICollection<Equipamento> Equipamentos { get; set; }
-        /*-------------------------------------------------------------------------------------------------*/
-        public ICollection<CaracteristicaTipoTipoEquipamento> CaracteristicaTipoTipoEquipamentos { get; set; }
-        /*-------------------------------------------------------------------------------------------------*/
+
+        public ICollection<Equipamento>? Equipamentos { get; set; }
+
+        public ICollection<CaracteristicaTipoTipoEquipamento>? CaracteristicaTipoTipoEquipamentos { get; set; }
+
+        public TipoEquipamento()
+        {
+        }
 
         public TipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
         {
-            AddTipoEquipamento(idTipoEquipamento, descricao, usuarioAtualizacao);
+            AdicionaTipoEquipamento(idTipoEquipamento, descricao, usuarioAtualizacao);
         }
 
         public TipoEquipamento(string descricao, string usuarioAtualizacao)
         {
-            AddTipoEquipamento(descricao, usuarioAtualizacao);
+            AdicionaTipoEquipamento(descricao, usuarioAtualizacao);
         }
 
-        private void AddTipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
+        private void AdicionaTipoEquipamento(int idTipoEquipamento, string descricao, string usuarioAtualizacao)
         {
             Id = idTipoEquipamento;
             Descricao = descricao;
@@ -40,7 +43,7 @@ namespace LabOps.Domain.Entities
             AtualizadoEm = DateTime.Now;
         }
 
-        private void AddTipoEquipamento(string descricao, string usuarioAtualizacao)
+        private void AdicionaTipoEquipamento(string descricao, string usuarioAtualizacao)
         {
             Descricao = descricao;
             UsuarioAtualizacao = usuarioAtualizacao;

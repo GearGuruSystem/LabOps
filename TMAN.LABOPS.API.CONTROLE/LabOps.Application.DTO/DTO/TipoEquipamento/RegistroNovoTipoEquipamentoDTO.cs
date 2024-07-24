@@ -1,22 +1,17 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LabOps.Application.DTO.DTO.TipoEquipamento
 {
     public record RegistroNovoTipoEquipamentoDTO
     {
-        public string Descricao { get; init; }
-        public string UsuarioAtualizcao { get; init; }
+        [Required(ErrorMessage = "Informe o tipo de equipamento")]
+        public string Descricao { get; set; }
+
+        [Required(ErrorMessage = "Informe usuario")]
+        public string UsuarioAtualizcao { get; set; }
 
         [JsonIgnore]
-        public DateTime? AtualizadoEm { get; init; } = DateTime.Now;
-
-
-        [JsonConstructor]
-        public RegistroNovoTipoEquipamentoDTO(string descricao, string usuarioAtualizacao)
-        {
-            Descricao = descricao;
-            UsuarioAtualizcao = usuarioAtualizacao;
-            AtualizadoEm = DateTime.Now;
-        }
+        public DateTime? AtualizadoEm { get; set; } = DateTime.Now;
     }
 }
