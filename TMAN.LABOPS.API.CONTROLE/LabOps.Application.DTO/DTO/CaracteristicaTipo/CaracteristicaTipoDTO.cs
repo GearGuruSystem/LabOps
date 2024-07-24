@@ -1,6 +1,6 @@
-﻿namespace LabOps.Application.DTO.DTO.Situacao
+﻿namespace LabOps.Application.DTO.DTO.CaracteristicaTipo
 {
-    public record SituacaoDTO
+    public class CaracteristicaTipoDTO
     {
         public int Id { get; set; }
         public string Descricao { get; set; }

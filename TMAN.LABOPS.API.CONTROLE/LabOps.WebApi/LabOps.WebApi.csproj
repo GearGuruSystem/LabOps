@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LabOps.Application.DTO\LabOps.Application.DTO.csproj" />
     <ProjectReference Include="..\LabOps.Infra.CrossCutting.IOC\LabOps.Infra.CrossCutting.IOC.csproj" />
   </ItemGroup>

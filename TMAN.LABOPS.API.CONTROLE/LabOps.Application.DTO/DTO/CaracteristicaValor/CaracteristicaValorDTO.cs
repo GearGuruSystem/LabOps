@@ -1,9 +1,9 @@
-﻿namespace LabOps.Application.DTO.DTO.Situacao
+﻿namespace LabOps.Application.DTO.DTO.CaracteristicaValor
 {
-    public record SituacaoDTO
+    public class CaracteristicaValorDTO
     {
         public int Id { get; set; }
-        public string Descricao { get; set; }
+        public string Valor { get; set; }
         public string UsuarioAtualizacao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
     }

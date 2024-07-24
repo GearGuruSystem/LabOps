@@ -2,10 +2,16 @@
 using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataContext;
 
+#pragma warning disable IDE0290
+
 namespace LabOps.Infra.Repository.Repository
 {
-    public class RepositoryFabricante(AppDbContext context) : RepositoryBase<Fabricante>(context), IRepositoryFabricante
+    public class RepositoryFabricante : RepositoryBase<Fabricante>, IRepositoryFabricante
     {
+        public RepositoryFabricante(AppDbContext context) : base(context)
+        {
+        }
+
         public override async Task<IEnumerable<Fabricante>> BuscarTodos()
         {
             var result = await base.BuscarTodos();

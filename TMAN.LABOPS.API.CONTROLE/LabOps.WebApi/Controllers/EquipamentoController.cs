@@ -1,7 +1,6 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
 using LabOps.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlTypes;
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -32,10 +31,27 @@ namespace LabOps.WebAPI.Controllers
                 _logger.LogInformation("Retornando 200OK");
                 return Ok(data);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _logger.LogError("Retornando 404NOTFOUND");
-                return StatusCode(StatusCodes.Status404NotFound);
+                _logger.LogError("Retornando CODIGO 404 - ERRO: {msgErro}", ex.Message);
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("BuscarEquipamentosPaginados")]
+        public async Task<IActionResult> BuscarEquipamentosPaginados(int pageNumber, int pageSize)
+        {
+            _logger.LogInformation("Iniciado busca de equipamentos");
+            try
+            {
+                var data = await _appService.BuscaTodosPorPagina(pageNumber, pageSize);
+                _logger.LogInformation("Retornando 200OK");
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Retornando CODIGO 404 - ERRO: {msgErro}", ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
