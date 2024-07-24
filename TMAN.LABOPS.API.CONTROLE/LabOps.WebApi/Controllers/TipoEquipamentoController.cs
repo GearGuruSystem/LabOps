@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LabOps.WebAPI.Controllers
 {
+    [ApiController]
     [Route("api/v1/[controller]")]
     public class TipoEquipamentoController : ControllerBase
     {
