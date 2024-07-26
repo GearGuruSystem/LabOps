@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Response;
 using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Entities;
 using LabOps.Infra.Data.DataAcess;
@@ -67,6 +68,32 @@ namespace LabOps.Infra.Repository.Repository
             }
         }
 
+        public async Task<IEnumerable<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        {
+            try
+            {
+                var query = _context.Equipamentos.AsNoTracking()
+                    .Include(x => x.Fabricante)
+                    .Include(x => x.TipoEquipamento)
+                    .Include(x => x.Situacao)
+                    .Include(x => x.Laboratorio)
+                    .OrderBy(x => x.Id);
+
+                var equipaments = await query.Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                var totalCount = await query.CountAsync();
+
+                return equipaments;
+            }
+            catch
+            {
+                //return new ResponsePaged<IEnumerable<Equipamento>>(false, "Não foi possivel consultar os equipamentos");
+                throw;
+            }
+        }
+
         public async Task<Equipamento> BuscarComRetornoId(long id)
         {
             var data = await _context.Equipamentos
@@ -90,11 +117,6 @@ namespace LabOps.Infra.Repository.Repository
         public override async Task Deletar(Equipamento obj)
         {
             await base.Deletar(obj);
-        }
-
-        public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
-        {
-            return await _context.Equipamentos.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         }
     }
 }

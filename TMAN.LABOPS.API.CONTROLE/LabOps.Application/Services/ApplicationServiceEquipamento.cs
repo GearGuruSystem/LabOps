@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Response;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
-
 
 #pragma warning disable IDE0290 // Use primary constructor
 
@@ -30,16 +30,21 @@ namespace LabOps.Application.Service
             throw new Exception();
         }
 
-        public async Task<IEnumerable<EquipamentoDTO>> BuscaTodosPorPagina(int pageNumber, int pageSize)
+        public async Task<ResponsePaged<IEnumerable<EquipamentoDTO>>> BuscaTodosPorPagina(int pageNumber, int pageSize)
         {
-            var objEquipamento = await _serviceEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
-            return _mapper.Map<IEnumerable<EquipamentoDTO>>(objEquipamento);
+            var objEquipamento = _mapper.Map<IEnumerable<EquipamentoDTO>>(await _serviceEquipamento.BuscarTodosPorPagina(pageNumber, pageSize));
+            var responsePaged = new ResponsePaged<IEnumerable<EquipamentoDTO>>(objEquipamento, objEquipamento.Count());
+            if (responsePaged.Sucess == true)
+            {
+                return responsePaged;
+            }
+            return new ResponsePaged<IEnumerable<EquipamentoDTO>>(false, "Houve um erro.");
         }
 
         public async Task<BuscarEquipamentos> BuscaPeloId(int id)
         {
             var data = await _serviceEquipamento.BuscarPorId(id);
-            if (data.Id > 0 )
+            if (data.Id > 0)
             {
                 return data;
             }
@@ -67,7 +72,7 @@ namespace LabOps.Application.Service
         public async Task<EquipamentoDTO> BuscarEquipamentoRetornoId(int id)
         {
             var data = await _serviceEquipamento.BuscarComRetornoId(id);
-            if(data.Id < 0)
+            if (data.Id < 0)
             {
                 throw new Exception();
             }

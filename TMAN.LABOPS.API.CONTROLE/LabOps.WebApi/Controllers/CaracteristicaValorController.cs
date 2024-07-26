@@ -17,6 +17,7 @@ namespace LabOps.WebApi.Controllers
             _appCaracteristicaValor = appCaracteristicaValor;
         }
 
+        [HttpGet("BuscarValoresCaracteristica")]
         public IActionResult BuscarCaracteristicasRegistradas()
         {
             return NotFound();

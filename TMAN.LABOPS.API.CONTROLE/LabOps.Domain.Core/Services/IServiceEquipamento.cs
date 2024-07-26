@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Response;
 using LabOps.Domain.Entities;
 
 namespace LabOps.Domain.Core.Services
@@ -8,8 +9,6 @@ namespace LabOps.Domain.Core.Services
         Task<Equipamento> BuscarComRetornoId(int id);
         new Task<BuscarEquipamentos> BuscarPorId(int id);
         new Task<IEnumerable<BuscarEquipamentos>> BuscarTodos();
-        Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize);
+        Task<IEnumerable<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize);
     }
-
-    
 }

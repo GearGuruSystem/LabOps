@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Response;
 using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
@@ -32,9 +33,10 @@ namespace LabOps.Domain.Services.Services
             return await repositoryEquipamento.BuscarPorId(id);
         }
 
-        public async Task<ICollection<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
+        public async Task<IEnumerable<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize)
         {
-            return await repositoryEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
+            var data = await repositoryEquipamento.BuscarTodosPorPagina(pageNumber, pageSize);
+            return data;
         }
     }
 }

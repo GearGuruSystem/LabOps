@@ -39,14 +39,17 @@ namespace LabOps.WebAPI.Controllers
         }
 
         [HttpGet("BuscarEquipamentosPaginados")]
-        public async Task<IActionResult> BuscarEquipamentosPaginados(int pageNumber, int pageSize)
+        public async Task<IActionResult> BuscarEquipamentosPaginados([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
             _logger.LogInformation("Iniciado busca de equipamentos");
             try
             {
                 var data = await _appService.BuscaTodosPorPagina(pageNumber, pageSize);
-                _logger.LogInformation("Retornando 200OK");
-                return Ok(data);
+                if (data.Sucess == true)
+                {
+                    return Ok(data);
+                }
+                throw new Exception(data.Message);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using LabOps.Application.Service;
 using LabOps.Domain.Core.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Services.Services;
+using LabOps.Infra.CrossCutting.Adapter.Map;
 using LabOps.Infra.Data.DataAcess;
 using LabOps.Infra.Data.DataContext;
 using LabOps.Infra.Repository.Repository;
@@ -67,6 +68,7 @@ namespace LabOps.Infra.CrossCutting.IOC
                 mc.AddProfile(new MapperLaboratorio());
                 mc.AddProfile(new MapperSituacao());
                 mc.AddProfile(new MapperTipoEquipamento());
+                mc.AddProfile(new MapperReponsePaged());
             });
             var mapper = mappingConfig.CreateMapper();
             service.AddSingleton(mapper);

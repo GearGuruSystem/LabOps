@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO.Equipamentos;
+using LabOps.Application.DTO.Response;
 
 namespace LabOps.Application.Interfaces
 {
@@ -10,6 +11,6 @@ namespace LabOps.Application.Interfaces
         void RegistraEquipamento(CriarNovo obj);
         void AtualizaEquipamento(EquipamentoDTO obj);
         void RemoveEquipamento(EquipamentoDTO obj);
-        Task<IEnumerable<EquipamentoDTO>> BuscaTodosPorPagina(int pageNumber, int pageSize);
+        Task<ResponsePaged<IEnumerable<EquipamentoDTO>>> BuscaTodosPorPagina(int pageNumber, int pageSize);
     }
 }

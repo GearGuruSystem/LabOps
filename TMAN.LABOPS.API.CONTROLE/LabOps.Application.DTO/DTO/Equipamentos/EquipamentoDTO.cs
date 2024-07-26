@@ -1,4 +1,5 @@
 ﻿using LabOps.Application.DTO.DTO.Fabricantes;
+using LabOps.Application.DTO.DTO.Laboratorio;
 using LabOps.Application.DTO.DTO.Situacao;
 using LabOps.Application.DTO.DTO.TipoEquipamento;
 
@@ -14,6 +15,7 @@ namespace LabOps.Application.DTO.DTO.Equipamentos
         public SituacaoDTO SituacaoDto { get; set; }
         public TipoEquipamentoDTO TipoEquipamentoDto { get; set; }
         public FabricanteDTO FabricanteDto { get; set; }
+        public LaboratorioDTO LaboratorioDto { get; set; }
         public string UsuarioInsercao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
 
