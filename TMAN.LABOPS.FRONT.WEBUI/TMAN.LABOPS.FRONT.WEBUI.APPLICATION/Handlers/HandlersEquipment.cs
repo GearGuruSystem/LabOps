@@ -2,6 +2,8 @@
 using Tman.LabOps.Infrastructure.CrossCutting.Interfaces;
 using Tman.LabOps.WebUI.Application.Interfaces;
 
+#pragma warning disable IDE0290
+
 namespace Tman.LabOps.WebUI.Application.Handlers
 {
     public class HandlersEquipment : IHandlersEquipment

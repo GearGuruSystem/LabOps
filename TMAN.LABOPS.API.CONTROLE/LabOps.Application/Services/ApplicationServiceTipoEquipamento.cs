@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using LabOps.Application.DTO.DTO.TipoEquipamento;
+using LabOps.Application.DTO.Response;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
 
-#pragma warning disable IDE0290 // Use primary constructor
+#pragma warning disable IDE0290
 
 namespace LabOps.Application.Service
 {
@@ -19,10 +20,10 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TipoEquipamentoDTO>> BuscarTodosTiposDeEquipamentos()
+        public async Task<Response<IEnumerable<TipoEquipamentoDTO>>> BuscarTodosTiposDeEquipamentos()
         {
-            var tipoEquipamentos = await _serviceTipoEquipamento.BuscarTodos();
-            return _mapper.Map<IEnumerable<TipoEquipamentoDTO>>(tipoEquipamentos);
+            var data = _mapper.Map<IEnumerable<TipoEquipamentoDTO>>(await _serviceTipoEquipamento.BuscarTodos());
+            return new Response<IEnumerable<TipoEquipamentoDTO>>(data, data.Count(), "Ok");
         }
 
         public void RegistraNovoTipoEquipamento(RegistroNovoTipoEquipamentoDTO registroNovo)

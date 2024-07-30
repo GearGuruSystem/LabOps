@@ -10,6 +10,7 @@ using Tman.LabOps.WebUI.Application.Interfaces;
 
 namespace Tman.LabOps.WebUI.MVC.Controllers
 {
+    [Route("Equipamentos")]
     public class EquipmentController : Controller
     {
         private readonly IHandlersEquipment _handlerEquipment;
@@ -33,14 +34,14 @@ namespace Tman.LabOps.WebUI.MVC.Controllers
             return View(dados);
         }
 
-        [HttpGet]
+        [HttpGet("Detalhes")]
         public async Task<IActionResult> Details(int id)
         {
             var dados = await _handlerEquipment.GetEquipmentById(id);
             return PartialView("_Details", dados);
         }
 
-        [HttpGet]
+        [HttpGet("Cadastro")]
         public async Task<IActionResult> Register()
         {
             var vManufacturers = await _handlerManufacturer.GetAllManufacturers();
@@ -56,13 +57,14 @@ namespace Tman.LabOps.WebUI.MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(NewEquipamentoDTO criarNovoE)
         {
             await _handlerEquipment.RegisterEquipment(criarNovoE);
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [HttpGet("Editar")]
         public async Task<IActionResult> Edit(int id)
         {
             var equipEdit = await _handlerEquipment.GetEquipmentById(id);
@@ -80,6 +82,7 @@ namespace Tman.LabOps.WebUI.MVC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(EditEquipamentoDTO editEquipmentDTO)
         {
             _handlerEquipment.UpdateEquipment(editEquipmentDTO);

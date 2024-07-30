@@ -4,6 +4,8 @@ using Tman.LabOps.Infrastructure.CrossCutting.DTOs.Equipamento;
 using Tman.LabOps.Infrastructure.CrossCutting.Interfaces;
 using Tman.LabOps.Infrastructure.CrossCutting.Response;
 
+#pragma warning disable IDE0290
+
 namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
 {
     public class ServicesEquipment : IServicesEquipment
@@ -22,7 +24,10 @@ namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
             {
                 var jsonString = await resultClient.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<ApiResponse<EquipamentoDTO>>(jsonString);
-                return jsonData.Data;
+                if (jsonData != null)
+                {
+                    return jsonData.Data;
+                }
             }
             throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
         }

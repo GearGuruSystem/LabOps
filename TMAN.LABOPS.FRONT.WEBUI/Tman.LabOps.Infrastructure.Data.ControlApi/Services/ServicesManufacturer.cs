@@ -51,9 +51,9 @@ namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
             throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
         }
 
-        public async void UpdateManufacturer(FabricanteDTO fabricante)
+        public async void UpdateManufacturer(EditFabricanteDTO editFabricante)
         {
-            var resultClient = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizaFabricante", fabricante);
+            var resultClient = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizaFabricante", editFabricante);
             if (!resultClient.IsSuccessStatusCode)
             {
                 throw new Exception(); //ToDo: Adicionar novos exceptions de retorno. 

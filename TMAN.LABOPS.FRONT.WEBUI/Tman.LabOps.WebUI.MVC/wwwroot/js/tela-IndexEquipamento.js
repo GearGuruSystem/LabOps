@@ -59,7 +59,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '/Equipment/Details/' + id,
+            url: '/Equipamentos/Detalhes/' + id,
             success: function (result) {
                 $("#detalhesEquipamento").html(result);
                 $('#modalDetalhesEquipamentos').modal("show");

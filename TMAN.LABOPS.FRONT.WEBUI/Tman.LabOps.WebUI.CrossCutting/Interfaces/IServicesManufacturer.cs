@@ -7,6 +7,6 @@ namespace Tman.LabOps.Infrastructure.CrossCutting.Interfaces
         Task<IEnumerable<FabricanteDTO>> GetAllManufacturers();
         Task<FabricanteDTO> GetManufacturerById(int id);
         Task<FabricanteDTO> RegisterManufacturer(NewFabricanteDTO novoFabricante);
-        void UpdateManufacturer(FabricanteDTO fabricante);
+        void UpdateManufacturer(EditFabricanteDTO fabricante);
     }
 }

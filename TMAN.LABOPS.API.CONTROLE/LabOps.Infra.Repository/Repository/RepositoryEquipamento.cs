@@ -28,23 +28,24 @@ namespace LabOps.Infra.Repository.Repository
             this._logger = logger;
         }
 
-        public new async Task<IEnumerable<BuscarEquipamentos>> BuscarTodos()
+        public new async Task<IEnumerable<Equipamento>> BuscarTodos()
         {
             _logger.LogInformation("Iniciando processo de busca no banco de dados");
             try
             {
-                var resultSql = await _sqlFactory.LoadDataAsync<BuscarEquipamentos>("[dbo].[BuscarEquipamentosInfosCompletas]");
-                return resultSql.ToList();
+                var query = _context.Equipamentos.AsNoTracking()
+                    .Include(x => x.Fabricante)
+                    .Include(x => x.TipoEquipamento)
+                    .Include(x => x.Situacao)
+                    .Include(x => x.Laboratorio);
+
+                var equipments = await query.ToListAsync();
+
+                return equipments;
             }
-            catch (SqlNullValueException ex)
+            catch
             {
-                _logger.LogError("Retornado o seguinte erro da consulta {@erroConsul}", ex);
-                return Enumerable.Empty<BuscarEquipamentos>();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("Erro inesperado durante a consulta. [{@erro}]", ex);
-                return Enumerable.Empty<BuscarEquipamentos>();
+                throw;
             }
         }
 
@@ -82,8 +83,6 @@ namespace LabOps.Infra.Repository.Repository
                 var equipaments = await query.Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
-
-                var totalCount = await query.CountAsync();
 
                 return equipaments;
             }

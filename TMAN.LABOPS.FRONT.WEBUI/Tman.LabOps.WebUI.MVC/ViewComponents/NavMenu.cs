@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace LabOps.WebUI.ViewComponents
+namespace Tman.LabOps.WebUI.MVC.ViewComponents
 {
     public class NavMenu : ViewComponent
     {

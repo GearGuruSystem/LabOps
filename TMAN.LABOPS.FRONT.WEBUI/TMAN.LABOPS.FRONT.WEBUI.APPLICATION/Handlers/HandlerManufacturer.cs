@@ -49,11 +49,12 @@ namespace Tman.LabOps.WebUI.Application.Handlers
             }
         }
 
-        public void UpdateManufacturer(FabricanteDTO manufacturer)
+        public Task UpdateManufacturer(EditFabricanteDTO editManufacturer)
         {
             try
             {
-                _services.UpdateManufacturer(manufacturer);
+                _services.UpdateManufacturer(editManufacturer);
+                return Task.CompletedTask;
             }
             catch (Exception)
             {

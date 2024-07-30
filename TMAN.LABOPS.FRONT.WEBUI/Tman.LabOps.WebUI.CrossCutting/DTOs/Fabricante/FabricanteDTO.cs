@@ -7,7 +7,7 @@ namespace Tman.LabOps.Infrastructure.CrossCutting.DTOs.Fabricante
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
-        public UsuarioDTO UsuarioAtualizacao { get; set; } = new UsuarioDTO();
+        public string UsuarioAtualizacao { get; set; }
         public DateTime? AtualizadoEm { get; set; }
     }
 }

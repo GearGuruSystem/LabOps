@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LabOps.Application.DTO.DTO.Situacao;
+using LabOps.Application.DTO.Response;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
@@ -19,16 +20,16 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<SituacaoDTO>> BuscarTodasSituacoes()
+        public async Task<Response<IEnumerable<SituacaoDTO>>> BuscarTodasSituacoes()
         {
-            var objSituacao = await _serviceSituacao.BuscarTodos();
-            return _mapper.Map<IEnumerable<SituacaoDTO>>(objSituacao);
+            var data = _mapper.Map<IEnumerable<SituacaoDTO>>(await _serviceSituacao.BuscarTodos());
+            return new Response<IEnumerable<SituacaoDTO>> (data, data.Count(), "Ok");
         }
 
-        public async Task<IEnumerable<SituacaoDTO>> BuscaTodasSituacaoAtiva()
+        public async Task<Response<IEnumerable<SituacaoDTO>>> BuscaTodasSituacaoAtiva()
         {
-            var objSituacao = await _serviceSituacao.BuscarSituacoesAtivas();
-            return _mapper.Map<IEnumerable<SituacaoDTO>>(objSituacao);
+            var data = _mapper.Map<IEnumerable<SituacaoDTO>>(await _serviceSituacao.BuscarSituacoesAtivas());
+            return new Response<IEnumerable<SituacaoDTO>>(data, data.Count(), "Ok");
         }
 
         public void CadastraSituacao(AdicionarSituacaoDTO situacaoDTO)

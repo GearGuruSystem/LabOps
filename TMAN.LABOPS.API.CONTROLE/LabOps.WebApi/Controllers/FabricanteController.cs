@@ -34,7 +34,7 @@ namespace LabOps.WebAPI.Controllers
             try
             {
                 var data = await applicationService.BuscaTodosFabricantes();
-                logger.LogInformation("Quantidade de dados retornados: [{@Dados}]", data.Count());
+                logger.LogInformation("Quantidade de dados retornados: [{@Dados}]", data.TotalCount);
                 return Ok(data);
             }
             catch (Exception ex)

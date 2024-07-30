@@ -18,7 +18,7 @@ namespace LabOps.Domain.Services.Services
             this.repositoryEquipamento = repositoryEquipamento;
         }
 
-        public new async Task<IEnumerable<BuscarEquipamentos>> BuscarTodos()
+        public new async Task<IEnumerable<Equipamento>> BuscarTodos()
         {
             return await repositoryEquipamento.BuscarTodos();
         }

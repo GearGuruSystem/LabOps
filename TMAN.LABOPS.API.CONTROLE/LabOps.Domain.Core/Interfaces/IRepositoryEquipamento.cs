@@ -6,7 +6,7 @@ namespace LabOps.Domain.Core.Interfaces
 {
     public interface IRepositoryEquipamento : IRepositoryBase<Equipamento>
     {
-        new Task<IEnumerable<BuscarEquipamentos>> BuscarTodos();
+        new Task<IEnumerable<Equipamento>> BuscarTodos();
         new Task<BuscarEquipamentos> BuscarPorId(int id);
         Task<Equipamento> BuscarComRetornoId(long id);
         Task<IEnumerable<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize);

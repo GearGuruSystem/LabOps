@@ -8,7 +8,7 @@ namespace LabOps.Domain.Core.Services
     {
         Task<Equipamento> BuscarComRetornoId(int id);
         new Task<BuscarEquipamentos> BuscarPorId(int id);
-        new Task<IEnumerable<BuscarEquipamentos>> BuscarTodos();
+        new Task<IEnumerable<Equipamento>> BuscarTodos();
         Task<IEnumerable<Equipamento>> BuscarTodosPorPagina(int pageNumber, int pageSize);
     }
 }

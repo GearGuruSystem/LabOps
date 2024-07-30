@@ -20,11 +20,10 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<Response<IEnumerable<BuscarEquipamentos>>> BuscaTodosEquipamentos()
+        public async Task<Response<IEnumerable<EquipamentoDTO>>> BuscaTodosEquipamentos()
         {
-            var data = _mapper.Map<IEnumerable<BuscarEquipamentos>>(await _serviceEquipamento.BuscarTodos());
-            var response = new Response<IEnumerable<BuscarEquipamentos>>(data, data.Count(), "Ok");
-            return response;
+            var data = _mapper.Map<IEnumerable<EquipamentoDTO>>(await _serviceEquipamento.BuscarTodos());
+            return new Response<IEnumerable<EquipamentoDTO>>(data, data.Count(), "Ok");
         }
 
         public async Task<ResponsePaged<IEnumerable<EquipamentoDTO>>> BuscaTodosPorPagina(int pageNumber, int pageSize)

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LabOps.Application.DTO.DTO.Fabricantes;
+using LabOps.Application.DTO.Response;
 using LabOps.Application.Interfaces;
 using LabOps.Domain.Core.Services;
 using LabOps.Domain.Entities;
@@ -19,10 +20,10 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<FabricanteDTO>> BuscaTodosFabricantes()
+        public async Task<Response<IEnumerable<FabricanteDTO>>> BuscaTodosFabricantes()
         {
-            var objFabricante = await _serviceFabricante.BuscarTodos();
-            return _mapper.Map<IEnumerable<FabricanteDTO>>(objFabricante);
+            var data = _mapper.Map<IEnumerable<FabricanteDTO>>(await _serviceFabricante.BuscarTodos());
+            return new Response<IEnumerable<FabricanteDTO>>(data, data.Count(), "Ok");
         }
 
         public async Task<FabricanteDTO> BuscaFabricantesPeloId(int id)

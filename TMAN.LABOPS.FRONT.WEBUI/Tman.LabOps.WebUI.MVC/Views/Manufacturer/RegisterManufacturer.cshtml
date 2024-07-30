@@ -1,0 +1,17 @@
+﻿@model NewFabricanteDTO
+
+<form asp-action="CadastroFabricante" method="post">
+    <div class="container">
+
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" type="text" class="form-control" placeholder="Nome do fabricante" />
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+
+    </div>
+</form>
+
