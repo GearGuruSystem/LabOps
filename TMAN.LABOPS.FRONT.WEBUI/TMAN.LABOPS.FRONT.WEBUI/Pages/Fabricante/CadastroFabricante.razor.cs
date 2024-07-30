@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Tman.LabOps.WebUI.Application.DTOs.Fabricante;
+using Tman.LabOps.Infrastructure.CrossCutting.DTOs.Fabricante;
 using Tman.LabOps.WebUI.Application.Interfaces;
 
-namespace Tman.LabOps.WebUI.Pages.Fabricante
+namespace Tman.LabOps.WebUI.Mud.Pages.Fabricante
 {
     public partial class CadastroFabricanteCode : ComponentBase
     {
         #region Properties
 
-        public CriarNovoF Model { get; set; } = new CriarNovoF();
+        public NewFabricanteDTO Model { get; set; } = new NewFabricanteDTO();
 
         public MudForm MudForm { get; set; }
 
@@ -18,7 +18,7 @@ namespace Tman.LabOps.WebUI.Pages.Fabricante
         #region Services
 
         [Inject]
-        public IServiceFabricante Services { get; set; } = null!;
+        public IHandlerManufacturer Services { get; set; } = null!;
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
@@ -36,7 +36,7 @@ namespace Tman.LabOps.WebUI.Pages.Fabricante
             {
                 try
                 {
-                    var result = await Services.RegistraFabricante(Model);
+                    var result = await Services.RegisterManufacturer(Model);
                     Snackbar.Add("Usuario cadastrado com sucesso", Severity.Success);
                     await Task.Delay(TimeSpan.FromSeconds(5));
                     NavigationManager.NavigateTo("/Equipamentos");

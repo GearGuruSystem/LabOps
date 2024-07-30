@@ -4,15 +4,23 @@ namespace LabOps.Application.DTO.Response
 {
     public class Response<TData>
     {
+        [JsonPropertyOrder(0)]
         public bool Sucess { get; set; } = true;
+
+        [JsonPropertyOrder(8)]
         public TData? Data { get; set; }
+
+        [JsonPropertyOrder(2)]
         public string? Message { get; set; }
+
+        [JsonPropertyOrder(1)]
+        public int TotalCount {  get; set; }
 
         protected Response() { }
 
-        [JsonConstructor]
-        public Response(TData? data, string? message = null)
+        public Response(TData? data, int totalCount, string? message = null)
         {
+            TotalCount = totalCount;
             Data = data;
             Message = message;
         }

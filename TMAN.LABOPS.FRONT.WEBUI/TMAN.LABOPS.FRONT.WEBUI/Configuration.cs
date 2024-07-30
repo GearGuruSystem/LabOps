@@ -1,4 +1,4 @@
-﻿namespace Tman.LabOps.WebUI
+﻿namespace Tman.LabOps.WebUI.Mud
 {
     public static class Configuration
     {

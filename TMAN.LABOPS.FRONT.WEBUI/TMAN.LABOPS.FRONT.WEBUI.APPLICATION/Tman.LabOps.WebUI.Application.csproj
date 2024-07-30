@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tman.LabOps.Infrastructure.Data.ControlApi\Tman.LabOps.Infrastructure.Data.ControlApi.csproj" />
+    <ProjectReference Include="..\Tman.LabOps.WebUI.CrossCutting\Tman.LabOps.Infrastructure.CrossCutting.csproj" />
+  </ItemGroup>
+
 </Project>

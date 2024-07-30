@@ -20,35 +20,24 @@ namespace LabOps.Application.Service
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BuscarEquipamentos>> BuscaTodosEquipamentos()
+        public async Task<Response<IEnumerable<BuscarEquipamentos>>> BuscaTodosEquipamentos()
         {
-            var data = await _serviceEquipamento.BuscarTodos();
-            if (data.Any())
-            {
-                return data;
-            }
-            throw new Exception();
+            var data = _mapper.Map<IEnumerable<BuscarEquipamentos>>(await _serviceEquipamento.BuscarTodos());
+            var response = new Response<IEnumerable<BuscarEquipamentos>>(data, data.Count(), "Ok");
+            return response;
         }
 
         public async Task<ResponsePaged<IEnumerable<EquipamentoDTO>>> BuscaTodosPorPagina(int pageNumber, int pageSize)
         {
             var objEquipamento = _mapper.Map<IEnumerable<EquipamentoDTO>>(await _serviceEquipamento.BuscarTodosPorPagina(pageNumber, pageSize));
             var responsePaged = new ResponsePaged<IEnumerable<EquipamentoDTO>>(objEquipamento, objEquipamento.Count());
-            if (responsePaged.Sucess == true)
-            {
-                return responsePaged;
-            }
-            return new ResponsePaged<IEnumerable<EquipamentoDTO>>(false, "Houve um erro.");
+            return responsePaged;
         }
 
         public async Task<BuscarEquipamentos> BuscaPeloId(int id)
         {
             var data = await _serviceEquipamento.BuscarPorId(id);
-            if (data.Id > 0)
-            {
-                return data;
-            }
-            throw new Exception();
+            return data;
         }
 
         public void RegistraEquipamento(CriarNovo obj)
@@ -71,13 +60,7 @@ namespace LabOps.Application.Service
 
         public async Task<EquipamentoDTO> BuscarEquipamentoRetornoId(int id)
         {
-            var data = await _serviceEquipamento.BuscarComRetornoId(id);
-            if (data.Id < 0)
-            {
-                throw new Exception();
-            }
-            var map = _mapper.Map<EquipamentoDTO>(data);
-            return map;
+            return _mapper.Map<EquipamentoDTO>(await _serviceEquipamento.BuscarComRetornoId(id));
         }
     }
 }

@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Tman.LabOps.WebUI.Application.DTOs.Equipamento;
-using Tman.LabOps.WebUI.Application.Interfaces;
+using Tman.LabOps.Infrastructure.CrossCutting.DTOs.Equipamento;
+using Tman.LabOps.WebUI.Application.Handlers;
 
-namespace Tman.LabOps.WebUI.Pages.Equipamento
+namespace Tman.LabOps.WebUI.Mud.Pages.Equipamento
 {
     public partial class IndexCode : ComponentBase
     {
         #region Proprieties
 
-        public IEnumerable<ViewEquipamento> Equipamentos { get; set; }
+        public IEnumerable<EquipamentoDTO> Equipamentos { get; set; }
 
         #endregion Proprieties
 
         #region Services
 
         [Inject]
-        public IServiceEquipamento Service { get; set; } = null!;
+        public HandlersEquipment Service { get; set; } = null!;
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;

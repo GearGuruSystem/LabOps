@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Tman.LabOps.WebUI.Application.DTOs.TipoEquipamento;
+using Tman.LabOps.Infrastructure.CrossCutting.DTOs.TiposEquipamentos;
 using Tman.LabOps.WebUI.Application.Interfaces;
 
-namespace Tman.LabOps.WebUI.Pages.TipoEquipamento
+namespace Tman.LabOps.WebUI.Mud.Pages.TipoEquipamento
 {
     public partial class CadastroTipoEquipamentoCode : ComponentBase
     {
         #region Proprieties
 
-        public CriarNovoTE Model { get; set; } = new CriarNovoTE();
+        public NewTipoEquipamentoDTO Model { get; set; } = new NewTipoEquipamentoDTO();
 
         public MudForm MudForm { get; set; }
 
@@ -18,7 +18,7 @@ namespace Tman.LabOps.WebUI.Pages.TipoEquipamento
         #region Services
 
         [Inject]
-        public IServiceTipoEquipamento Service { get; set; } = null;
+        public IHandlerEquipmentType Service { get; set; } = null;
 
         [Inject]
         public NavigationManager NavigationManager { get; set; } = null!;
@@ -32,11 +32,11 @@ namespace Tman.LabOps.WebUI.Pages.TipoEquipamento
 
         public async Task OnValidSubmitAsync()
         {
-            if(MudForm.IsValid)
+            if (MudForm.IsValid)
             {
                 try
                 {
-                    var result = Service.RegistraTipoEquipamento(Model);
+                    var result = Service.RegisterEquipmentType(Model);
                     Snackbar.Add("Tipo de equipamento cadastrado com sucesso.", Severity.Success);
                     await Task.Delay(TimeSpan.FromSeconds(5));
                     NavigationManager.NavigateTo("/");

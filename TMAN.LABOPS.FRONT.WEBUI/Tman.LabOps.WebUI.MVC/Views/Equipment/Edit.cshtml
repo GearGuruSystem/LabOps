@@ -1,0 +1,57 @@
+﻿@using Tman.LabOps.Infrastructure.CrossCutting.DTOs.Equipamento
+@model EditEquipamentoDTO
+
+<h4>
+    Editar equipamento: @Model.SerialNumber
+</h4>
+<form asp-action="Cadastro" asp-controller="Equipamento" method="post">
+    <div class="container">
+
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" type="text" class="form-control" placeholder="Informe o modelo do equipamento" required />
+        </div>
+
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-6">
+                    <label asp-for="Inventario" class="form-label"></label>
+                    <input asp-for="Inventario" type="text" class="form-control" placeholder="Informe o inventario" />
+                </div>
+                <div class="col-6">
+                    <label asp-for="Hostname" class="form-label"></label>
+                    <input asp-for="Hostname" type="text" class="form-control" placeholder="Informe o hostname" />
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SerialNumber" class="form-label"></label>
+            <input asp-for="SerialNumber" type="text" class="form-control" placeholder="Informe o Numero de serie do equipamento" required />
+        </div>
+
+        <div class="mb-3">
+            <div class="row">
+                <div class="col">
+                    <label for="dropdown">Selecione o Fabricante</label>
+                    @Html.DropDownList("dropdown", ViewBag.ValuesEquipment as SelectList, "Selecione uma opção", new { @class = "form-control" })
+                </div>
+                <div class="col">
+                    <label for="dropdown">Selecione o Tipo de equipamento</label>
+                    @Html.DropDownList("dropdown", ViewBag.ValuesEquipmentType as SelectList, "Selecione uma opção", new { @class = "form-control" })
+                </div>
+                <div class="col">
+                    <label for="dropdown">Selecione a Situação</label>
+                    @Html.DropDownList("dropdown", ViewBag.ValuesSituation as SelectList, "Selecione uma opção", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary" type="submit">Salvar</button>
+            </div>
+        </div>
+
+    </div>
+</form>
