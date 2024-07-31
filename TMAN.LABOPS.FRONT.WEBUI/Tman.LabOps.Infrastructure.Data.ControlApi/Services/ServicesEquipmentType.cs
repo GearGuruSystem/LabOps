@@ -1,13 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
 using Tman.LabOps.Infrastructure.CrossCutting.DTOs.TiposEquipamentos;
 using Tman.LabOps.Infrastructure.CrossCutting.Interfaces;
 using Tman.LabOps.Infrastructure.CrossCutting.Response;
+
+#pragma warning disable IDE0290
 
 namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
 {
@@ -22,44 +19,44 @@ namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
 
         public async Task<IEnumerable<TipoEquipamentoDTO>> GetAllEquipmentType()
         {
-            var resultClient = await _client.GetAsync("api/v1/TipoEquipamento/BuscarTodosTiposDeEquipamentos");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync("api/v1/TipoEquipamento/BuscarTodosTiposDeEquipamentos");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<ApiResponse<TipoEquipamentoDTO>>(jsonString);
                 return jsonData.Data;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<TipoEquipamentoDTO> GetEquipmentTypeById(int id)
         {
-            var resultClient = await _client.GetAsync($"api/v1/TipoEquipamento/BuscarTipoDeEquipamentoPorId/{id}");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync($"api/v1/TipoEquipamento/BuscarTipoDeEquipamentoPorId/{id}");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<TipoEquipamentoDTO>(jsonString);
                 return jsonData;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<TipoEquipamentoDTO> RegisterEquipmentType(NewTipoEquipamentoDTO nTipoEquipamento)
         {
-            var resultClient = await _client.PostAsJsonAsync("api/v1/TipoEquipamento/RegistroTipoEquipamento", nTipoEquipamento);
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.PostAsJsonAsync("api/v1/TipoEquipamento/RegistroTipoEquipamento", nTipoEquipamento);
+            if (response.IsSuccessStatusCode)
             {
                 return new TipoEquipamentoDTO();
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async void UpdateEquipmentType(TipoEquipamentoDTO tipoEquipamento)
         {
-            var resultClient = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizarTipoEquipamento", tipoEquipamento);
-            if (!resultClient.IsSuccessStatusCode)
+            using var response = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizarTipoEquipamento", tipoEquipamento);
+            if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+                throw new HttpRequestException(response.ReasonPhrase);
             }
         }
     }

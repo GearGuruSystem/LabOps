@@ -17,46 +17,46 @@ namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
 
         public async Task<IEnumerable<FabricanteDTO>> GetAllManufacturers()
         {
-            var resultClient = await _client.GetAsync("api/v1/Fabricante/BuscarTodosFabricantes");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync("api/v1/Fabricante/BuscarTodosFabricantes");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<ApiResponse<FabricanteDTO>>(jsonString);
                 return jsonData.Data;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<FabricanteDTO> GetManufacturerById(int id)
         {
-            var resultClient = await _client.GetAsync($"api/v1/Fabricante/BuscarFabricantePeloId/{id}");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync($"api/v1/Fabricante/BuscarFabricantePeloId/{id}");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<FabricanteDTO>(jsonString);
                 return jsonData;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<FabricanteDTO> RegisterManufacturer(NewFabricanteDTO novoFabricante)
         {
-            var resultClient = await _client.PostAsJsonAsync("api/v1/Fabricante/CadastraFabricante", novoFabricante);
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.PostAsJsonAsync("api/v1/Fabricante/CadastraFabricante", novoFabricante);
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<FabricanteDTO>(jsonString);
                 return jsonData;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async void UpdateManufacturer(EditFabricanteDTO editFabricante)
         {
-            var resultClient = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizaFabricante", editFabricante);
-            if (!resultClient.IsSuccessStatusCode)
+            using var response = await _client.PutAsJsonAsync("api/v1/Fabricante/AtualizaFabricante", editFabricante);
+            if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(); //ToDo: Adicionar novos exceptions de retorno. 
+                throw new HttpRequestException(response.ReasonPhrase);
             }
         }
     }

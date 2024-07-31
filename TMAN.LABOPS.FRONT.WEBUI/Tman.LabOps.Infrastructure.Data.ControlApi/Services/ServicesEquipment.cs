@@ -19,47 +19,44 @@ namespace Tman.LabOps.Infrastructure.Data.ControlApi.Services
 
         public async Task<IEnumerable<EquipamentoDTO>> GetAllEquipment()
         {
-            var resultClient = await _client.GetAsync("api/v1/Equipamento/BuscarEquipamentos");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync("api/v1/Equipamento/BuscarEquipamentos");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<ApiResponse<EquipamentoDTO>>(jsonString);
-                if (jsonData != null)
-                {
-                    return jsonData.Data;
-                }
+                return jsonData.Data;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<EquipamentoDTO> GetEquipmentById(int id)
         {
-            var resultClient = await _client.GetAsync($"/api/v1/Equipamento/BuscarEquipamentoPeloId/{id}");
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.GetAsync($"/api/v1/Equipamento/BuscarEquipamentoPeloId/{id}");
+            if (response.IsSuccessStatusCode)
             {
-                var jsonString = await resultClient.Content.ReadAsStringAsync();
+                var jsonString = await response.Content.ReadAsStringAsync();
                 var jsonData = JsonConvert.DeserializeObject<EquipamentoDTO>(jsonString);
                 return jsonData;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async Task<bool> RegisterEquipment(NewEquipamentoDTO novoEquipamento)
         {
-            var resultClient = await _client.PostAsJsonAsync("api/v1/Equipamento/CadastrarEquipamento", novoEquipamento);
-            if (resultClient.IsSuccessStatusCode)
+            using var response = await _client.PostAsJsonAsync("api/v1/Equipamento/CadastrarEquipamento", novoEquipamento);
+            if (response.IsSuccessStatusCode)
             {
                 return true;
             }
-            throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+            throw new HttpRequestException(response.ReasonPhrase);
         }
 
         public async void UpdateEquipment(EditEquipamentoDTO equipamento)
         {
-            var resultClient = await _client.PutAsJsonAsync("api/v1/Equipamento/AtualizarEquipamento", equipamento);
-            if (!resultClient.IsSuccessStatusCode)
+            using var response = await _client.PutAsJsonAsync("api/v1/Equipamento/AtualizarEquipamento", equipamento);
+            if (!response.IsSuccessStatusCode)
             {
-                throw new Exception(); //ToDo: Adicionar novos exceptions de retorno.
+                throw new HttpRequestException(response.ReasonPhrase);
             }
         }
     }
